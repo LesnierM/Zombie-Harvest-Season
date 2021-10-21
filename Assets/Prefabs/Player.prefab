@@ -195,7 +195,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8057907759296733282}
-  m_LocalRotation: {x: 0, y: -0.9542401, z: 0, w: 0.29904157}
+  m_LocalRotation: {x: 0, y: -0.9542403, z: 0, w: 0.29904088}
   m_LocalPosition: {x: 68.5779, y: 20.976337, z: 40.18394}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -203,7 +203,7 @@ Transform:
   - {fileID: 8057907759258749855}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -145.2, z: 0}
 --- !u!143 &8057907759296733290
 CharacterController:
   m_ObjectHideFlags: 0
@@ -291,7 +291,7 @@ MonoBehaviour:
   _gravitymultiplier: 1.1
   _jumpHigh: 2
   _crouchHeigh: 0.9
-  _normalHeigh: 2
+  _normalHeigh: 1.8
 --- !u!114 &8057907759296733281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,8 +372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stepSoundConcrete:
-  - {fileID: 8300000, guid: ea784b2183ce5354da3e86bfb61b2ad8, type: 3}
-  - {fileID: 8300000, guid: 2c2ce622cabf27a468f605567882688a, type: 3}
+  - {fileID: 8300000, guid: 7fbb71087136af8418e5ddd74578cf93, type: 3}
+  - {fileID: 8300000, guid: aadc15b77b5786943a5b8cf3ea057846, type: 3}
 --- !u!114 &8057907759296733283
 MonoBehaviour:
   m_ObjectHideFlags: 0
