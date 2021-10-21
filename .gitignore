@@ -41,3 +41,5 @@ sysinfo.txt
 *.apk
 *.unitypackage
 Assets/Scenes/Granja Scene prueba.unity.meta
+UserSettings/EditorUserSettings.asset
+UserSettings/EditorUserSettings.asset
