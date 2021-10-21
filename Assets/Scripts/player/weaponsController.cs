@@ -43,10 +43,6 @@ public class weaponsController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _pickUps = GetComponent<collisionController>();
     }
-    void Update()
-    {
-     
-    }
     private void OnEnable()
     {
 		_playerActions = new GameActions();
@@ -114,7 +110,6 @@ public class weaponsController : MonoBehaviour
             stopAiming();
         }
     }
-
     private void stopAiming()
     {
         _animator.Play("stopAiming");

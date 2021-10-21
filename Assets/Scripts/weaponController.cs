@@ -94,7 +94,9 @@ public class weaponController : MonoBehaviour
     {
 		if (_rayHit.collider.tag == "Target")
 		{
+
 		}
+		Destroy(Instantiate(_bulletHole, _rayHit.point + _rayHit.normal * 0.001f, Quaternion.LookRotation(_rayHit.normal)), _bulletHoleDuration);
 	}
     public void Reload()
 	{

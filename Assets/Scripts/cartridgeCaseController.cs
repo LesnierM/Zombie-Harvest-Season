@@ -20,7 +20,7 @@ public class cartridgeCaseController : MonoBehaviour
     //Clases
     void Start()
     {
-		GetComponent<Rigidbody>().AddRelativeForce(-Random.Range(_minXForce,_maxXForce),0, Random.Range(_minYForce, _maxYForce));
+		GetComponent<Rigidbody>().AddRelativeForce(-Random.Range(_minXForce,_maxXForce),0, -Random.Range(_minYForce, _maxYForce));
 		Invoke("playSound", .5f);
 		Destroy(gameObject,1);
     }
