@@ -65,7 +65,7 @@ public class movementEffectController : MonoBehaviour
         }
 		if (_movementEffect)
 		{
-			if (_characterVelocityOnXAndZ > 0.1f)
+			if (_characterVelocityOnXAndZ > 0.01f)
 			{
 				_camera.transform.localPosition = _cameraInitialPosition + _finalMovement;
 			}
