@@ -6,7 +6,20 @@ using UnityEngine.InputSystem;
 public enum Weapons
 {
     None,
-    Jericho_941
+    Jericho_941,
+    Preuba,
+}
+public struct WeaponsStruct
+{ 
+    public Weapons Weapon;
+    public int BulletsTotalCount;
+    public int BulletsInCartridge;
+    public WeaponsStruct(int BulletsTotalCount,int BulletsInCartridge,Weapons Weapon)
+    {
+        this.BulletsTotalCount = BulletsTotalCount;
+        this.BulletsInCartridge = BulletsInCartridge;
+        this.Weapon = Weapon;
+    }
 }
 public class weaponsController : MonoBehaviour
 {
@@ -23,7 +36,7 @@ public class weaponsController : MonoBehaviour
     //Variables
     int _currentWeaponIndex=-1;
     //TODO en la version final eliminar la etiqueta seriealiza
-	[SerializeField] List<Weapons> _weaponsAdquired=new List<Weapons>();
+	[SerializeField] List<WeaponsStruct> _weaponsAdquired=new List<WeaponsStruct>();
     /// <summary>
     /// Cunado este dejando de apuntar no reproducir la animacion de walk hasta que no termine la animacion stopAiming
     /// </summary>
@@ -38,6 +51,10 @@ public class weaponsController : MonoBehaviour
     moveController _playerController;
     void Awake()
     {
+        if (Application.isEditor)
+        {
+            _weaponsAdquired.Add(_weaponsCollection[0].status);
+        }
         _mainCamera = Camera.main;
         _playerController = GetComponent<moveController>();
         _characterController = GetComponent<CharacterController>();
@@ -69,20 +86,22 @@ public class weaponsController : MonoBehaviour
     #region Input
     private void ChangeWeapon_performed(InputAction.CallbackContext obj)
     {
+        if (_animator!=null&&( _animator.GetCurrentAnimatorStateInfo(1).IsName("reloading") || _animator.GetCurrentAnimatorStateInfo(1).IsName("shoot")))
+        {
+            return;
+        }
         switch (obj.action.activeControl.name)
         {
             case "right":
-                if (_currentWeaponIndex < _weaponsAdquired.Count)
+                if (_currentWeaponIndex < _weaponsAdquired.Count-1)
                 {
-                    _currentWeaponIndex++;
-                    changeWeapon(_weaponsAdquired[_currentWeaponIndex]);
+                    changeWeapon(_weaponsAdquired[_currentWeaponIndex + 1].Weapon);
                 }
                 break;
             case "left":
                 if (_currentWeaponIndex > 0)
                 {
-                    _currentWeaponIndex--;
-                    changeWeapon(_weaponsAdquired[_currentWeaponIndex]);
+                    changeWeapon(_weaponsAdquired[_currentWeaponIndex-1].Weapon);
                 }
                 break;
             case "1":
@@ -168,19 +187,6 @@ public class weaponsController : MonoBehaviour
             _animator.Play("stopRunning");
         }
     }
-    private void OnWeaponPickedUp(Weapons Weapon)
-    {
-        if (!_weaponsAdquired.Contains(Weapon))
-        {
-            _weaponsAdquired.Add(Weapon);
-            _currentWeaponIndex++;
-        }
-        //equipar arma si no hay ninguna
-        if (_currentWeapon == null)
-        {
-            changeWeapon(Weapon);
-        }
-    }
     private void OnReload()
     {
         if (_currentWeapon != null && _animator.GetCurrentAnimatorStateInfo(0).IsName("aiming"))
@@ -188,18 +194,49 @@ public class weaponsController : MonoBehaviour
             stopAiming();
         }
     }
+    private void OnWeaponPickedUp(Weapons Weapon)
+    {
+        foreach(WeaponsStruct weapon in _weaponsAdquired)
+        {
+            if (weapon.Weapon == Weapon)
+            {
+                return;
+            }
+        }
+          _weaponsAdquired.Add(_weaponsCollection[(int)Weapon-1].status);
+          //equipar arma si no hay ninguna
+        if (_currentWeapon == null)
+        {
+          _currentWeaponIndex++;
+            changeWeapon(Weapon);
+        }
+    }
     #endregion
 
     #region Metodos
+    
     private bool isAiming()
     {
         return _animator.GetCurrentAnimatorStateInfo(0).IsName("startAiming") || _animator.GetCurrentAnimatorStateInfo(0).IsName("aiming") || _animator.GetCurrentAnimatorStateInfo(0).IsName("stopAiming");
     }
-    void changeWeapon(Weapons CurrentWeapon)
+    void changeWeapon(Weapons NewWeapon)
     {
-        _currentWeapon= Instantiate(getWeapon(CurrentWeapon), _weaponsHolder.transform).GetComponent<weaponController>();
+        //eliminr el arma actualemte equipada
+        if (_weaponsHolder.transform.childCount == 1)
+        {
+            Destroy(_weaponsHolder.transform.GetChild(0).gameObject);
+        }
+        //gaurdr el estado del arma 
+        if (_currentWeapon!=null)
+        {
+            _weaponsAdquired[_currentWeaponIndex] = _currentWeapon.status;
+        }
+        _currentWeaponIndex = (int)NewWeapon - 1;
+        _currentWeapon= Instantiate(getWeapon(NewWeapon), _weaponsHolder.transform).GetComponent<weaponController>();
+        //restaurar el estado del arma a mostrar
+        _currentWeapon.status = _weaponsAdquired[_currentWeaponIndex];
         _currentWeapon.OnReload += OnReload;
-        _currentWeaponName = CurrentWeapon;
+        _currentWeaponName = NewWeapon;
         _animator = _currentWeapon.GetComponent<Animator>();
         OnWeaponChange(_currentWeapon);
     }
@@ -223,8 +260,7 @@ public class weaponsController : MonoBehaviour
         int _newWeapon = int.Parse(obj.action.activeControl.name) - 1;
         if (_weaponsAdquired.Count > _newWeapon&&_newWeapon!=_currentWeaponIndex)
         {
-            _currentWeaponIndex = _newWeapon;
-            changeWeapon(_weaponsAdquired[_currentWeaponIndex]);
+            changeWeapon(_weaponsAdquired[_newWeapon].Weapon);
         }
     }
     #endregion
@@ -232,7 +268,6 @@ public class weaponsController : MonoBehaviour
     #region Propiedades
     public weaponController CurrentWeapon { get => _currentWeapon; }
 	public Weapons CurrentWeaponName { get => _currentWeaponName; }
-    public List<Weapons> WeaponsAdquired { get => _weaponsAdquired;  }
     public bool IsAiming { get => _isAiming; }
     #endregion
 

@@ -117,7 +117,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 112.70001, y: 49.700012}
+  m_AnchoredPosition: {x: 112.69995, y: 49.69995}
   m_SizeDelta: {x: 221.9, y: 104.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8057907759051465947
@@ -302,7 +302,7 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.05
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8057907759296733285
@@ -343,8 +343,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53a1976eee09eb4db30aecffc0858e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mouseSensitivity: {x: 10, y: 15}
-  _gamepadSensitivity: {x: 0, y: 0}
+  _mouseSensitivity: {x: 10, y: 10}
+  _gamepadSensitivity: {x: 80, y: 80}
   _verticalBounds: 85
 --- !u!114 &8057907759296733286
 MonoBehaviour:
@@ -361,18 +361,19 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  _sphereRadious: 0.2
-  _groundCheckOffet: 0
+  _sphereRadious: 0.5
+  _groundCheckOffetStanding: -0.4
+  _groundCheckOffetCrouching: -0.09
   _walkSpeed: 7
   _runMultiplier: 1.5
   _lateralSpeed: 4
   _backSpeed: 4
   _crouchSpeed: 3
   _aimingSpeed: 3
-  _gravity: -9.8
+  _airSpeedmultiplier: 0.7
   _gravityOnGrounded: -2
   _gravitymultiplier: 1.1
-  _jumpHigh: 2
+  _jumpHigh: 1.5
   _crouchHeigh: 0.9
   _normalHeigh: 1.8
 --- !u!114 &8057907759296733281
@@ -475,7 +476,7 @@ MonoBehaviour:
   _defaultCameraFieldofViewValue: 60
   _weaponsCollection:
   - {fileID: 7492235534193854105, guid: a72d98c3149ecd14eb5113e044d118f7, type: 3}
-  _weaponsAdquired: 
+  _weaponsAdquired: 01000000
 --- !u!82 &8057907759296733288
 AudioSource:
   m_ObjectHideFlags: 0

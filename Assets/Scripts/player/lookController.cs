@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum ControlType
+{
+    Keyboard,
+    Gamepad
+}
+
 public class lookController : MonoBehaviour
 {
 	//Variables Expuestas
@@ -58,31 +64,62 @@ public class lookController : MonoBehaviour
         _playerActions = new GameActions();
         _playerActions.Enable();
 
-        #region mouse
-        _playerActions.playerActions.MouseXMove.performed += mouseInput => _velocity.x = mouseInput.ReadValue<float>()*_mouseSensitivity.x;
-        _playerActions.playerActions.MouseXMove.canceled += mouseInput => _velocity.x = mouseInput.ReadValue<float>()*0;
-        _playerActions.playerActions.MouseYMove.performed += mouseInput => _velocity.y = mouseInput.ReadValue<float>()*_mouseSensitivity.y;
-        _playerActions.playerActions.MouseYMove.canceled += mouseInput => _velocity.y = mouseInput.ReadValue<float>()*0;
-        #endregion
-
-        #region Gamepad
-        _playerActions.playerActions.GamepadXMove.performed += gamepadInput => _velocity.x = gamepadInput.ReadValue<float>() * _gamepadSensitivity.x;
-        _playerActions.playerActions.GamepadXMove.canceled += gamepadInput => _velocity.x = gamepadInput.ReadValue<float>() * 0;
-        _playerActions.playerActions.GamepadYMove.performed += gamepadInput => _velocity.y = gamepadInput.ReadValue<float>() * _gamepadSensitivity.y;
-        _playerActions.playerActions.GamepadYMove.canceled += gamepadInput => _velocity.y = gamepadInput.ReadValue<float>() * 0;
-        #endregion
+        _playerActions.playerActions.LookX.performed += LookX;
+        _playerActions.playerActions.LookX.canceled += mouseInput => _velocity.x = mouseInput.ReadValue<float>() * 0;
+        _playerActions.playerActions.LookY.performed += LookY;
+        _playerActions.playerActions.LookY.canceled += mouseInput => _velocity.y = mouseInput.ReadValue<float>() * 0;
     }
     private void OnDisable()
     {
         _playerActions.Disable();
     }
 
+    #region Inputs
+    private void LookY(InputAction.CallbackContext obj)
+    {
+        _velocity.y = obj.ReadValue<float>();
+        switch (getControlType(obj))
+        {
+            case ControlType.Keyboard:
+                _velocity.y *= _mouseSensitivity.y;
+
+                break;
+            case ControlType.Gamepad:
+                _velocity.y *= _gamepadSensitivity.y;
+                break;
+        }
+    }
+
+    private void LookX(InputAction.CallbackContext obj)
+    {
+        _velocity.x = obj.ReadValue<float>();
+        switch (getControlType(obj))
+        {
+            case ControlType.Keyboard:
+                _velocity.x *= _mouseSensitivity.x;
+
+                break;
+            case ControlType.Gamepad:
+                _velocity.x *= _gamepadSensitivity.x;
+                break;
+        }
+    }
+    #endregion
+
     #region Eventos
 
     #endregion
 
     #region Metodos
-
+    public static ControlType getControlType(InputAction.CallbackContext Context)
+    {
+        ControlType _value = ControlType.Keyboard;
+        if (Context.action.activeControl.ToString().Contains("/XInputControllerWindows/"))
+        {
+            _value = ControlType.Gamepad;
+        }
+        return _value;
+    }
     #endregion
 
     #region Propiedades

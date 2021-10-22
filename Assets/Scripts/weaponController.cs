@@ -10,6 +10,8 @@ public class weaponController : MonoBehaviour
 	public event ShootEventHandler OnAmmoStatusChange;
 
 	//Variables Expuestas
+	[SerializeField] Weapons _weaponType;
+	[Header("Propiedades")]
 	[SerializeField] float _cartridgeBulletDelay;
 	[SerializeField] int _cartridgeCaseCapacity;
 	[SerializeField] int _cartridgeCaseRemaningBullets;
@@ -79,10 +81,12 @@ public class weaponController : MonoBehaviour
 			if (Physics.Raycast(transform.parent.parent.position, transform.parent.parent.forward, out _rayHit, _effectiveMaxRange, _hitLayerMask))
 			{
 				Invoke("performBulletCollision", _rayHit.distance / _bulletSpeed);
+				Debug.Log("En rango");
 			}
 			else if (Physics.Raycast(transform.parent.parent.position + transform.parent.parent.forward * _effectiveMaxRange, transform.parent.parent.forward + transform.parent.parent.up * _yAxyRandomDirection + transform.parent.parent.right * _xAxyRandomDirection, out _rayHit, _maxRange - _rayHit.distance, _hitLayerMask))
 			{
 				Invoke("performBulletCollision", _rayHit.distance / _bulletSpeed);
+				Debug.Log("Fuera de rango");
 			}
         }
         else
@@ -147,6 +151,18 @@ public class weaponController : MonoBehaviour
     public float AimingZoomMultiplier { get => _aimingZoomMultiplier;}
     public int CartridgeCaseRemaningBullets { get => _cartridgeCaseRemaningBullets;}
     public int BulletsCount { get => _bulletsCount; set => _bulletsCount = value; }
+	public WeaponsStruct status
+    {
+        get
+        {
+			return new WeaponsStruct(_bulletsCount, _cartridgeCaseRemaningBullets, _weaponType);
+        }
+        set
+        {
+			_bulletsCount = value.BulletsTotalCount;
+			_cartridgeCaseRemaningBullets = value.BulletsInCartridge;
+        }
+    }
 
     #endregion
 

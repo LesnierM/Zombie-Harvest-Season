@@ -14,7 +14,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "MouseXMove",
+                    "name": "LookX",
                     "type": "PassThrough",
                     "id": "95d0ed14-c198-4002-b748-5199163b75f9",
                     "expectedControlType": "Axis",
@@ -22,7 +22,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "MouseYMove",
+                    "name": "LookY",
                     "type": "PassThrough",
                     "id": "267961e2-ccf5-4b6b-89d4-b37068df2d6e",
                     "expectedControlType": "Axis",
@@ -67,22 +67,6 @@
                     "id": "e44db02e-8e9f-4add-ad8e-390e5a2c74dd",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "GamepadXMove",
-                    "type": "Value",
-                    "id": "6ee683a9-6d00-4a16-aae4-263286382b26",
-                    "expectedControlType": "Axis",
-                    "processors": "AxisDeadzone",
-                    "interactions": ""
-                },
-                {
-                    "name": "GamepadYMove",
-                    "type": "Value",
-                    "id": "0d317346-5bec-48de-84d3-dca824c9a8ee",
-                    "expectedControlType": "Axis",
-                    "processors": "AxisDeadzone",
                     "interactions": ""
                 },
                 {
@@ -228,7 +212,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "MouseXMove",
+                    "action": "LookX",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -239,7 +223,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "MouseYMove",
+                    "action": "LookY",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -355,28 +339,6 @@
                 },
                 {
                     "name": "",
-                    "id": "48d4986e-b318-44fe-b46b-2ebda7ad6c54",
-                    "path": "<Gamepad>/rightStick/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "GamepadXMove",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ed2104c2-72f7-494a-902d-1b371e27c71c",
-                    "path": "<Gamepad>/rightStick/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "GamepadYMove",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "4d8a3320-5725-4ea1-829e-5e52e41149d3",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -482,6 +444,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "ChangeWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "48d4986e-b318-44fe-b46b-2ebda7ad6c54",
+                    "path": "<Gamepad>/rightStick/x",
+                    "interactions": "",
+                    "processors": "AxisDeadzone",
+                    "groups": "Gamepad",
+                    "action": "LookX",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ed2104c2-72f7-494a-902d-1b371e27c71c",
+                    "path": "<Gamepad>/rightStick/y",
+                    "interactions": "",
+                    "processors": "AxisDeadzone",
+                    "groups": "Gamepad",
+                    "action": "LookY",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

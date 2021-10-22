@@ -27,10 +27,10 @@ public class weaponSway : MonoBehaviour
     {
         _playerActions = new GameActions();
         _playerActions.Enable();
-        _playerActions.playerActions.MouseXMove.performed += MouseData => _mouseInput.x = MouseData.ReadValue<float>();
-        _playerActions.playerActions.MouseXMove.canceled += MouseData => _mouseInput.x = MouseData.ReadValue<float>();
-        _playerActions.playerActions.MouseYMove.performed += MouseData => _mouseInput.y = MouseData.ReadValue<float>();
-        _playerActions.playerActions.MouseYMove.canceled += MouseData => _mouseInput.y = MouseData.ReadValue<float>();
+        //_playerActions.playerActions.MouseXMove.performed += MouseData => _mouseInput.x = MouseData.ReadValue<float>();
+        //_playerActions.playerActions.MouseXMove.canceled += MouseData => _mouseInput.x = MouseData.ReadValue<float>();
+        //_playerActions.playerActions.MouseYMove.performed += MouseData => _mouseInput.y = MouseData.ReadValue<float>();
+        //_playerActions.playerActions.MouseYMove.canceled += MouseData => _mouseInput.y = MouseData.ReadValue<float>();
     }
     private void OnDisable()
     {

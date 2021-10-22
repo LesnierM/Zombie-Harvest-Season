@@ -27,7 +27,7 @@ public class @GameActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""MouseXMove"",
+                    ""name"": ""LookX"",
                     ""type"": ""PassThrough"",
                     ""id"": ""95d0ed14-c198-4002-b748-5199163b75f9"",
                     ""expectedControlType"": ""Axis"",
@@ -35,7 +35,7 @@ public class @GameActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""MouseYMove"",
+                    ""name"": ""LookY"",
                     ""type"": ""PassThrough"",
                     ""id"": ""267961e2-ccf5-4b6b-89d4-b37068df2d6e"",
                     ""expectedControlType"": ""Axis"",
@@ -80,22 +80,6 @@ public class @GameActions : IInputActionCollection, IDisposable
                     ""id"": ""e44db02e-8e9f-4add-ad8e-390e5a2c74dd"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""GamepadXMove"",
-                    ""type"": ""Value"",
-                    ""id"": ""6ee683a9-6d00-4a16-aae4-263286382b26"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": ""AxisDeadzone"",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""GamepadYMove"",
-                    ""type"": ""Value"",
-                    ""id"": ""0d317346-5bec-48de-84d3-dca824c9a8ee"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": ""AxisDeadzone"",
                     ""interactions"": """"
                 },
                 {
@@ -241,7 +225,7 @@ public class @GameActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""MouseXMove"",
+                    ""action"": ""LookX"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -252,7 +236,7 @@ public class @GameActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""MouseYMove"",
+                    ""action"": ""LookY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -368,28 +352,6 @@ public class @GameActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""48d4986e-b318-44fe-b46b-2ebda7ad6c54"",
-                    ""path"": ""<Gamepad>/rightStick/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""GamepadXMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ed2104c2-72f7-494a-902d-1b371e27c71c"",
-                    ""path"": ""<Gamepad>/rightStick/y"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""GamepadYMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""4d8a3320-5725-4ea1-829e-5e52e41149d3"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -497,6 +459,28 @@ public class @GameActions : IInputActionCollection, IDisposable
                     ""action"": ""ChangeWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48d4986e-b318-44fe-b46b-2ebda7ad6c54"",
+                    ""path"": ""<Gamepad>/rightStick/x"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LookX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ed2104c2-72f7-494a-902d-1b371e27c71c"",
+                    ""path"": ""<Gamepad>/rightStick/y"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LookY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -534,15 +518,13 @@ public class @GameActions : IInputActionCollection, IDisposable
         // playerActions
         m_playerActions = asset.FindActionMap("playerActions", throwIfNotFound: true);
         m_playerActions_Move = m_playerActions.FindAction("Move", throwIfNotFound: true);
-        m_playerActions_MouseXMove = m_playerActions.FindAction("MouseXMove", throwIfNotFound: true);
-        m_playerActions_MouseYMove = m_playerActions.FindAction("MouseYMove", throwIfNotFound: true);
+        m_playerActions_LookX = m_playerActions.FindAction("LookX", throwIfNotFound: true);
+        m_playerActions_LookY = m_playerActions.FindAction("LookY", throwIfNotFound: true);
         m_playerActions_Jump = m_playerActions.FindAction("Jump", throwIfNotFound: true);
         m_playerActions_Shoot = m_playerActions.FindAction("Shoot", throwIfNotFound: true);
         m_playerActions_Reload = m_playerActions.FindAction("Reload", throwIfNotFound: true);
         m_playerActions_Run = m_playerActions.FindAction("Run", throwIfNotFound: true);
         m_playerActions_Crouch = m_playerActions.FindAction("Crouch", throwIfNotFound: true);
-        m_playerActions_GamepadXMove = m_playerActions.FindAction("GamepadXMove", throwIfNotFound: true);
-        m_playerActions_GamepadYMove = m_playerActions.FindAction("GamepadYMove", throwIfNotFound: true);
         m_playerActions_Action = m_playerActions.FindAction("Action", throwIfNotFound: true);
         m_playerActions_Aim = m_playerActions.FindAction("Aim", throwIfNotFound: true);
         m_playerActions_ChangeWeapon = m_playerActions.FindAction("ChangeWeapon", throwIfNotFound: true);
@@ -596,15 +578,13 @@ public class @GameActions : IInputActionCollection, IDisposable
     private readonly InputActionMap m_playerActions;
     private IPlayerActionsActions m_PlayerActionsActionsCallbackInterface;
     private readonly InputAction m_playerActions_Move;
-    private readonly InputAction m_playerActions_MouseXMove;
-    private readonly InputAction m_playerActions_MouseYMove;
+    private readonly InputAction m_playerActions_LookX;
+    private readonly InputAction m_playerActions_LookY;
     private readonly InputAction m_playerActions_Jump;
     private readonly InputAction m_playerActions_Shoot;
     private readonly InputAction m_playerActions_Reload;
     private readonly InputAction m_playerActions_Run;
     private readonly InputAction m_playerActions_Crouch;
-    private readonly InputAction m_playerActions_GamepadXMove;
-    private readonly InputAction m_playerActions_GamepadYMove;
     private readonly InputAction m_playerActions_Action;
     private readonly InputAction m_playerActions_Aim;
     private readonly InputAction m_playerActions_ChangeWeapon;
@@ -613,15 +593,13 @@ public class @GameActions : IInputActionCollection, IDisposable
         private @GameActions m_Wrapper;
         public PlayerActionsActions(@GameActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_playerActions_Move;
-        public InputAction @MouseXMove => m_Wrapper.m_playerActions_MouseXMove;
-        public InputAction @MouseYMove => m_Wrapper.m_playerActions_MouseYMove;
+        public InputAction @LookX => m_Wrapper.m_playerActions_LookX;
+        public InputAction @LookY => m_Wrapper.m_playerActions_LookY;
         public InputAction @Jump => m_Wrapper.m_playerActions_Jump;
         public InputAction @Shoot => m_Wrapper.m_playerActions_Shoot;
         public InputAction @Reload => m_Wrapper.m_playerActions_Reload;
         public InputAction @Run => m_Wrapper.m_playerActions_Run;
         public InputAction @Crouch => m_Wrapper.m_playerActions_Crouch;
-        public InputAction @GamepadXMove => m_Wrapper.m_playerActions_GamepadXMove;
-        public InputAction @GamepadYMove => m_Wrapper.m_playerActions_GamepadYMove;
         public InputAction @Action => m_Wrapper.m_playerActions_Action;
         public InputAction @Aim => m_Wrapper.m_playerActions_Aim;
         public InputAction @ChangeWeapon => m_Wrapper.m_playerActions_ChangeWeapon;
@@ -637,12 +615,12 @@ public class @GameActions : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMove;
-                @MouseXMove.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMouseXMove;
-                @MouseXMove.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMouseXMove;
-                @MouseXMove.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMouseXMove;
-                @MouseYMove.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMouseYMove;
-                @MouseYMove.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMouseYMove;
-                @MouseYMove.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMouseYMove;
+                @LookX.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLookX;
+                @LookX.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLookX;
+                @LookX.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLookX;
+                @LookY.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLookY;
+                @LookY.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLookY;
+                @LookY.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLookY;
                 @Jump.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
@@ -658,12 +636,6 @@ public class @GameActions : IInputActionCollection, IDisposable
                 @Crouch.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnCrouch;
                 @Crouch.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnCrouch;
                 @Crouch.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnCrouch;
-                @GamepadXMove.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnGamepadXMove;
-                @GamepadXMove.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnGamepadXMove;
-                @GamepadXMove.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnGamepadXMove;
-                @GamepadYMove.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnGamepadYMove;
-                @GamepadYMove.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnGamepadYMove;
-                @GamepadYMove.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnGamepadYMove;
                 @Action.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnAction;
                 @Action.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnAction;
                 @Action.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnAction;
@@ -680,12 +652,12 @@ public class @GameActions : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @MouseXMove.started += instance.OnMouseXMove;
-                @MouseXMove.performed += instance.OnMouseXMove;
-                @MouseXMove.canceled += instance.OnMouseXMove;
-                @MouseYMove.started += instance.OnMouseYMove;
-                @MouseYMove.performed += instance.OnMouseYMove;
-                @MouseYMove.canceled += instance.OnMouseYMove;
+                @LookX.started += instance.OnLookX;
+                @LookX.performed += instance.OnLookX;
+                @LookX.canceled += instance.OnLookX;
+                @LookY.started += instance.OnLookY;
+                @LookY.performed += instance.OnLookY;
+                @LookY.canceled += instance.OnLookY;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -701,12 +673,6 @@ public class @GameActions : IInputActionCollection, IDisposable
                 @Crouch.started += instance.OnCrouch;
                 @Crouch.performed += instance.OnCrouch;
                 @Crouch.canceled += instance.OnCrouch;
-                @GamepadXMove.started += instance.OnGamepadXMove;
-                @GamepadXMove.performed += instance.OnGamepadXMove;
-                @GamepadXMove.canceled += instance.OnGamepadXMove;
-                @GamepadYMove.started += instance.OnGamepadYMove;
-                @GamepadYMove.performed += instance.OnGamepadYMove;
-                @GamepadYMove.canceled += instance.OnGamepadYMove;
                 @Action.started += instance.OnAction;
                 @Action.performed += instance.OnAction;
                 @Action.canceled += instance.OnAction;
@@ -741,15 +707,13 @@ public class @GameActions : IInputActionCollection, IDisposable
     public interface IPlayerActionsActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnMouseXMove(InputAction.CallbackContext context);
-        void OnMouseYMove(InputAction.CallbackContext context);
+        void OnLookX(InputAction.CallbackContext context);
+        void OnLookY(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
-        void OnGamepadXMove(InputAction.CallbackContext context);
-        void OnGamepadYMove(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);

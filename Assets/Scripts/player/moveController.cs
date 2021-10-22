@@ -12,7 +12,8 @@ public class moveController : MonoBehaviour
     [Header("Chequeo de piso")]
     [SerializeField] LayerMask _groundLayer;
     [SerializeField] float _sphereRadious;
-    [SerializeField] float _groundCheckOffet;
+    [SerializeField] float _groundCheckOffetStanding;
+    [SerializeField] float _groundCheckOffetCrouching;
     [Header("Velocidades")]
     [SerializeField] float _walkSpeed;
     [SerializeField] float _runMultiplier;
@@ -20,14 +21,19 @@ public class moveController : MonoBehaviour
     [SerializeField] float _backSpeed;
     [SerializeField] float _crouchSpeed;
     [SerializeField] float _aimingSpeed;
+    [SerializeField] float _airSpeedmultiplier;
     [Header("Gravedad")]
-    [SerializeField] float _gravity = -9.8f;
     [SerializeField] float _gravityOnGrounded;
+    /// <summary>
+    /// Para ajustar la gravedad sin modificar el valor original
+    /// </summary>
     [SerializeField] float _gravitymultiplier;
     [Header("Alturas")]
     [SerializeField] float _jumpHigh;
     [SerializeField] float _crouchHeigh;
     [SerializeField] float _normalHeigh;
+    [Header("opciones")]
+    [SerializeField] bool _isCrouchToggled;
     //Variables
     bool _runPressed;
     bool _isRunning;
@@ -36,6 +42,8 @@ public class moveController : MonoBehaviour
     bool _isGrounded;
     bool _isIdle=true;
 
+    float _gravity = -9.8f;
+    float _groundCheckOffet;
     bool _diagonalMovement;//velocidad cuando s e corre endiagonal
     float _yVelocity;
     Vector2 _input;
@@ -47,6 +55,7 @@ public class moveController : MonoBehaviour
     weaponsController _weaponsController;
     void Awake()
     {
+        _groundCheckOffet = _groundCheckOffetStanding;
         _weaponsController = GetComponent<weaponsController>();
         _soundPlayer = GetComponent<AudioSource>();
         _characterController = GetComponent<CharacterController>();
@@ -66,20 +75,21 @@ public class moveController : MonoBehaviour
         #endregion
 
         #region Crear las velocidades de las direcciones
-        float _zSpeed = _weaponsController.IsAiming?_input.y*_aimingSpeed*Time.deltaTime: calculateZVelocity();
+        float _zSpeed =_weaponsController.IsAiming?_input.y*_aimingSpeed*Time.deltaTime: calculateZVelocity();
         float _xSpeed = _weaponsController.IsAiming ? _input.x * _aimingSpeed * Time.deltaTime : calculateXVelocity();
+        //velocidad cuando este en el aire
+        if (!_isGrounded)
+        {
+            _zSpeed *= _airSpeedmultiplier;
+            _xSpeed *= _airSpeedmultiplier;
+        }
         #endregion
 
         #region Gravedad
 
         if (!_isGrounded)
         {
-            _yVelocity += (_gravity* Time.deltaTime) * Time.deltaTime;
-            //PARA CAER MAS RAPIDO
-            if (_yVelocity < 0)
-            {
-                _yVelocity *= _gravitymultiplier;
-            }
+            _yVelocity += (_gravity* Time.deltaTime*_gravitymultiplier) * Time.deltaTime;
         }
         else
         {
@@ -90,18 +100,15 @@ public class moveController : MonoBehaviour
         #region Salto
         if (_isGrounded && _jumpPressed && !_isCrouch)
         {
-            _yVelocity = Mathf.Sqrt(-2 * _gravity * _jumpHigh) * Time.deltaTime;
-            _jumpPressed = false;
+            _yVelocity = Mathf.Sqrt(-2 * (_gravity *_gravitymultiplier)*_jumpHigh) * Time.deltaTime;
         }
-        else
-        {
-            _jumpPressed = false;
-        }
+        _jumpPressed = false;
+       
         #endregion
 
         #region Notificar estados de movimiento
         float _currentMovementVelocity =new Vector2(_characterController.velocity.x, _characterController.velocity.z).sqrMagnitude;
-        if (_currentMovementVelocity > 100)
+        if (_currentMovementVelocity > 70)
         {
             OnRunStateChange(true);
             OnWalkStateChange(false);
@@ -109,7 +116,7 @@ public class moveController : MonoBehaviour
             _isIdle = false;
             _isRunning = true;
         }
-        else if (_currentMovementVelocity < 100 && _currentMovementVelocity != 0)
+        else if (_currentMovementVelocity < 70 && _currentMovementVelocity != 0)
         {
             OnRunStateChange(false);
             OnWalkStateChange(true);
@@ -128,6 +135,7 @@ public class moveController : MonoBehaviour
         #endregion
 
         _characterController.Move(transform.TransformDirection(new Vector3( _xSpeed, _yVelocity, _zSpeed)));
+        //Debug.Log(new Vector2(_characterController.velocity.x, _characterController.velocity.z).sqrMagnitude);
     }
     private void OnDrawGizmos()
     {
@@ -144,12 +152,12 @@ public class moveController : MonoBehaviour
         _playerActions.playerActions.Jump.performed += OnJump;
         _playerActions.playerActions.Crouch.performed += OnCrouch;
         _playerActions.playerActions.Crouch.canceled += OnCrouch;
-        //_playerActions.playerActions.Shoot.performed += _ => Debug.Log("shoot");
     }
     private void OnDisable()
     {
         _playerActions.Disable();
     }
+
     #region Input
     private void OnJump(InputAction.CallbackContext obj)
     {
@@ -161,20 +169,33 @@ public class moveController : MonoBehaviour
     }
     private void OnCrouch(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        if (obj.performed &&_isGrounded)
-        {
-            _characterController.height = _crouchHeigh;
-            _isCrouch = true;
-        }
-         if (!obj.performed &&_isGrounded)
-        {
-            stand();
-        }
+        StartCoroutine(performCrouch(obj));
     }
+
     #endregion
 
     #region Eventos
-  
+    private IEnumerator performCrouch(InputAction.CallbackContext obj)
+    {
+        if (!_isGrounded)
+        {
+           yield return null;
+        }
+
+        if (obj.performed && !_isCrouch)
+        {
+            _isCrouch = true;
+            _characterController.height = _crouchHeigh;
+            _groundCheckOffet = _groundCheckOffetCrouching;
+        }
+        else if ((!obj.performed && !_isCrouchToggled) || (_isCrouchToggled && obj.performed))
+        {
+            _groundCheckOffet = _groundCheckOffetStanding;
+            stand();
+        }
+        yield return new WaitForSeconds(.1f);
+    }
+
     #endregion
 
     #region Metodos
