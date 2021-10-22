@@ -1,12 +1,64 @@
 fileFormatVersion: 2
-guid: 7d5c872450ee7eb479c6fa4db2231935
+guid: 486a3ac02dbe792449ff6f674be8db18
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable:
   - first:
-      74: -623603649343465320
-    second: Scene
-  externalObjects: {}
+      74: -3568404125941133076
+    second: Apuntar_Idle
+  - first:
+      74: 1212892522580797277
+    second: Cuerpo|Apuntar_Idle
+  - first:
+      74: -3011752128765108999
+    second: Esqueleto|Apuntar -> Idle
+  - first:
+      74: -486087790709148416
+    second: Esqueleto|Apuntar_Idle
+  - first:
+      74: 4869834635753590079
+    second: Esqueleto|Caminando
+  - first:
+      74: 4656120970862366365
+    second: Esqueleto|Corredera_Percutor Abajo
+  - first:
+      74: -915110348374240326
+    second: Esqueleto|Corredera_Percutor Arriba
+  - first:
+      74: -7082840561861548260
+    second: Esqueleto|Correr
+  - first:
+      74: -2247741559490286211
+    second: Esqueleto|Correr -> Idle
+  - first:
+      74: 2916306212401769018
+    second: Esqueleto|Disparo
+  - first:
+      74: 4893019970992917223
+    second: Esqueleto|Disparo_Apuntar
+  - first:
+      74: 2174045794081892003
+    second: Esqueleto|Idle
+  - first:
+      74: 7629957875810684296
+    second: Esqueleto|Idle -> Apuntar
+  - first:
+      74: -444856946469511447
+    second: Esqueleto|Idle -> Correr
+  - first:
+      74: -8605349349708851925
+    second: Esqueleto|Recarga
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bala-Casquillo
+    second: {fileID: 2100000, guid: cf26ebce4b8e9de4badc317cef04637e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 687939533d50e1a4498c9b874fa5b838, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -97,7 +149,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 

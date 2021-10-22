@@ -128,11 +128,6 @@ public class moveController : MonoBehaviour
         #endregion
 
         _characterController.Move(transform.TransformDirection(new Vector3( _xSpeed, _yVelocity, _zSpeed)));
-        //Debug.Log(_currentMovementVelocity);
-        //Debug.Log("Running=" + _isRunning);
-        //Debug.Log("walking=" + (!_isRunning&& !_isIdle));
-        //Debug.Log("idle=" + _isIdle);
-
     }
     private void OnDrawGizmos()
     {
