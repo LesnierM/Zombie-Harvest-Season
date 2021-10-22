@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 7492235534193854105}
   - component: {fileID: 6446267196618801483}
   m_Layer: 7
-  m_Name: Jericho-941
+  m_Name: Jericho-941 pureba
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3d71b2ad4fbce42af5b38fdeb1548b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponType: 1
+  _weaponType: 2
   _cartridgeBulletDelay: 0.2
   _cartridgeCaseCapacity: 16
   _cartridgeCaseRemaningBullets: 16
