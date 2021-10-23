@@ -7,7 +7,6 @@ public enum Weapons
 {
     None,
     Jericho_941,
-    Preuba,
 }
 public struct WeaponsStruct
 { 
@@ -51,10 +50,6 @@ public class weaponsController : MonoBehaviour
     moveController _playerController;
     void Awake()
     {
-        if (Application.isEditor)
-        {
-            _weaponsAdquired.Add(_weaponsCollection[0].status);
-        }
         _mainCamera = Camera.main;
         _playerController = GetComponent<moveController>();
         _characterController = GetComponent<CharacterController>();

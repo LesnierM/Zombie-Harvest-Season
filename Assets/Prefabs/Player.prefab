@@ -371,11 +371,12 @@ MonoBehaviour:
   _crouchSpeed: 3
   _aimingSpeed: 3
   _airSpeedmultiplier: 0.7
-  _gravityOnGrounded: -2
+  _gravityOnGrounded: -4
   _gravitymultiplier: 1.1
   _jumpHigh: 1.5
   _crouchHeigh: 0.9
   _normalHeigh: 1.8
+  _isCrouchToggled: 0
 --- !u!114 &8057907759296733281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,7 +477,6 @@ MonoBehaviour:
   _defaultCameraFieldofViewValue: 60
   _weaponsCollection:
   - {fileID: 7492235534193854105, guid: a72d98c3149ecd14eb5113e044d118f7, type: 3}
-  _weaponsAdquired: 01000000
 --- !u!82 &8057907759296733288
 AudioSource:
   m_ObjectHideFlags: 0
