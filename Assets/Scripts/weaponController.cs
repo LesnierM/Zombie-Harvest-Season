@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class weaponController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class weaponController : MonoBehaviour
 	[SerializeField] int _cartridgeCaseCapacity;
 	[SerializeField] int _cartridgeCaseRemaningBullets;
 	[SerializeField] int _bulletsCount;
+	[SerializeField] int _bulletsMaxCount;
 	[Header("Retraso de sonidos")]
 	[SerializeField] float _shootSoundDelay;
     [SerializeField] float _reloadSoundDelay;
@@ -25,16 +27,21 @@ public class weaponController : MonoBehaviour
     [SerializeField] GameObject _cartridgeCase;
 	[Header("Disparo")]
 	[SerializeField] GameObject _bulletHole;
+	[SerializeField] GameObject _muzzleFlash;
 	[SerializeField] LayerMask _hitLayerMask;
+	[SerializeField] float _fireRate;
 	[SerializeField] float _maxRange;
 	[SerializeField] float _effectiveMaxRange;
 	[SerializeField] float _bulletHoleDuration;
 	[SerializeField] float _aimingZoomMultiplier;
 	[Tooltip("Velocidad del proyectil en u/s")]
 	[SerializeField] float _bulletSpeed;
+	[Header("Imagen Ui")]
+	[SerializeField] Texture2D _UiImage;
 
 	//Variables
 	RaycastHit _rayHit;
+	float _lastFiredTime;
 	//Componentes
 	Animator _animator;
 	AudioSource _soundPlayer;
@@ -64,12 +71,21 @@ public class weaponController : MonoBehaviour
     public void shoot()
     {
 		//no disparar si esta disparando
-        if (_playerController.IsRunning||_animator.GetCurrentAnimatorStateInfo(1).IsName("shoot")||_animator.GetCurrentAnimatorStateInfo(1).IsName("reloading"))
+        if (_playerController.IsRunning||_lastFiredTime+_fireRate>Time.time||_animator.GetCurrentAnimatorStateInfo(1).IsName("reloading"))
         {
 			return;
         }
+		_lastFiredTime = Time.time;
 		if (_cartridgeCaseRemaningBullets > 0)
         {
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("aiming"))
+            {
+				Destroy(Instantiate(_muzzleFlash, transform.GetChild(2).transform.position, Quaternion.Euler(_muzzleFlash.transform.forward), transform), .5f); ;
+            }
+            else
+            {
+			Destroy(Instantiate(_muzzleFlash, transform.GetChild(1).transform.position, Quaternion.Euler(_muzzleFlash.transform.forward),transform),.5f);
+            }
             --_cartridgeCaseRemaningBullets;
 			OnAmmoStatusChange(_cartridgeCaseRemaningBullets, _bulletsCount);
             _animator.Play("shoot", 1);
@@ -169,6 +185,7 @@ public class weaponController : MonoBehaviour
 			_cartridgeCaseRemaningBullets = value.BulletsInCartridge;
         }
     }
+    public Texture2D UiImage { get => _UiImage; }
 
     #endregion
 

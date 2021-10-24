@@ -92,6 +92,36 @@ Transform:
   m_Father: {fileID: 3657595561363478370}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2023011627825732874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3840216675651800756}
+  m_Layer: 7
+  m_Name: normalMuzzleFlashPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3840216675651800756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023011627825732874}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.129, y: 0.103, z: -0.113}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7832344869612772386}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2490708871579563822
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +211,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 7832344869612772386}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &128693786108609686
 SkinnedMeshRenderer:
@@ -303,7 +333,7 @@ Transform:
   m_Children:
   - {fileID: 2091062786077152350}
   m_Father: {fileID: 7832344869612772386}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -89.98021, y: 0, z: 0}
 --- !u!1 &3898873152377620180
 GameObject:
@@ -401,6 +431,36 @@ Transform:
   m_Father: {fileID: 2091062786077152350}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -70.04127, y: 2.7217647e-14, z: -3.7963458e-14}
+--- !u!1 &6837858468562645284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9047875893877730420}
+  m_Layer: 7
+  m_Name: aiminglMuzzleFlashPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9047875893877730420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6837858468562645284}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.004, y: 0.123, z: 0.107}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7832344869612772386}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7298062945574087851
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,6 +554,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8393483071069897493}
+  - {fileID: 3840216675651800756}
+  - {fileID: 9047875893877730420}
   - {fileID: 633874966740312960}
   - {fileID: 1015272257300966985}
   - {fileID: 9167709247518026660}
@@ -536,20 +598,24 @@ MonoBehaviour:
   _cartridgeCaseCapacity: 16
   _cartridgeCaseRemaningBullets: 16
   _bulletsCount: 96
+  _bulletsMaxCount: 96
   _shootSoundDelay: 0
   _reloadSoundDelay: 0.1
   _shootSound: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
   _reloadSound: {fileID: 8300000, guid: 7eae240aa4f30e243a92eadb52af1c2a, type: 3}
   _cartridgeCase: {fileID: 8682409687313712761, guid: 4c086e3d6df01e941b0be254fd076ce9, type: 3}
   _bulletHole: {fileID: 9083845830130240433, guid: 6facedcfb21ef6146adf1db0ed02b7fa, type: 3}
+  _muzzleFlash: {fileID: 3082203602606882605, guid: ce8cd3af529c06743b132a87d7fb85ae, type: 3}
   _hitLayerMask:
     serializedVersion: 2
     m_Bits: 2147483647
+  _fireRate: 0.5
   _maxRange: 90
   _effectiveMaxRange: 50
   _bulletHoleDuration: 500
   _aimingZoomMultiplier: 0.8
   _bulletSpeed: 360
+  _UiImage: {fileID: 2800000, guid: 5a6bdcff9cd19a346987713a9c7ad5b6, type: 3}
 --- !u!82 &6446267196618801483
 AudioSource:
   m_ObjectHideFlags: 0
@@ -705,7 +771,7 @@ Transform:
   m_LocalScale: {x: 44.99372, y: 44.993732, z: 44.99372}
   m_Children: []
   m_Father: {fileID: 7832344869612772386}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &968509926477619043
 Camera:

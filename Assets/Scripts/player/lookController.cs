@@ -8,7 +8,6 @@ public enum ControlType
     Keyboard,
     Gamepad
 }
-
 public class lookController : MonoBehaviour
 {
 	//Variables Expuestas
@@ -25,27 +24,33 @@ public class lookController : MonoBehaviour
     //Clases
     GameActions _playerActions;
     CharacterController _characterController;
-
     void Awake()
     {
-        
         _playerActions = new GameActions();
 		_camera = Camera.main.transform;
+    }
+    private void OnEnable()
+    {
+        if (_playerActions == null)
+        {
+            _playerActions = new GameActions();
+        }
+        _playerActions.Enable();
+        _playerActions.playerActions.LookX.performed += LookX;
+        _playerActions.playerActions.LookX.canceled += mouseInput => _velocity.x = mouseInput.ReadValue<float>() * 0;
+        _playerActions.playerActions.LookY.performed += LookY;
+        _playerActions.playerActions.LookY.canceled += mouseInput => _velocity.y = mouseInput.ReadValue<float>() * 0;
         Application.focusChanged += Application_focusChanged;
     }
-
-    private void Application_focusChanged(bool obj)
+    private void OnDisable()
     {
-        if (obj)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
+        _playerActions.playerActions.LookX.performed -= LookX;
+        _playerActions.playerActions.LookX.canceled -= mouseInput => _velocity.x = mouseInput.ReadValue<float>() * 0;
+        _playerActions.playerActions.LookY.performed -= LookY;
+        _playerActions.playerActions.LookY.canceled -= mouseInput => _velocity.y = mouseInput.ReadValue<float>() * 0;
+        Application.focusChanged -= Application_focusChanged;
+        _playerActions.Disable();
     }
-
     void FixedUpdate()
     {
 
@@ -58,20 +63,6 @@ public class lookController : MonoBehaviour
         _verticalAngle = Mathf.Clamp(_verticalAngle, -_verticalBounds, _verticalBounds);
         _camera.localRotation = Quaternion.Euler(_verticalAngle, 0, 0);
         #endregion
-    }
-    private void OnEnable()
-    {
-        _playerActions = new GameActions();
-        _playerActions.Enable();
-
-        _playerActions.playerActions.LookX.performed += LookX;
-        _playerActions.playerActions.LookX.canceled += mouseInput => _velocity.x = mouseInput.ReadValue<float>() * 0;
-        _playerActions.playerActions.LookY.performed += LookY;
-        _playerActions.playerActions.LookY.canceled += mouseInput => _velocity.y = mouseInput.ReadValue<float>() * 0;
-    }
-    private void OnDisable()
-    {
-        _playerActions.Disable();
     }
 
     #region Inputs
@@ -107,7 +98,17 @@ public class lookController : MonoBehaviour
     #endregion
 
     #region Eventos
-
+    private void Application_focusChanged(bool obj)
+    {
+        if (obj)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
     #endregion
 
     #region Metodos

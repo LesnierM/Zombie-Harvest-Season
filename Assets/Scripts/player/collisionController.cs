@@ -11,16 +11,10 @@ public class collisionController : MonoBehaviour
     //Variables
     //Componentes
     //Clases
-    GameActions _playerACtion;
     guiController _guiController;
     private void Awake()
     {
         _guiController = GetComponent <guiController>();
-    }
-    private void OnEnable()
-    {
-        _playerACtion = new GameActions();
-        _playerACtion.Enable();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -41,10 +35,6 @@ public class collisionController : MonoBehaviour
             _guiController.showInfotext("Has recojido " + _pickedUpObjectname,10);
             Destroy(_puc.gameObject);
         }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-      
     }
 
     #region Eventos

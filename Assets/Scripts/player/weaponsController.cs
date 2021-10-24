@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.Events;
 public enum Weapons
 {
     None,
@@ -22,11 +22,11 @@ public struct WeaponsStruct
 }
 public class weaponsController : MonoBehaviour
 {
-    //eventos
+    ////eventos
     public delegate void WeaponsEventhandler(weaponController NewWeapon);
     public event WeaponsEventhandler OnWeaponChange;
-	//Variables Expuestas
-	[SerializeField] Weapons _currentWeaponName=Weapons.None;
+    //Variables Expuestas
+    [SerializeField] Weapons _currentWeaponName=Weapons.None;
 	[SerializeField] weaponController _currentWeapon;
     [SerializeField] GameObject _weaponsHolder;
     [SerializeField] float _defaultCameraFieldofViewValue=60;
@@ -57,7 +57,10 @@ public class weaponsController : MonoBehaviour
     }
     private void OnEnable()
     {
-		_playerActions = new GameActions();
+        if (_playerActions == null)
+        {
+            _playerActions = new GameActions();
+        }
 		_playerActions.Enable();
         _playerActions.playerActions.Shoot.performed += _ => { if (_currentWeapon != null)  _currentWeapon.shoot();};
         _playerActions.playerActions.Reload.performed += _ => { if (_currentWeapon != null)  _currentWeapon.Reload();};
@@ -66,7 +69,7 @@ public class weaponsController : MonoBehaviour
         _playerController.OnRunStateChange += OnRunningStateChange;
         _playerController.OnWalkStateChange += OnWalkStateChange;
         _playerController.OnidletateChange += OnidletateChange;
-        _playerActions.playerActions.ChangeWeapon.performed += ChangeWeapon_performed;
+        _playerActions.playerActions.ChangeWeapon.performed += OnChangeWeapon;
         _pickUps.OnWeaponPickedUp += OnWeaponPickedUp;
         if (_currentWeapon != null)
         {
@@ -76,10 +79,20 @@ public class weaponsController : MonoBehaviour
     private void OnDisable()
     {
 		_playerActions.Disable();
+        _playerActions.playerActions.Shoot.performed -= _ => { if (_currentWeapon != null) _currentWeapon.shoot(); };
+        _playerActions.playerActions.Reload.performed -= _ => { if (_currentWeapon != null) _currentWeapon.Reload(); };
+        _playerActions.playerActions.Aim.performed -= Aim;
+        _playerActions.playerActions.Aim.canceled -= Aim;
+        _playerController.OnRunStateChange -= OnRunningStateChange;
+        _playerController.OnWalkStateChange -= OnWalkStateChange;
+        _playerController.OnidletateChange -= OnidletateChange;
+        _playerActions.playerActions.ChangeWeapon.performed -= OnChangeWeapon;
+        _pickUps.OnWeaponPickedUp -= OnWeaponPickedUp;
+        _currentWeapon.OnReload -= OnReload;
     }
 
     #region Input
-    private void ChangeWeapon_performed(InputAction.CallbackContext obj)
+    private void OnChangeWeapon(InputAction.CallbackContext obj)
     {
         if (_animator!=null&&( _animator.GetCurrentAnimatorStateInfo(1).IsName("reloading") || _animator.GetCurrentAnimatorStateInfo(1).IsName("shoot")))
         {
@@ -222,9 +235,10 @@ public class weaponsController : MonoBehaviour
             Destroy(_weaponsHolder.transform.GetChild(0).gameObject);
         }
         //gaurdr el estado del arma 
-        if (_currentWeapon!=null)
+        if (_currentWeapon != null)
         {
             _weaponsAdquired[_currentWeaponIndex] = _currentWeapon.status;
+            _currentWeapon.OnReload -= OnReload;
         }
         _currentWeaponIndex = (int)NewWeapon - 1;
         _currentWeapon= Instantiate(getWeapon(NewWeapon), _weaponsHolder.transform).GetComponent<weaponController>();

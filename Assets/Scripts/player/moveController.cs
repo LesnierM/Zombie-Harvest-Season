@@ -55,7 +55,7 @@ public class moveController : MonoBehaviour
     weaponsController _weaponsController;
     void Awake()
     {
-        _groundCheckOffet = _groundCheckOffetStanding;
+        _groundCheckOffet = _groundCheckOffetStanding;//establecer el offset del grounddetector
         _weaponsController = GetComponent<weaponsController>();
         _soundPlayer = GetComponent<AudioSource>();
         _characterController = GetComponent<CharacterController>();
@@ -143,7 +143,10 @@ public class moveController : MonoBehaviour
     }
     private void OnEnable()
     {
-        _playerActions = new GameActions();
+        if (_playerActions == null)
+        {
+            _playerActions = new GameActions();
+        }
         _playerActions.Enable();
         _playerActions.playerActions.Move.performed += data => _input = data.ReadValue<Vector2>();
         _playerActions.playerActions.Move.canceled += data => _input = data.ReadValue<Vector2>();
@@ -156,6 +159,13 @@ public class moveController : MonoBehaviour
     private void OnDisable()
     {
         _playerActions.Disable();
+        _playerActions.playerActions.Move.performed -= data => _input = data.ReadValue<Vector2>();
+        _playerActions.playerActions.Move.canceled -= data => _input = data.ReadValue<Vector2>();
+        _playerActions.playerActions.Run.performed -= _ => _runPressed = true;
+        _playerActions.playerActions.Run.canceled -= _ => _runPressed = false;
+        _playerActions.playerActions.Jump.performed -= OnJump;
+        _playerActions.playerActions.Crouch.performed -= OnCrouch;
+        _playerActions.playerActions.Crouch.canceled -= OnCrouch;
     }
 
     #region Input

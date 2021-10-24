@@ -16,16 +16,11 @@ public class soundEffectsController : MonoBehaviour
     {
 		_soundPlayer = GetComponent<AudioSource>();
     }
-
     public void OnStep()
     {
 		_soundPlayer.PlayOneShot(_stepSoundConcrete[_index]);
 		_index = _index == _stepSoundConcrete.Length-1 ? 0 : _index+1;
     }
-    void Update()
-    {
-        
-    }		
 				
 	#region Eventos
 	
