@@ -5,11 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - aguatag
+  - Item
+  - Doors
+  - Gates
+  - Well
+  - Box
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Ground
@@ -20,8 +25,8 @@ TagManager:
   - Casas
   - Arboles pintados
   - arboles colocados
-  - 
-  - 
+  - Actionable
+  - Affectable
   - 
   - 
   - 

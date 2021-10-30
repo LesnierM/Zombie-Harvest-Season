@@ -26,16 +26,16 @@ public class weaponsController : MonoBehaviour
     public delegate void WeaponsEventhandler(weaponController NewWeapon);
     public event WeaponsEventhandler OnWeaponChange;
     //Variables Expuestas
-    [SerializeField] Weapons _currentWeaponName=Weapons.None;
-	[SerializeField] weaponController _currentWeapon;
+    [SerializeField] Weapons _currentWeaponName = Weapons.None;
+    [SerializeField] weaponController _currentWeapon;
     [SerializeField] GameObject _weaponsHolder;
-    [SerializeField] float _defaultCameraFieldofViewValue=60;
+    [SerializeField] float _defaultCameraFieldofViewValue = 60;
     [Header("Coleccion de armas")]
     [SerializeField] weaponController[] _weaponsCollection;
     //Variables
-    int _currentWeaponIndex=-1;
+    int _currentWeaponIndex = -1;
     //TODO en la version final eliminar la etiqueta seriealiza
-	[SerializeField] List<WeaponsStruct> _weaponsAdquired=new List<WeaponsStruct>();
+    [SerializeField] List<WeaponsStruct> _weaponsAdquired = new List<WeaponsStruct>();
     /// <summary>
     /// Cunado este dejando de apuntar no reproducir la animacion de walk hasta que no termine la animacion stopAiming
     /// </summary>
@@ -44,7 +44,7 @@ public class weaponsController : MonoBehaviour
     Camera _mainCamera;
     //Clases
     collisionController _pickUps;
-	GameActions _playerActions;
+    GameActions _playerActions;
     Animator _animator;
     CharacterController _characterController;
     moveController _playerController;
@@ -61,15 +61,16 @@ public class weaponsController : MonoBehaviour
         {
             _playerActions = new GameActions();
         }
-		_playerActions.Enable();
-        _playerActions.playerActions.Shoot.performed += _ => { if (_currentWeapon != null)  _currentWeapon.shoot();};
-        _playerActions.playerActions.Reload.performed += _ => { if (_currentWeapon != null)  _currentWeapon.Reload();};
+        _playerActions.Enable();
+        _playerActions.playerActions.Shoot.performed += data => { if (_currentWeapon != null) _currentWeapon.shoot(); };
+        _playerActions.playerActions.Reload.performed += data => { if (_currentWeapon != null) _currentWeapon.Reload(); }; 
         _playerActions.playerActions.Aim.performed += Aim;
         _playerActions.playerActions.Aim.canceled += Aim;
+        _playerActions.playerActions.ChangeWeapon.performed += OnChangeWeapon;
+
         _playerController.OnRunStateChange += OnRunningStateChange;
         _playerController.OnWalkStateChange += OnWalkStateChange;
         _playerController.OnidletateChange += OnidletateChange;
-        _playerActions.playerActions.ChangeWeapon.performed += OnChangeWeapon;
         _pickUps.OnWeaponPickedUp += OnWeaponPickedUp;
         if (_currentWeapon != null)
         {
@@ -78,17 +79,21 @@ public class weaponsController : MonoBehaviour
     }
     private void OnDisable()
     {
-		_playerActions.Disable();
-        _playerActions.playerActions.Shoot.performed -= _ => { if (_currentWeapon != null) _currentWeapon.shoot(); };
-        _playerActions.playerActions.Reload.performed -= _ => { if (_currentWeapon != null) _currentWeapon.Reload(); };
+        _playerActions.Disable();
+        _playerActions.playerActions.Shoot.performed -= data => { if (_currentWeapon != null) _currentWeapon.shoot(); };
+        _playerActions.playerActions.Reload.performed -= data => { if (_currentWeapon != null) _currentWeapon.Reload(); };
         _playerActions.playerActions.Aim.performed -= Aim;
         _playerActions.playerActions.Aim.canceled -= Aim;
+        _playerActions.playerActions.ChangeWeapon.performed -= OnChangeWeapon;
+
         _playerController.OnRunStateChange -= OnRunningStateChange;
         _playerController.OnWalkStateChange -= OnWalkStateChange;
         _playerController.OnidletateChange -= OnidletateChange;
-        _playerActions.playerActions.ChangeWeapon.performed -= OnChangeWeapon;
         _pickUps.OnWeaponPickedUp -= OnWeaponPickedUp;
-        _currentWeapon.OnReload -= OnReload;
+        if (_currentWeapon != null)
+        {
+            _currentWeapon.OnReload -= OnReload;
+        }
     }
 
     #region Input

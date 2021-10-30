@@ -9,11 +9,7 @@ public class moveController : MonoBehaviour
     public event StatesEventHandler OnWalkStateChange;
     public event StatesEventHandler OnidletateChange;
     //Variables Expuestas
-    [Header("Chequeo de piso")]
-    [SerializeField] LayerMask _groundLayer;
-    [SerializeField] float _sphereRadious;
-    [SerializeField] float _groundCheckOffetStanding;
-    [SerializeField] float _groundCheckOffetCrouching;
+
     [Header("Velocidades")]
     [SerializeField] float _walkSpeed;
     [SerializeField] float _runMultiplier;
@@ -21,13 +17,15 @@ public class moveController : MonoBehaviour
     [SerializeField] float _backSpeed;
     [SerializeField] float _crouchSpeed;
     [SerializeField] float _aimingSpeed;
-    [SerializeField] float _airSpeedmultiplier;
+    [SerializeField] float _airSpeedReducer;
+    [SerializeField] float _waterSpeedReducer;
     [Header("Gravedad")]
     [SerializeField] float _gravityOnGrounded;
+    [SerializeField] float _gravityModifierInWater;
     /// <summary>
     /// Para ajustar la gravedad sin modificar el valor original
     /// </summary>
-    [SerializeField] float _gravitymultiplier;
+    [SerializeField] float _gravityModifier;
     [Header("Alturas")]
     [SerializeField] float _jumpHigh;
     [SerializeField] float _crouchHeigh;
@@ -41,11 +39,12 @@ public class moveController : MonoBehaviour
     bool _isCrouch;
     bool _isGrounded;
     bool _isIdle=true;
+    bool _diagonalMovement;//velocidad cuando s e corre endiagonal
 
     float _gravity = -9.8f;
-    float _groundCheckOffet;
-    bool _diagonalMovement;//velocidad cuando s e corre endiagonal
     float _yVelocity;
+    float _tempGravityModifier;//guardar el modificador de gravedad en estado normal antes de editarlo para devolverlo al valor definido en el editor
+
     Vector2 _input;
     //Componentes
     AudioSource _soundPlayer;
@@ -53,17 +52,55 @@ public class moveController : MonoBehaviour
     GameActions _playerActions;
     CharacterController _characterController;
     weaponsController _weaponsController;
+    collisionController _collisionController;
     void Awake()
     {
-        _groundCheckOffet = _groundCheckOffetStanding;//establecer el offset del grounddetector
         _weaponsController = GetComponent<weaponsController>();
         _soundPlayer = GetComponent<AudioSource>();
         _characterController = GetComponent<CharacterController>();
+        _collisionController = GetComponent<collisionController>();
+    }
+    private void OnEnable()
+    {
+        if (_playerActions == null)
+        {
+            _playerActions = new GameActions();
+        }
+        _playerActions.Enable();
+        _playerActions.playerActions.Move.performed += data => { _input = data.ReadValue<Vector2>(); };
+        _playerActions.playerActions.Move.canceled += data => { _input = data.ReadValue<Vector2>(); };
+        _playerActions.playerActions.Run.performed += data => { _runPressed = true;  };
+        _playerActions.playerActions.Run.canceled += data => { _runPressed = false; };
+        _playerActions.playerActions.Jump.performed+= OnJump;
+        _playerActions.playerActions.Crouch.performed += OnCrouch;
+        _playerActions.playerActions.Crouch.canceled += OnCrouch;
+
+        _collisionController.OnWaterStateChange += OnWaterStateChange;
+    }
+
+    
+    private void OnDisable()
+    {
+        _playerActions.Disable();
+        _playerActions.playerActions.Move.performed -= data => {_input =  data.ReadValue<Vector2>(); };
+        _playerActions.playerActions.Move.canceled -= data => { _input = data.ReadValue<Vector2>(); };
+        _playerActions.playerActions.Run.performed -= data => { _runPressed = true; ;};
+        _playerActions.playerActions.Run.canceled -= data => { _runPressed = false; ; };
+        _playerActions.playerActions.Jump.performed -= OnJump;
+        _playerActions.playerActions.Crouch.performed -= OnCrouch;
+        _playerActions.playerActions.Crouch.canceled -= OnCrouch;
+
+        _collisionController.OnWaterStateChange -= OnWaterStateChange;
     }
     void FixedUpdate()
     {
         #region Ground Check
-        _isGrounded = Physics.CheckSphere(transform.position + (Vector3.down * (_characterController.height / 2+_groundCheckOffet)), _sphereRadious, _groundLayer);
+        //prueba verificar solo si esta de acaida y n ode subid
+        if (_yVelocity < 0)
+        {
+            _isGrounded = _collisionController.checkGrounded();
+        }
+        //Debug.Log(_isGrounded);
         #endregion
 
         #region Normalizar la velocidad diagonal
@@ -80,8 +117,8 @@ public class moveController : MonoBehaviour
         //velocidad cuando este en el aire
         if (!_isGrounded)
         {
-            _zSpeed *= _airSpeedmultiplier;
-            _xSpeed *= _airSpeedmultiplier;
+            _zSpeed *= _airSpeedReducer;
+            _xSpeed *= _airSpeedReducer;
         }
         #endregion
 
@@ -89,18 +126,20 @@ public class moveController : MonoBehaviour
 
         if (!_isGrounded)
         {
-            _yVelocity += (_gravity* Time.deltaTime*_gravitymultiplier) * Time.deltaTime;
+            _yVelocity += (_gravity* Time.deltaTime*_gravityModifier) * Time.deltaTime;
         }
         else
         {
             _yVelocity = _gravityOnGrounded * Time.deltaTime;
         }
+        //Debug.Log(_yVelocity);
         #endregion
 
         #region Salto
         if (_isGrounded && _jumpPressed && !_isCrouch)
         {
-            _yVelocity = Mathf.Sqrt(-2 * (_gravity *_gravitymultiplier)*_jumpHigh) * Time.deltaTime;
+            _yVelocity = Mathf.Sqrt(-2 * (_gravity *_gravityModifier)*_jumpHigh) * Time.deltaTime;
+            _isGrounded = false;
         }
         _jumpPressed = false;
        
@@ -137,36 +176,6 @@ public class moveController : MonoBehaviour
         _characterController.Move(transform.TransformDirection(new Vector3( _xSpeed, _yVelocity, _zSpeed)));
         //Debug.Log(new Vector2(_characterController.velocity.x, _characterController.velocity.z).sqrMagnitude);
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position + (Vector3.down * (GetComponent<CharacterController>().height / 2 + _groundCheckOffet)), _sphereRadious);
-    }
-    private void OnEnable()
-    {
-        if (_playerActions == null)
-        {
-            _playerActions = new GameActions();
-        }
-        _playerActions.Enable();
-        _playerActions.playerActions.Move.performed += data => _input = data.ReadValue<Vector2>();
-        _playerActions.playerActions.Move.canceled += data => _input = data.ReadValue<Vector2>();
-        _playerActions.playerActions.Run.performed += _ => _runPressed = true;
-        _playerActions.playerActions.Run.canceled += _ => _runPressed = false;
-        _playerActions.playerActions.Jump.performed += OnJump;
-        _playerActions.playerActions.Crouch.performed += OnCrouch;
-        _playerActions.playerActions.Crouch.canceled += OnCrouch;
-    }
-    private void OnDisable()
-    {
-        _playerActions.Disable();
-        _playerActions.playerActions.Move.performed -= data => _input = data.ReadValue<Vector2>();
-        _playerActions.playerActions.Move.canceled -= data => _input = data.ReadValue<Vector2>();
-        _playerActions.playerActions.Run.performed -= _ => _runPressed = true;
-        _playerActions.playerActions.Run.canceled -= _ => _runPressed = false;
-        _playerActions.playerActions.Jump.performed -= OnJump;
-        _playerActions.playerActions.Crouch.performed -= OnCrouch;
-        _playerActions.playerActions.Crouch.canceled -= OnCrouch;
-    }
 
     #region Input
     private void OnJump(InputAction.CallbackContext obj)
@@ -185,6 +194,18 @@ public class moveController : MonoBehaviour
     #endregion
 
     #region Eventos
+    private void OnWaterStateChange()
+    {
+        if (_collisionController.IsInWater)
+        {
+            _tempGravityModifier = _gravityModifier;
+            _gravityModifier = _gravityModifierInWater;
+        }
+        else
+        {
+            _gravityModifier =_tempGravityModifier;
+        }
+    }
     private IEnumerator performCrouch(InputAction.CallbackContext obj)
     {
         if (!_isGrounded)
@@ -196,11 +217,9 @@ public class moveController : MonoBehaviour
         {
             _isCrouch = true;
             _characterController.height = _crouchHeigh;
-            _groundCheckOffet = _groundCheckOffetCrouching;
         }
         else if ((!obj.performed && !_isCrouchToggled) || (_isCrouchToggled && obj.performed))
         {
-            _groundCheckOffet = _groundCheckOffetStanding;
             stand();
         }
         yield return new WaitForSeconds(.1f);
@@ -237,6 +256,10 @@ public class moveController : MonoBehaviour
         {
             velocity *= _backSpeed;
         }
+        if (_collisionController.IsInWater)
+        {
+            velocity *= _waterSpeedReducer;
+        }
         return velocity * Time.deltaTime;
     }
     private float calculateXVelocity()
@@ -254,6 +277,10 @@ public class moveController : MonoBehaviour
         {
             velocity *= _lateralSpeed *_runMultiplier;
         }
+        if (_collisionController.IsInWater)
+        {
+            velocity *= _waterSpeedReducer;
+        }
         return velocity*Time.deltaTime;
     }
     private void stand()
@@ -268,6 +295,7 @@ public class moveController : MonoBehaviour
     public bool IsRunning { get => _isRunning; }
     public bool IsGrounded { get => _isGrounded; }
     public bool IsCrouch { get => _isCrouch; }
+    public float Gravity { get => _gravity; set => _gravity = value; }
     #endregion
 
 }

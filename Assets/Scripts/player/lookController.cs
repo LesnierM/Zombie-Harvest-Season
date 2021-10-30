@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum ControlType
-{
-    Keyboard,
-    Gamepad
-}
+
 public class lookController : MonoBehaviour
 {
 	//Variables Expuestas
@@ -37,9 +33,9 @@ public class lookController : MonoBehaviour
         }
         _playerActions.Enable();
         _playerActions.playerActions.LookX.performed += LookX;
-        _playerActions.playerActions.LookX.canceled += mouseInput => _velocity.x = mouseInput.ReadValue<float>() * 0;
+        _playerActions.playerActions.LookX.canceled += mouseInput =>  _velocity.x = mouseInput.ReadValue<float>() * 0;
         _playerActions.playerActions.LookY.performed += LookY;
-        _playerActions.playerActions.LookY.canceled += mouseInput => _velocity.y = mouseInput.ReadValue<float>() * 0;
+        _playerActions.playerActions.LookY.canceled += mouseInput => _velocity.y = mouseInput.ReadValue<float>() * 0 ;
         Application.focusChanged += Application_focusChanged;
     }
     private void OnDisable()
@@ -69,7 +65,7 @@ public class lookController : MonoBehaviour
     private void LookY(InputAction.CallbackContext obj)
     {
         _velocity.y = obj.ReadValue<float>();
-        switch (getControlType(obj))
+        switch (gameManager._lastInputDeviceUsed)
         {
             case ControlType.Keyboard:
                 _velocity.y *= _mouseSensitivity.y;
@@ -84,7 +80,7 @@ public class lookController : MonoBehaviour
     private void LookX(InputAction.CallbackContext obj)
     {
         _velocity.x = obj.ReadValue<float>();
-        switch (getControlType(obj))
+        switch (gameManager._lastInputDeviceUsed)
         {
             case ControlType.Keyboard:
                 _velocity.x *= _mouseSensitivity.x;
@@ -112,15 +108,7 @@ public class lookController : MonoBehaviour
     #endregion
 
     #region Metodos
-    public static ControlType getControlType(InputAction.CallbackContext Context)
-    {
-        ControlType _value = ControlType.Keyboard;
-        if (Context.action.activeControl.ToString().Contains("/XInputControllerWindows/"))
-        {
-            _value = ControlType.Gamepad;
-        }
-        return _value;
-    }
+
     #endregion
 
     #region Propiedades

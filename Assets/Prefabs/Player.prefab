@@ -234,6 +234,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2556099937161260348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4116889400916347887}
+  m_Layer: 5
+  m_Name: actionButonsSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4116889400916347887
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2556099937161260348}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8057907760447675862}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 375}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8057907759051465941
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +405,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -416,7 +451,7 @@ GameObject:
   - component: {fileID: 8057907759296733280}
   - component: {fileID: 8057907759296733283}
   - component: {fileID: 8057907759296733288}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,10 +485,10 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1.8
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.05
+  m_SkinWidth: 0.04
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8057907759296733285
@@ -468,6 +503,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f8831c06e2c77449aecc6a47773921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gatesRotationSpeed: 200
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 65511
+  _waterLayer:
+    serializedVersion: 2
+    m_Bits: 16
+  _sphereRadious: 0.3
+  _groundCheckOffset: -0.2
+  _forceMultiplierOAffectableObjects: 20
 --- !u!114 &8057907759296733284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,6 +529,9 @@ MonoBehaviour:
   _ammoRemainingInCartridgeText: {fileID: 8057907759051465946}
   _totalAmmoRemainingText: {fileID: 2134897131}
   _weaponImage: {fileID: 1647402577157538921}
+  _actionButtonsSpawnPoints: {fileID: 2556099937161260348}
+  _keyboardEButton: {fileID: 2260826272049094107, guid: 63d45b9a4e4a48d41a56549a093b9acb, type: 3}
+  _gamepadAButton: {fileID: 9193695190230909604, guid: a84bf9d792adc2a46bfd55ad7146a0e3, type: 3}
 --- !u!114 &8057907759296733287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,8 +545,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mouseSensitivity: {x: 10, y: 10}
-  _gamepadSensitivity: {x: 80, y: 80}
-  _verticalBounds: 85
+  _gamepadSensitivity: {x: 100, y: 100}
+  _verticalBounds: 70
 --- !u!114 &8057907759296733286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,21 +559,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f7ff6f535be3e43b662c128d51e723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  _sphereRadious: 0.5
-  _groundCheckOffetStanding: -0.4
-  _groundCheckOffetCrouching: -0.09
   _walkSpeed: 7
   _runMultiplier: 1.5
   _lateralSpeed: 4
   _backSpeed: 4
   _crouchSpeed: 3
   _aimingSpeed: 3
-  _airSpeedmultiplier: 0.7
+  _airSpeedReducer: 0.7
+  _waterSpeedReducer: 0.5
   _gravityOnGrounded: -4
-  _gravitymultiplier: 1.1
+  _gravityModifierInWater: 0.1
+  _gravityModifier: 1.1
   _jumpHigh: 1.5
   _crouchHeigh: 0.9
   _normalHeigh: 1.8
@@ -612,6 +656,8 @@ MonoBehaviour:
   _stepSoundConcrete:
   - {fileID: 8300000, guid: 7fbb71087136af8418e5ddd74578cf93, type: 3}
   - {fileID: 8300000, guid: aadc15b77b5786943a5b8cf3ea057846, type: 3}
+  _waterSplash:
+  - {fileID: 8300000, guid: e0bb149e1e3da2346b4fc0e8535a6ee3, type: 3}
 --- !u!114 &8057907759296733283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -791,6 +837,7 @@ RectTransform:
   - {fileID: 2134897130}
   - {fileID: 3571208041864722965}
   - {fileID: 1324510774}
+  - {fileID: 4116889400916347887}
   m_Father: {fileID: 8057907759258749855}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -810,7 +857,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 8057907759258749854}
-  m_PlaneDistance: 0.4
+  m_PlaneDistance: 0.2
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -818,7 +865,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &8057907760447675860
 MonoBehaviour:
