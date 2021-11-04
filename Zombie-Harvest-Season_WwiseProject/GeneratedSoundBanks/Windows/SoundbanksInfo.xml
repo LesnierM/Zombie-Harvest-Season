@@ -16,16 +16,92 @@
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="2385628198" Language="SFX" Hash="2925588482">
+		<SoundBank Id="2385628198" Language="SFX" Hash="1449899798">
 			<ObjectPath>\SoundBanks\Default Work Unit\Footsteps</ObjectPath>
 			<ShortName>Footsteps</ShortName>
 			<Path>Footsteps.bnk</Path>
 			<IncludedEvents>
-				<Event Id="1866025847" Name="Footstep" ObjectPath="\Events\Default Work Unit\Footstep" DurationType="OneShot" DurationMin="0.546939" DurationMax="0.546939">
+				<Event Id="1866025847" Name="Footstep" ObjectPath="\Events\Default Work Unit\Footstep" DurationType="OneShot" DurationMin="0.406339" DurationMax="0.789852">
 					<IncludedMemoryFiles>
-						<File Id="95143289" Language="SFX">
-							<ShortName>01 - Footstep, Ground.wav</ShortName>
-							<Path>SFX\01 - Footstep, Ground_10C4C929.wem</Path>
+						<File Id="41982838" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\13 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\13 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="61483710" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\07 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\07 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="109387311" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\16 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\16 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="172277949" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\11 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\11 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="254939598" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\01 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\01 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="290205782" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\03 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\03 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="435655521" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\10 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\10 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="595959202" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\15 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\15 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="636657277" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\17 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\17 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="647071412" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\02 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\02 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="684900597" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\19 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\19 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="728512740" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\09 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\09 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="731202752" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\04 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\04 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="737548490" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\12 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\12 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="837450767" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\18 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\18 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="883427649" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\05 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\05 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="894132551" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\20 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\20 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="934319143" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\06 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\06 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="988612834" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\14 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\14 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+						<File Id="991603804" Language="SFX">
+							<ShortName>Footsteps, Human, Dirty Ground, Walk\08 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\Footsteps, Human, Dirty Ground, Walk\08 - Footstep, Ground_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
