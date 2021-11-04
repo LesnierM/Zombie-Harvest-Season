@@ -66,10 +66,10 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: 67fc28f1667cad44ba653e0ee9c98251
     GuidInternal: 
-    m_lastTime: -8585657021320438932
+    m_lastTime: -8585655697321965099
     List:
     - name: Footsteps
-      guid: f1fd4cd9f903b64ba8bbc49fdaa38402
+      guid: 7ce5ab0e6208b146a3d46cdef0656e41
       id: 2385628198
       PathAndIcons:
       - ElementName: SoundBanks
@@ -80,7 +80,7 @@ MonoBehaviour:
         guid: 67fc28f1667cad44ba653e0ee9c98251
       - ElementName: Footsteps
         ObjectType: 7
-        guid: f1fd4cd9f903b64ba8bbc49fdaa38402
+        guid: 7ce5ab0e6208b146a3d46cdef0656e41
       Path: SoundBanks\Default Work Unit\Footsteps
   EventWwu:
   - PhysicalPath: Events\Default Work Unit.wwu
@@ -94,8 +94,25 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: f3bceabc3e5b0f4c824eb39aeea14312
     GuidInternal: 
-    m_lastTime: -8585657118750880883
-    List: []
+    m_lastTime: -8585655697322275365
+    List:
+    - name: Footstep
+      guid: d6089b21bb6c56408f01b0867db58030
+      id: 1866025847
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: f3bceabc3e5b0f4c824eb39aeea14312
+      - ElementName: Footstep
+        ObjectType: 3
+        guid: d6089b21bb6c56408f01b0867db58030
+      Path: Events\Default Work Unit\Footstep
+      maxAttenuation: 0
+      maxDuration: 0.789852
+      minDuration: 0.418487
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -136,7 +153,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 7cf8745f41766c429bd53629c996794d
     GuidInternal: 
-    m_lastTime: -8585657118752502055
+    m_lastTime: -8585655697322145288
     List: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
@@ -153,7 +170,7 @@ MonoBehaviour:
     m_lastTime: -8585657118751991684
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 0a000000
+  ExpandedWaapiItemIds: 0a0000000b0000000c000000b0000000b1000000b7000000b8000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0
