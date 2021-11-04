@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{50D35A70-C606-463C-ACBE-0B68AAFAA2DD}" SchemaVersion="103">
 	<AudioObjects>
-		<WorkUnit Name="Default Work Unit" ID="{50D35A70-C606-463C-ACBE-0B68AAFAA2DD}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{50D35A70-C606-463C-ACBE-0B68AAFAA2DD}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="01 - Footstep, Ground" ID="{C204979A-1DA8-4454-B627-810B5C056DB8}" ShortID="449960042">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F76B1C64-20A5-408A-9F47-ABC617D030E0}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C6E2DAF3-A02D-4D77-9789-5C944C4E5FCF}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="01 - Footstep, Ground" ID="{88789C7A-366E-423F-9AC3-4E5DC1128288}">
+							<Language>SFX</Language>
+							<AudioFile>01 - Footstep, Ground.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="95143289"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ObjectLists/>
+					<ActiveSourceList>
+						<ActiveSource Name="01 - Footstep, Ground" ID="{88789C7A-366E-423F-9AC3-4E5DC1128288}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>

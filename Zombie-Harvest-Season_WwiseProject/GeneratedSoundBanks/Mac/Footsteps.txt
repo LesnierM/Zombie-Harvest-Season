@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1866025847	Footstep			\Default Work Unit\Footstep	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	95143289	01 - Footstep, Ground	D:\Tomas\AUDIOVISUALES\VIDEOJUEGOS\JUEGO LATINO\GRANJA\Github\Zombie-Harvest-Season\Zombie-Harvest-Season_WwiseProject\.cache\Mac\SFX\01 - Footstep, Ground_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\01 - Footstep, Ground		96544
+

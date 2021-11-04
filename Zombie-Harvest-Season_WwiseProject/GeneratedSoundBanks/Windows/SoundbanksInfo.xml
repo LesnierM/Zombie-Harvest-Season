@@ -16,10 +16,20 @@
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="2385628198" Language="SFX" Hash="1502165035">
+		<SoundBank Id="2385628198" Language="SFX" Hash="2925588482">
 			<ObjectPath>\SoundBanks\Default Work Unit\Footsteps</ObjectPath>
 			<ShortName>Footsteps</ShortName>
 			<Path>Footsteps.bnk</Path>
+			<IncludedEvents>
+				<Event Id="1866025847" Name="Footstep" ObjectPath="\Events\Default Work Unit\Footstep" DurationType="OneShot" DurationMin="0.546939" DurationMax="0.546939">
+					<IncludedMemoryFiles>
+						<File Id="95143289" Language="SFX">
+							<ShortName>01 - Footstep, Ground.wav</ShortName>
+							<Path>SFX\01 - Footstep, Ground_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+			</IncludedEvents>
 		</SoundBank>
 	</SoundBanks>
 </SoundBanksInfo>
