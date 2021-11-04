@@ -140,6 +140,7 @@ public class moveController : MonoBehaviour
         {
             _yVelocity = Mathf.Sqrt(-2 * (_gravity *_gravityModifier)*_jumpHigh) * Time.deltaTime;
             _isGrounded = false;
+            AkSoundEngine.PostEvent("Jump", gameObject);
         }
         _jumpPressed = false;
        
