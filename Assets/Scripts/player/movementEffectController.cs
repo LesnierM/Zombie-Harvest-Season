@@ -56,7 +56,7 @@ public class movementEffectController : MonoBehaviour
 		//ejecutar sonido de paso
 		if (_lastFrameTime < 1.5f && _movementEffectTime.y > 1.5f)
 		{
-			AkSoundEngine.PostEvent("Footstep", gameObject);
+			_soundEffectsController.OnStep();
 		}
 		_lastFrameTime = _movementEffectTime.y;
         if (_playerMoveController.IsRunning)

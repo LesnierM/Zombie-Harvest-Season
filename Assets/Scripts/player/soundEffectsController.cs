@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class soundEffectsController : MonoBehaviour
 {
-    //Variables Expuestas
-    [Header("Pasos")]
-    [SerializeField] AudioClip[] _stepSoundConcrete;
 	[SerializeField] AudioClip[] _waterSplash;
     //Variables
-    int _index;
 	//Componentes
 	AudioSource _soundPlayer;
 	collisionController _collisionController;
@@ -53,9 +49,8 @@ public class soundEffectsController : MonoBehaviour
     #region Metodos
     public void OnStep()
 	{
-		_soundPlayer.PlayOneShot(_stepSoundConcrete[_index]);
-		_index = _index == _stepSoundConcrete.Length - 1 ? 0 : _index + 1;
-	}
+        AkSoundEngine.PostEvent("Footstep", gameObject);
+    }
 	#endregion
 
 	#region Propiedades
