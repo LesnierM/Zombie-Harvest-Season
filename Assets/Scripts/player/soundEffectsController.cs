@@ -13,7 +13,8 @@ public class soundEffectsController : MonoBehaviour
 	//Componentes
 	AudioSource _soundPlayer;
 	collisionController _collisionController;
-	//Clases
+    //Clases
+    moveController _moveController;
     void Awake()
     {
 		_collisionController = GetComponent<collisionController>();
@@ -21,15 +22,28 @@ public class soundEffectsController : MonoBehaviour
     }
     private void OnEnable()
     {
+        if (_moveController == null)
+        {
+            _moveController = GameObject.FindObjectOfType<moveController>();
+        }
+        _moveController.OnGroundedStateChange += OnGroundedStateChange;
         _collisionController.OnWaterStateChange += OnWaterStateChange;
     }
 
     private void OnDisable()
     {
+        _moveController.OnGroundedStateChange -= OnGroundedStateChange;
         _collisionController.OnWaterStateChange -= OnWaterStateChange;
     }
 
     #region Eventos
+    private void OnGroundedStateChange(bool State)
+    {
+        if (State)
+        {
+            AkSoundEngine.PostEvent("Landing", gameObject);
+        }
+    }
     private void OnWaterStateChange()
     {
         _soundPlayer.PlayOneShot(_waterSplash[0]);

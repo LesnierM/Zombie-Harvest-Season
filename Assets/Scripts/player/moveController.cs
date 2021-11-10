@@ -8,6 +8,7 @@ public class moveController : MonoBehaviour
     public event StatesEventHandler OnRunStateChange;
     public event StatesEventHandler OnWalkStateChange;
     public event StatesEventHandler OnidletateChange;
+    public event StatesEventHandler OnGroundedStateChange;
     //Variables Expuestas
 
     [Header("Velocidades")]
@@ -77,8 +78,6 @@ public class moveController : MonoBehaviour
 
         _collisionController.OnWaterStateChange += OnWaterStateChange;
     }
-
-    
     private void OnDisable()
     {
         _playerActions.Disable();
@@ -96,9 +95,14 @@ public class moveController : MonoBehaviour
     {
         #region Ground Check
         //prueba verificar solo si esta de acaida y n ode subid
+        bool _tempGrounded = _isGrounded;
         if (_yVelocity < 0)
         {
             _isGrounded = _collisionController.checkGrounded();
+        }
+        if(_tempGrounded != _isGrounded)
+        {
+            OnGroundedStateChange(_isGrounded);
         }
         //Debug.Log(_isGrounded);
         #endregion
