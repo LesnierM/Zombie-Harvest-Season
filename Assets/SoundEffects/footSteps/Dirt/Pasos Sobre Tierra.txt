@@ -1,0 +1,7 @@
+SFX Pasos Sobre Tierra. 
+
+Lo ideal sería:
+
+-Implementarlos de forma aleatorea.
+-Que no se repita ningun paso hasta despues de sonar diez pasos seguidos.
+-Randomizar el volumen y el Pitch (Frecuencia). 

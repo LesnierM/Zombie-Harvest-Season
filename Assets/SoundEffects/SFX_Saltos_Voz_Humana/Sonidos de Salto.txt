@@ -1,0 +1,6 @@
+Sonidos de Salto
+
+-Estos sonidos van cuando el player salta en cualquier superficie. 
+-lo ideal es que suene junto con el sonido de paso (ya sea sobre tierra,
+agua, pasto, etc).
+-Implementarlos para que se reproduzcan de forma aleatorea si es posible.  

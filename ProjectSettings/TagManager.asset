@@ -10,6 +10,7 @@ TagManager:
   - Gates
   - Well
   - Box
+  - Dirt
   layers:
   - Default
   - TransparentFX

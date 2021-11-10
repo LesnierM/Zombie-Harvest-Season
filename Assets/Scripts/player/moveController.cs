@@ -4,11 +4,24 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class moveController : MonoBehaviour
 {
+    public struct GroundData
+    {
+        public bool Colliosined;
+        public string Tag;
+        public GroundData(bool Grounded,string Tag)
+        {
+            this.Colliosined = Grounded;
+            this.Tag = Tag;
+        }
+    }
+    public delegate void NoParametersEventHandler();
     public delegate void StatesEventHandler(bool State);
+    public delegate void OnGroundedStateChangeEventHandler(GroundData GroundData);
     public event StatesEventHandler OnRunStateChange;
     public event StatesEventHandler OnWalkStateChange;
     public event StatesEventHandler OnidletateChange;
-    public event StatesEventHandler OnGroundedStateChange;
+    public event OnGroundedStateChangeEventHandler OnGroundedStateChange;
+    public event NoParametersEventHandler OnPlayerJump;
     //Variables Expuestas
 
     [Header("Velocidades")]
@@ -96,13 +109,15 @@ public class moveController : MonoBehaviour
         #region Ground Check
         //prueba verificar solo si esta de acaida y n ode subid
         bool _tempGrounded = _isGrounded;
+        GroundData _groundData = new GroundData();
         if (_yVelocity < 0)
         {
-            _isGrounded = _collisionController.checkGrounded();
+            _groundData = _collisionController.checkGrounded();
+            _isGrounded = _groundData.Colliosined;
         }
         if(_tempGrounded != _isGrounded)
         {
-            OnGroundedStateChange(_isGrounded);
+            OnGroundedStateChange(_groundData);
         }
         //Debug.Log(_isGrounded);
         #endregion
@@ -144,7 +159,7 @@ public class moveController : MonoBehaviour
         {
             _yVelocity = Mathf.Sqrt(-2 * (_gravity *_gravityModifier)*_jumpHigh) * Time.deltaTime;
             _isGrounded = false;
-            AkSoundEngine.PostEvent("Jump", gameObject);
+            OnPlayerJump();
         }
         _jumpPressed = false;
        

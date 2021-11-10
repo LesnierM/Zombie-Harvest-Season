@@ -22,9 +22,11 @@ public class movementEffectController : MonoBehaviour
 	CharacterController _characterController;
 	moveController _playerMoveController;
 	soundEffectsController _soundEffectsController;
+	collisionController _collisionController;
 	Camera _camera;
-    void Start()
+    void Awake()
     {
+		_collisionController = GetComponent<collisionController>();
 		_camera = Camera.main;
 		_soundEffectsController=GetComponent<soundEffectsController>();
 		_characterController = GetComponent<CharacterController>();
@@ -56,7 +58,7 @@ public class movementEffectController : MonoBehaviour
 		//ejecutar sonido de paso
 		if (_lastFrameTime < 1.5f && _movementEffectTime.y > 1.5f)
 		{
-			_soundEffectsController.OnStep();
+			_soundEffectsController.OnStep(converter.getGroundStepSoundTypesFromString(_collisionController.checkGrounded().Tag));
 		}
 		_lastFrameTime = _movementEffectTime.y;
         if (_playerMoveController.IsRunning)

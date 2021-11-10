@@ -26,6 +26,7 @@ public class collisionController : MonoBehaviour
     //Variables
     private bool _executeAction;
     bool _isInWater;
+    Collider[] _colliders=new Collider[0];
     //Componentes
     //Clases
     GameActions _playerActions;
@@ -42,7 +43,7 @@ public class collisionController : MonoBehaviour
     {
         #region Water Check
         bool _isWaterTemp = _isInWater;
-        _isInWater = checkLayer(_waterLayer);
+        _isInWater = checkLayer(_waterLayer).Colliosined;
         if (OnWaterStateChange != null&&_isWaterTemp!=_isInWater)
         {
             OnWaterStateChange();
@@ -184,13 +185,21 @@ public class collisionController : MonoBehaviour
     #endregion
 
     #region Metodos
-    public bool checkGrounded()
+    public moveController.GroundData checkGrounded()
     {
         return checkLayer(_groundLayer);
     }
-    bool checkLayer(LayerMask Layer)
+    moveController.GroundData checkLayer(LayerMask Layer)
     {
-        return Physics.CheckSphere(transform.position + (Vector3.down * ((_characterController.height / 2) + _groundCheckOffset)), _sphereRadious, Layer);
+        moveController.GroundData _groundData=new moveController.GroundData(false,"");
+
+        //return Physics.OverlapSphere(transform.position + (Vector3.down * ((_characterController.height / 2) + _groundCheckOffset)), _sphereRadious, Layer);
+       _colliders =Physics.OverlapSphere(transform.position + (Vector3.down * ((_characterController.height / 2) + _groundCheckOffset)),_sphereRadious,Layer);
+        if (_colliders.Length != 0)
+        {
+            _groundData = new moveController.GroundData(true,_colliders[0].gameObject.tag);
+        }
+        return _groundData;
     }
 
     #endregion

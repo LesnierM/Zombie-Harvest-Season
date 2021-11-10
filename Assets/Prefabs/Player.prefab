@@ -358,7 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8057907759258749855}
   - component: {fileID: 8057907759258749854}
-  - component: {fileID: 8057907759258749849}
+  - component: {fileID: 3526599064003307559}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -425,7 +425,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &8057907759258749849
+--- !u!81 &3526599064003307559
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -653,9 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7544fd79e1a989e41b0875d0ec7c9b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stepSoundConcrete:
-  - {fileID: 8300000, guid: 7fbb71087136af8418e5ddd74578cf93, type: 3}
-  - {fileID: 8300000, guid: aadc15b77b5786943a5b8cf3ea057846, type: 3}
+  _dirtStepSoundEffects: []
   _waterSplash:
   - {fileID: 8300000, guid: e0bb149e1e3da2346b4fc0e8535a6ee3, type: 3}
 --- !u!114 &8057907759296733283

@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class soundEffectsController : MonoBehaviour
 {
+    [SerializeField] AudioClip[] _jumpSounds;
+    [SerializeField] AudioClip[] _dirtStepSoundEffects;
 	[SerializeField] AudioClip[] _waterSplash;
     //Variables
+    List<int> _playedStepSounds = new List<int>();
 	//Componentes
 	AudioSource _soundPlayer;
 	collisionController _collisionController;
@@ -22,9 +25,12 @@ public class soundEffectsController : MonoBehaviour
         {
             _moveController = GameObject.FindObjectOfType<moveController>();
         }
+        _moveController.OnPlayerJump += OnPlayerJump;
         _moveController.OnGroundedStateChange += OnGroundedStateChange;
         _collisionController.OnWaterStateChange += OnWaterStateChange;
     }
+
+   
 
     private void OnDisable()
     {
@@ -33,11 +39,15 @@ public class soundEffectsController : MonoBehaviour
     }
 
     #region Eventos
-    private void OnGroundedStateChange(bool State)
+    private void OnPlayerJump()
     {
-        if (State)
+        _soundPlayer.PlayOneShot(_jumpSounds[Random.Range(0, _jumpSounds.Length)]);
+    }
+    private void OnGroundedStateChange(moveController.GroundData GroundData)
+    {
+        if (GroundData.Colliosined)
         {
-            AkSoundEngine.PostEvent("Landing", gameObject);
+
         }
     }
     private void OnWaterStateChange()
@@ -47,14 +57,37 @@ public class soundEffectsController : MonoBehaviour
     #endregion
 
     #region Metodos
-    public void OnStep()
-	{
-        AkSoundEngine.PostEvent("Footstep", gameObject);
+    public void OnStep(GroundStepsSoundTypes Type)
+    {
+        AudioClip[] _stepSounds;
+        switch (Type)
+        {
+            case GroundStepsSoundTypes.None:
+                break;
+            case GroundStepsSoundTypes.Dirt:
+                _stepSounds = _dirtStepSoundEffects;
+                break;
+        }
+        int _nextSound;
+        do
+        {
+            _nextSound = Random.Range(0, _dirtStepSoundEffects.Length);
+        } while (_playedStepSounds.Contains(_nextSound));
+        _soundPlayer.PlayOneShot(_dirtStepSoundEffects[_nextSound]);
+
+        if (_playedStepSounds.Count == 10)
+        {
+            _playedStepSounds[0] = _nextSound;
+        }
+        else
+        {
+            _playedStepSounds.Add(_nextSound);
+        }
     }
-	#endregion
+    #endregion
 
-	#region Propiedades
+    #region Propiedades
 
-	#endregion
+    #endregion
 
 }

@@ -48,6 +48,11 @@ public enum SoundType
     Door,
     Gate
 }
+public enum GroundStepsSoundTypes
+{
+    None,
+    Dirt
+}
 public class gameManager : MonoBehaviour
 {
     public delegate void NoParameters(ControlType Type);
@@ -156,6 +161,16 @@ public static class converter
                 return ActionsTypes.Cancel;
             default:
                 return ActionsTypes.None;
+        }
+    }
+    public static GroundStepsSoundTypes getGroundStepSoundTypesFromString(string SoundType)
+    {
+        switch (SoundType)
+        {
+            case "Dirt":
+                return GroundStepsSoundTypes.Dirt;
+            default:
+                return GroundStepsSoundTypes.None;
         }
     }
 }

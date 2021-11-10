@@ -87,12 +87,12 @@ public class weaponController : MonoBehaviour
 			//calcular desvio de proyectil
 			_xAxyRandomDirection = Random.Range(-.1f, .1f);
 			_yAxyRandomDirection = Random.Range(-.1f, .1f);
-			if (Physics.Raycast(transform.parent.parent.position, transform.parent.parent.forward, out _rayHit, _effectiveMaxRange, _hitLayerMask))
+			if (Physics.Raycast(transform.parent.parent.position, transform.parent.parent.forward, out _rayHit, _effectiveMaxRange, _hitLayerMask,QueryTriggerInteraction.Ignore))
 			{
 				Invoke("performBulletCollision", _rayHit.distance / _bulletSpeed);
 				Debug.Log("En rango");
 			}
-			else if (Physics.Raycast(transform.parent.parent.position + transform.parent.parent.forward * _effectiveMaxRange, transform.parent.parent.forward + transform.parent.parent.up * _yAxyRandomDirection + transform.parent.parent.right * _xAxyRandomDirection, out _rayHit, _maxRange - _rayHit.distance, _hitLayerMask))
+			else if (Physics.Raycast(transform.parent.parent.position + transform.parent.parent.forward * _effectiveMaxRange, transform.parent.parent.forward + transform.parent.parent.up * _yAxyRandomDirection + transform.parent.parent.right * _xAxyRandomDirection, out _rayHit, _maxRange - _rayHit.distance, _hitLayerMask,QueryTriggerInteraction.Ignore))
 			{
 				Invoke("performBulletCollision", _rayHit.distance / _bulletSpeed);
 				Debug.Log("Fuera de rango");
@@ -115,7 +115,7 @@ public class weaponController : MonoBehaviour
 		//{
 		//	_rayHit.collider.gameObject.GetComponent<ExplosiveBarrelScript>().explode = true;
 		//}
-			Destroy(Instantiate(_bulletHole, _rayHit.point + _rayHit.normal * 0.001f, Quaternion.LookRotation(_rayHit.normal)), _bulletHoleDuration);
+			Destroy(Instantiate(_bulletHole, _rayHit.point + _rayHit.normal * 0.001f, Quaternion.LookRotation(_rayHit.normal),_rayHit.transform), _bulletHoleDuration);
 	}
     public void Reload()
 	{
