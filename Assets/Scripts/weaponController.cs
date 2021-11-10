@@ -77,20 +77,13 @@ public class weaponController : MonoBehaviour
         }
 		_lastFiredTime = Time.time;
 		if (_cartridgeCaseRemaningBullets > 0)
-        {
-            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("aiming"))
-            {
-				Destroy(Instantiate(_muzzleFlash, transform.GetChild(2).transform.position, Quaternion.Euler(_muzzleFlash.transform.forward), transform), .5f); ;
-            }
-            else
-            {
-			Destroy(Instantiate(_muzzleFlash, transform.GetChild(1).transform.position, Quaternion.Euler(_muzzleFlash.transform.forward),transform),.5f);
-            }
-            --_cartridgeCaseRemaningBullets;
+		{
+			Destroy(Instantiate(_muzzleFlash, transform.GetChild((_animator.GetCurrentAnimatorStateInfo(0).IsName("aiming") ? 2 : 1)).transform.position, Quaternion.Euler(_muzzleFlash.transform.forward), transform), .5f); ;
+			--_cartridgeCaseRemaningBullets;
 			OnAmmoStatusChange(_cartridgeCaseRemaningBullets, _bulletsCount);
-            _animator.Play("shoot", 1);
-            Invoke("showCartridge", _cartridgeBulletDelay);
-            Invoke("shootSound", _shootSoundDelay);
+			_animator.Play("shoot", 1);
+			Invoke("showCartridge", _cartridgeBulletDelay);
+			Invoke("shootSound", _shootSoundDelay);
 			//calcular desvio de proyectil
 			_xAxyRandomDirection = Random.Range(-.1f, .1f);
 			_yAxyRandomDirection = Random.Range(-.1f, .1f);
@@ -104,11 +97,11 @@ public class weaponController : MonoBehaviour
 				Invoke("performBulletCollision", _rayHit.distance / _bulletSpeed);
 				Debug.Log("Fuera de rango");
 			}
-        }
-        else
-        {
+		}
+		else
+		{
 			Reload();
-        }
+		}
     }
     private void performBulletCollision()
     {
