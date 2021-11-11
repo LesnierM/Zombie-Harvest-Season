@@ -11,6 +11,9 @@ TagManager:
   - Well
   - Box
   - Dirt
+  - Wood
+  - TinyObjects
+  - BigObjects
   layers:
   - Default
   - TransparentFX

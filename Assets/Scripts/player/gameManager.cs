@@ -18,6 +18,17 @@ public enum DoorOpenDirections
 /// <summary>
 /// Referencia de la ui para mostrar los mensajes.
 /// </summary>
+/// 
+public struct GroundData
+{
+    public bool Colliosined;
+    public string Tag;
+    public GroundData(bool Grounded, string Tag)
+    {
+        this.Colliosined = Grounded;
+        this.Tag = Tag;
+    }
+}
 public enum ActionableObjects
 {
     None,
@@ -51,7 +62,8 @@ public enum SoundType
 public enum GroundStepsSoundTypes
 {
     None,
-    Dirt
+    Dirt,
+    Wood
 }
 public class gameManager : MonoBehaviour
 {
@@ -169,6 +181,9 @@ public static class converter
         {
             case "Dirt":
                 return GroundStepsSoundTypes.Dirt;
+
+            case "Wood":
+                return GroundStepsSoundTypes.Wood;
             default:
                 return GroundStepsSoundTypes.None;
         }

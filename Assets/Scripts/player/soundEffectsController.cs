@@ -6,18 +6,23 @@ public class soundEffectsController : MonoBehaviour
 {
     [SerializeField] AudioClip[] _jumpSounds;
     [SerializeField] AudioClip[] _dirtStepSoundEffects;
+    [SerializeField] AudioClip[] _woodStepSoundEffect;
 	[SerializeField] AudioClip[] _waterSplash;
     //Variables
     List<int> _playedStepSounds = new List<int>();
 	//Componentes
 	AudioSource _soundPlayer;
+    AudioSource _stepsPlayer;
 	collisionController _collisionController;
     //Clases
     moveController _moveController;
     void Awake()
     {
 		_collisionController = GetComponent<collisionController>();
-		_soundPlayer = GetComponent<AudioSource>();
+        AudioSource[] players= GetComponents<AudioSource>();
+        _soundPlayer = players[0];
+        _stepsPlayer = players[1];
+        
     }
     private void OnEnable()
     {
@@ -26,15 +31,13 @@ public class soundEffectsController : MonoBehaviour
             _moveController = GameObject.FindObjectOfType<moveController>();
         }
         _moveController.OnPlayerJump += OnPlayerJump;
-        _moveController.OnGroundedStateChange += OnGroundedStateChange;
+        _collisionController.OnGroundedStateChange += OnGroundedStateChange;
         _collisionController.OnWaterStateChange += OnWaterStateChange;
     }
 
-   
-
     private void OnDisable()
     {
-        _moveController.OnGroundedStateChange -= OnGroundedStateChange;
+        _collisionController.OnGroundedStateChange -= OnGroundedStateChange;
         _collisionController.OnWaterStateChange -= OnWaterStateChange;
     }
 
@@ -43,11 +46,11 @@ public class soundEffectsController : MonoBehaviour
     {
         _soundPlayer.PlayOneShot(_jumpSounds[Random.Range(0, _jumpSounds.Length)]);
     }
-    private void OnGroundedStateChange(moveController.GroundData GroundData)
+    private void OnGroundedStateChange(GroundData GroundData)
     {
         if (GroundData.Colliosined)
         {
-
+            OnStep();
         }
     }
     private void OnWaterStateChange()
@@ -57,23 +60,26 @@ public class soundEffectsController : MonoBehaviour
     #endregion
 
     #region Metodos
-    public void OnStep(GroundStepsSoundTypes Type)
+    public void OnStep()
     {
-        AudioClip[] _stepSounds;
-        switch (Type)
+       AudioClip[] _stepSounds=default;
+        switch (converter.getGroundStepSoundTypesFromString(_collisionController.GroundedData.Tag))
         {
             case GroundStepsSoundTypes.None:
-                break;
+                return;
             case GroundStepsSoundTypes.Dirt:
                 _stepSounds = _dirtStepSoundEffects;
+                break;
+            case GroundStepsSoundTypes.Wood:
+                _stepSounds = _woodStepSoundEffect;
                 break;
         }
         int _nextSound;
         do
         {
-            _nextSound = Random.Range(0, _dirtStepSoundEffects.Length);
+            _nextSound = Random.Range(0, _stepSounds.Length);
         } while (_playedStepSounds.Contains(_nextSound));
-        _soundPlayer.PlayOneShot(_dirtStepSoundEffects[_nextSound]);
+        _stepsPlayer.PlayOneShot(_stepSounds[_nextSound]);
 
         if (_playedStepSounds.Count == 10)
         {

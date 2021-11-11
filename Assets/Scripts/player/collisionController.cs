@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class collisionController : MonoBehaviour
 {
+   
     public delegate void NoParameters();
     public delegate void BoolParameter(bool isinWater);
+    public delegate void GroundDataParameterEventHandler(GroundData GroundData);
     public delegate void onPickedUpWeaponEventHandler(Weapons Weapon);
     public delegate void ActionableObjects(global::ActionableObjects ActionableObject, ActionsTypes Action);
     public delegate void onPickedUpConsumibleEventHandler(Consumibles Consumible);
@@ -13,6 +15,7 @@ public class collisionController : MonoBehaviour
     public event ActionableObjects onActionableObjectStay;
     public event NoParameters onActionableObjectLeave;
     public event NoParameters OnWaterStateChange;
+    public event GroundDataParameterEventHandler OnGroundedStateChange;
     //Variables Expuestas
     [SerializeField] float _gatesRotationSpeed;
     [Header("Capas")]
@@ -23,21 +26,33 @@ public class collisionController : MonoBehaviour
     [SerializeField] float _groundCheckOffset=-0.2f;
     [Header("parametros de fuerza y rotacion aplicada,")]
     [SerializeField] float _forceMultiplierOAffectableObjects;
+    [SerializeField] float _forceAppliedToBigobjects;
     //Variables
     private bool _executeAction;
     bool _isInWater;
+    GroundData _groundedData;
     Collider[] _colliders=new Collider[0];
     //Componentes
+    CharacterController _characterController;
     //Clases
     GameActions _playerActions;
     guiController _guiController;
-    CharacterController _characterController;
     moveController _moveController;
     private void Awake()
     {
         _guiController = GetComponent<guiController>();
         _moveController = GetComponent<moveController>();
         _characterController = GetComponent<CharacterController>();
+    }
+    private void Update()
+    {
+        #region Ground Check
+        //la cindicion es para cuando se salta pegado a un objeto con tag ground poder terminar el salto
+        if (_characterController.velocity.y < 0)
+        {
+            checkGroundedData();
+        }
+        #endregion
     }
     private void FixedUpdate()
     {
@@ -163,6 +178,7 @@ public class collisionController : MonoBehaviour
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        //objetos que son modificados por fuerza
         if (hit.gameObject.layer == 15)
         {
             Vector3 dif = (hit.transform.position - transform.position).normalized;
@@ -172,7 +188,14 @@ public class collisionController : MonoBehaviour
             {
                 hit.transform.GetComponent<AudioSource>().Play();
             }
-            hit.rigidbody.AddForceAtPosition( _direction* hit.controller.velocity.magnitude*_forceMultiplierOAffectableObjects,hit.point);
+            if (hit.gameObject.tag == "TinyObjects")
+            {
+                hit.rigidbody.AddForceAtPosition(_direction * hit.controller.velocity.magnitude * _forceMultiplierOAffectableObjects, hit.point);
+            }
+            else if (hit.gameObject.tag == "BigObjects")
+            {
+                hit.rigidbody.AddForceAtPosition(_direction  *_forceAppliedToBigobjects *_forceMultiplierOAffectableObjects, hit.point);
+            }
         }
     }
     private void OnDrawGizmos()
@@ -185,19 +208,24 @@ public class collisionController : MonoBehaviour
     #endregion
 
     #region Metodos
-    public moveController.GroundData checkGrounded()
+    public void checkGroundedData()
     {
-        return checkLayer(_groundLayer);
+        bool _tempGrounded = _groundedData.Colliosined;
+        _groundedData = checkLayer(_groundLayer);
+        if (_tempGrounded != _groundedData.Colliosined)
+        {
+            OnGroundedStateChange(_groundedData);
+        }
     }
-    moveController.GroundData checkLayer(LayerMask Layer)
+    GroundData checkLayer(LayerMask Layer)
     {
-        moveController.GroundData _groundData=new moveController.GroundData(false,"");
+        GroundData _groundData=new GroundData(false,"");
 
         //return Physics.OverlapSphere(transform.position + (Vector3.down * ((_characterController.height / 2) + _groundCheckOffset)), _sphereRadious, Layer);
        _colliders =Physics.OverlapSphere(transform.position + (Vector3.down * ((_characterController.height / 2) + _groundCheckOffset)),_sphereRadious,Layer);
         if (_colliders.Length != 0)
         {
-            _groundData = new moveController.GroundData(true,_colliders[0].gameObject.tag);
+            _groundData = new GroundData(true,_colliders[0].gameObject.tag);
         }
         return _groundData;
     }
@@ -206,5 +234,6 @@ public class collisionController : MonoBehaviour
 
     #region Propiedades
     public bool IsInWater { get => _isInWater; set => _isInWater = value; }
+    public GroundData GroundedData { get => _groundedData; }
     #endregion
 }
