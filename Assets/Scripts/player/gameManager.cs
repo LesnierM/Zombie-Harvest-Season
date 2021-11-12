@@ -19,6 +19,11 @@ public enum DoorOpenDirections
 /// Referencia de la ui para mostrar los mensajes.
 /// </summary>
 /// 
+public enum SunStates
+{
+    Day,
+    Night
+}
 public struct GroundData
 {
     public bool Colliosined;
@@ -75,12 +80,18 @@ public enum GroundStepsSoundTypes
 }
 public class gameManager : MonoBehaviour
 {
+    [SerializeField] AudioClip _enviromentDaySound;
+    [SerializeField] AudioClip _enviromentNightSound;
     public delegate void NoParameters(ControlType Type);
     public event NoParameters oninputDiviceChanged;
     public static ControlType _lastInputDeviceUsed;
     GameActions _playerActions;
+    AudioSource _enviromentSoundPlayer;
+    sunController _sunState;
     private void Awake()
     {
+        
+        _enviromentSoundPlayer = GetComponent<AudioSource>();
         if (GameObject.FindObjectsOfType<gameManager>().Length > 1)
         {
             Destroy(gameObject);
@@ -92,6 +103,11 @@ public class gameManager : MonoBehaviour
     }
     private void OnEnable()
     {
+        if (_sunState == null)
+        {
+            _sunState = GameObject.FindObjectOfType<sunController>();
+        }
+        _sunState.OnSunStateChange += OnSunStateChange;
         if (_playerActions == null)
         {
             _playerActions = new GameActions();
@@ -108,6 +124,13 @@ public class gameManager : MonoBehaviour
         _playerActions.playerActions.Reload.performed += updateUsedDivice;
         _playerActions.playerActions.Run.performed += updateUsedDivice;
         _playerActions.playerActions.Shoot.performed += updateUsedDivice;
+    }
+
+    private void OnSunStateChange(SunStates State)
+    {
+        _enviromentSoundPlayer.Stop();
+        _enviromentSoundPlayer.clip = State == SunStates.Day ? _enviromentDaySound : _enviromentNightSound;
+        _enviromentSoundPlayer.Play();
     }
 
     private void OnDisable()

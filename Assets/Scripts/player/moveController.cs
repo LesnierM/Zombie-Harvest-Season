@@ -81,9 +81,6 @@ public class moveController : MonoBehaviour
         _collisionController.OnWaterStateChange += OnWaterStateChange;
         _collisionController.OnGroundedStateChange += Grounded =>_isGrounded = Grounded.Colliosined;
     }
-
-  
-
     private void OnDisable()
     {
         _playerActions.Disable();
@@ -173,7 +170,7 @@ public class moveController : MonoBehaviour
         #endregion
 
         _characterController.Move(transform.TransformDirection(new Vector3( _xSpeed, _yVelocity, _zSpeed)));
-        Debug.Log(new Vector2(_characterController.velocity.x, _characterController.velocity.z).sqrMagnitude);
+        //Debug.Log(new Vector2(_characterController.velocity.x, _characterController.velocity.z).sqrMagnitude);
     }
 
     #region Input
