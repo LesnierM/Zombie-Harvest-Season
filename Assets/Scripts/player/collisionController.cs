@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class collisionController : MonoBehaviour
 {
+    enum SphereCheckPositions
+    {
+        Top,
+        Middle,
+        Bottom
+    }
    
     public delegate void NoParameters();
+    public delegate void WaterParameters(WaterLevels WaterLevel);
+
     public delegate void BoolParameter(bool isinWater);
     public delegate void GroundDataParameterEventHandler(GroundData GroundData);
     public delegate void onPickedUpWeaponEventHandler(Weapons Weapon);
@@ -14,7 +22,7 @@ public class collisionController : MonoBehaviour
     public event onPickedUpWeaponEventHandler OnWeaponPickedUp;
     public event ActionableObjects onActionableObjectStay;
     public event NoParameters onActionableObjectLeave;
-    public event NoParameters OnWaterStateChange;
+    public event WaterParameters OnWaterStateChange;
     public event GroundDataParameterEventHandler OnGroundedStateChange;
     //Variables Expuestas
     [SerializeField] float _gatesRotationSpeed;
@@ -27,11 +35,18 @@ public class collisionController : MonoBehaviour
     [Header("parametros de fuerza y rotacion aplicada,")]
     [SerializeField] float _forceMultiplierOAffectableObjects;
     [SerializeField] float _forceAppliedToBigobjects;
+    [Header("")]
+    [SerializeField] float _inWaterShpereOffset=.12f;
+    [SerializeField] float _halfInWaterShpereOffset=.12f;
     //Variables
     private bool _executeAction;
-    bool _isInWater;
+
+
     GroundData _groundedData;
+
     Collider[] _colliders=new Collider[0];
+
+    WaterLevels _currentWaterLevel;
     //Componentes
     CharacterController _characterController;
     //Clases
@@ -48,23 +63,30 @@ public class collisionController : MonoBehaviour
     {
         #region Ground Check
         //la cindicion es para cuando se salta pegado a un objeto con tag ground poder terminar el salto
-        if (_characterController.velocity.y < 0)
+        if (_characterController.velocity.y <= 0)
         {
             checkGroundedData();
         }
         #endregion
-    }
-    private void FixedUpdate()
-    {
+
         #region Water Check
-        bool _isWaterTemp = _isInWater;
-        _isInWater = checkLayer(_waterLayer).Colliosined;
-        if (OnWaterStateChange != null&&_isWaterTemp!=_isInWater)
+        WaterLevels _isWaterTemp = _currentWaterLevel;
+        _currentWaterLevel = checkLayer(_waterLayer,SphereCheckPositions.Top).Colliosined?WaterLevels.InWater:WaterLevels.None;
+        if (_currentWaterLevel == WaterLevels.None)
         {
-            OnWaterStateChange();
+        _currentWaterLevel = checkLayer(_waterLayer,SphereCheckPositions.Middle).Colliosined?WaterLevels.HalfInWater:WaterLevels.None;
+        }
+        if (_currentWaterLevel == WaterLevels.None)
+        {
+        _currentWaterLevel = checkLayer(_waterLayer,SphereCheckPositions.Bottom ).Colliosined?WaterLevels.OnWater:WaterLevels.None;
+        }
+        if (_isWaterTemp != _currentWaterLevel)
+        {
+            OnWaterStateChange(_currentWaterLevel);
         }
         #endregion
     }
+   
     private void OnEnable()
     {
         if (_playerActions == null)
@@ -200,7 +222,12 @@ public class collisionController : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position + (Vector3.down * (GetComponent<CharacterController>().height / 2 + _groundCheckOffset)), _sphereRadious);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position+Vector3.up*_halfInWaterShpereOffset, .05f);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(Camera.main.transform.position + Vector3.up * _inWaterShpereOffset, .05f);
     }
 
     #region Eventos
@@ -211,18 +238,30 @@ public class collisionController : MonoBehaviour
     public void checkGroundedData()
     {
         bool _tempGrounded = _groundedData.Colliosined;
-        _groundedData = checkLayer(_groundLayer);
+        _groundedData = checkLayer(_groundLayer,SphereCheckPositions.Bottom);
         if (_tempGrounded != _groundedData.Colliosined)
         {
             OnGroundedStateChange(_groundedData);
         }
     }
-    GroundData checkLayer(LayerMask Layer)
+    GroundData checkLayer(LayerMask Layer,SphereCheckPositions Position)
     {
         GroundData _groundData=new GroundData(false,"");
-
+        Vector3 _spherePosition=default;
+        switch (Position)
+        {
+            case SphereCheckPositions.Top:
+                _spherePosition = Camera.main.transform.position + Vector3.up * _inWaterShpereOffset;
+                break;
+            case SphereCheckPositions.Middle:
+                _spherePosition = transform.position + Vector3.up * _halfInWaterShpereOffset;
+                break;
+            case SphereCheckPositions.Bottom:
+                _spherePosition = transform.position + (Vector3.down * ((_characterController.height / 2) + _groundCheckOffset));
+                break;
+        }
         //return Physics.OverlapSphere(transform.position + (Vector3.down * ((_characterController.height / 2) + _groundCheckOffset)), _sphereRadious, Layer);
-       _colliders =Physics.OverlapSphere(transform.position + (Vector3.down * ((_characterController.height / 2) + _groundCheckOffset)),_sphereRadious,Layer);
+        _colliders =Physics.OverlapSphere(_spherePosition,_sphereRadious,Layer);
         if (_colliders.Length != 0)
         {
             _groundData = new GroundData(true,_colliders[0].gameObject.tag);
@@ -233,7 +272,7 @@ public class collisionController : MonoBehaviour
     #endregion
 
     #region Propiedades
-    public bool IsInWater { get => _isInWater; set => _isInWater = value; }
     public GroundData GroundedData { get => _groundedData; }
+    public WaterLevels CurrentWaterLevel { get => _currentWaterLevel; }
     #endregion
 }

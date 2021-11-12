@@ -27,7 +27,7 @@ public class moveController : MonoBehaviour
     /// <summary>
     /// Para ajustar la gravedad sin modificar el valor original
     /// </summary>
-    [SerializeField] float _gravityModifier;
+    [SerializeField] float _gravityNormalModifier;
     [Header("Alturas")]
     [SerializeField] float _jumpHigh;
     [SerializeField] float _crouchHeigh;
@@ -45,7 +45,7 @@ public class moveController : MonoBehaviour
 
     float _gravity = -9.8f;
     float _yVelocity;
-    float _tempGravityModifier;//guardar el modificador de gravedad en estado normal antes de editarlo para devolverlo al valor definido en el editor
+    float _currentGravityModifier;
 
     Vector2 _input;
     //Componentes
@@ -57,6 +57,7 @@ public class moveController : MonoBehaviour
     collisionController _collisionController;
     void Awake()
     {
+        _currentGravityModifier = _gravityNormalModifier;
         _weaponsController = GetComponent<weaponsController>();
         _soundPlayer = GetComponent<AudioSource>();
         _characterController = GetComponent<CharacterController>();
@@ -71,8 +72,8 @@ public class moveController : MonoBehaviour
         _playerActions.Enable();
         _playerActions.playerActions.Move.performed += data => { _input = data.ReadValue<Vector2>(); };
         _playerActions.playerActions.Move.canceled += data => { _input = data.ReadValue<Vector2>(); };
-        _playerActions.playerActions.Run.performed += data => { _runPressed = true;  };
-        _playerActions.playerActions.Run.canceled += data => { _runPressed = false; };
+        _playerActions.playerActions.Run.performed += OnRun; 
+        _playerActions.playerActions.Run.canceled += OnRun;
         _playerActions.playerActions.Jump.performed+= OnJump;
         _playerActions.playerActions.Crouch.performed += OnCrouch;
         _playerActions.playerActions.Crouch.canceled += OnCrouch;
@@ -80,13 +81,16 @@ public class moveController : MonoBehaviour
         _collisionController.OnWaterStateChange += OnWaterStateChange;
         _collisionController.OnGroundedStateChange += Grounded =>_isGrounded = Grounded.Colliosined;
     }
+
+  
+
     private void OnDisable()
     {
         _playerActions.Disable();
         _playerActions.playerActions.Move.performed -= data => {_input =  data.ReadValue<Vector2>(); };
         _playerActions.playerActions.Move.canceled -= data => { _input = data.ReadValue<Vector2>(); };
-        _playerActions.playerActions.Run.performed -= data => { _runPressed = true; ;};
-        _playerActions.playerActions.Run.canceled -= data => { _runPressed = false; ; };
+        _playerActions.playerActions.Run.performed -=OnRun;
+        _playerActions.playerActions.Run.canceled -=OnRun;
         _playerActions.playerActions.Jump.performed -= OnJump;
         _playerActions.playerActions.Crouch.performed -= OnCrouch;
         _playerActions.playerActions.Crouch.canceled -= OnCrouch;
@@ -120,7 +124,7 @@ public class moveController : MonoBehaviour
 
         if (!_isGrounded)
         {
-            _yVelocity += (_gravity* Time.deltaTime*_gravityModifier) * Time.deltaTime;
+            _yVelocity += (_gravity* Time.deltaTime*_currentGravityModifier) * Time.deltaTime;
         }
         else
         {
@@ -132,7 +136,7 @@ public class moveController : MonoBehaviour
         #region Salto
         if (_isGrounded && _jumpPressed && !_isCrouch)
         {
-            _yVelocity = Mathf.Sqrt(-2 * (_gravity *_gravityModifier)*_jumpHigh) * Time.deltaTime;
+            _yVelocity = Mathf.Sqrt(-2 * (_gravity * _currentGravityModifier) *_jumpHigh) * Time.deltaTime;
             _isGrounded = false;
             OnPlayerJump();
         }
@@ -169,10 +173,17 @@ public class moveController : MonoBehaviour
         #endregion
 
         _characterController.Move(transform.TransformDirection(new Vector3( _xSpeed, _yVelocity, _zSpeed)));
-        //Debug.Log(new Vector2(_characterController.velocity.x, _characterController.velocity.z).sqrMagnitude);
+        Debug.Log(new Vector2(_characterController.velocity.x, _characterController.velocity.z).sqrMagnitude);
     }
 
     #region Input
+    private void OnRun(InputAction.CallbackContext obj)
+    {
+        if (_isGrounded)
+        {
+            _runPressed = obj.performed;
+        }
+    }
     private void OnJump(InputAction.CallbackContext obj)
     {
         _jumpPressed = obj.performed;
@@ -189,18 +200,19 @@ public class moveController : MonoBehaviour
     #endregion
 
     #region Eventos
-    private void OnWaterStateChange()
+    private void OnWaterStateChange(WaterLevels WaterLevel)
     {
-        if (_collisionController.IsInWater)
+        if (WaterLevel == WaterLevels.InWater || WaterLevel == WaterLevels.HalfInWater)
         {
-            _tempGravityModifier = _gravityModifier;
-            _gravityModifier = _gravityModifierInWater;
+            _currentGravityModifier = _gravityModifierInWater;
+
         }
         else
         {
-            _gravityModifier =_tempGravityModifier;
+            _currentGravityModifier = _gravityNormalModifier;
         }
     }
+    //utilize una courrutine porque cunado se precionaba el boton muy rapido se mantenia agachado en modo toggle activado
     private IEnumerator performCrouch(InputAction.CallbackContext obj)
     {
         if (!_isGrounded)
@@ -251,7 +263,7 @@ public class moveController : MonoBehaviour
         {
             velocity *= _backSpeed;
         }
-        if (_collisionController.IsInWater)
+        if (_collisionController.CurrentWaterLevel==WaterLevels.HalfInWater||_collisionController.CurrentWaterLevel==WaterLevels.InWater)
         {
             velocity *= _waterSpeedReducer;
         }
@@ -272,7 +284,7 @@ public class moveController : MonoBehaviour
         {
             velocity *= _lateralSpeed *_runMultiplier;
         }
-        if (_collisionController.IsInWater)
+        if (_collisionController.CurrentWaterLevel==WaterLevels.InWater||_collisionController.CurrentWaterLevel==WaterLevels.HalfInWater)
         {
             velocity *= _waterSpeedReducer;
         }

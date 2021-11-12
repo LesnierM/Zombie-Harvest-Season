@@ -3104,7 +3104,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh169264
+  m_Name: pb_Mesh32534
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -47296,7 +47296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4575060604013774, guid: c4e102418e8d1fe4dac503425c4baa3d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.14674
+      value: 19.97
       objectReference: {fileID: 0}
     - target: {fileID: 4575060604013774, guid: c4e102418e8d1fe4dac503425c4baa3d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -49286,8 +49286,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterSoundEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: c79f18090fa1cc04daa5d91b425cf155, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _jumpSounds.Array.size
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _waterSplash.Array.size
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _jumpSounds.Array.data[0]
@@ -49358,12 +49366,56 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: c0e7c7279084e50469602098f75596f8, type: 3}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _waterSplash.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 802eb8fc867d4884d9084f5ccaf2d45b, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _waterSplash.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: e59effd2b59635a44bb41886ec6cd5e8, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _waterSplash.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 811a1d12d2bdff34b87e527f6b78ff0f, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _waterSplash.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: faf9c5b831da1074aa61a65f518937b5, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _waterSplash.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0f4257317dbc4fa4abbdbdea5b6300c9, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _waterSplash.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b5aec9a9adf6e0409baed14b18ae3b2, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _waterSplash.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 047043165f343da4f99512bca1bed865, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _waterSplash.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: ae2bfaa09e858fe43b9531e3fd15a43a, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _waterSplash.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ff0fb3a75d374742b6d932078a30db9, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _waterSplash.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ec48f7ff54acc84aaa7a8236352d4cd, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _diferentSoundsConsecutiveCount
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _woodStepSoundEffect.Array.size
       value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _dirtStepSoundEffects.Array.size
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _woodStepSoundEffect.Array.data[0]
@@ -49444,7 +49496,15 @@ PrefabInstance:
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _dirtStepSoundEffects.Array.data[9]
       value: 
-      objectReference: {fileID: 8300000, guid: ae7d06e5ebc2dc8408c92fe09b2a700a, type: 3}
+      objectReference: {fileID: 8300000, guid: 4b8621c36404ada46899dec7d81cefc4, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _onWaterStepSoundEffects.Array.size
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _woodStepSoundEffect.Array.data[10]
       value: 
@@ -49504,35 +49564,35 @@ PrefabInstance:
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _dirtStepSoundEffects.Array.data[10]
       value: 
-      objectReference: {fileID: 8300000, guid: 4b8621c36404ada46899dec7d81cefc4, type: 3}
+      objectReference: {fileID: 8300000, guid: ac5b075818fddfb44be28b436ee7de33, type: 3}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _dirtStepSoundEffects.Array.data[11]
       value: 
-      objectReference: {fileID: 8300000, guid: ac5b075818fddfb44be28b436ee7de33, type: 3}
+      objectReference: {fileID: 8300000, guid: c11c701af4ae2ea4d812ce36935a7820, type: 3}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _dirtStepSoundEffects.Array.data[12]
       value: 
-      objectReference: {fileID: 8300000, guid: c11c701af4ae2ea4d812ce36935a7820, type: 3}
+      objectReference: {fileID: 8300000, guid: 6d58b92450b838741a681b7427f99ac6, type: 3}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _dirtStepSoundEffects.Array.data[13]
       value: 
-      objectReference: {fileID: 8300000, guid: 6d58b92450b838741a681b7427f99ac6, type: 3}
+      objectReference: {fileID: 8300000, guid: 1d4d5764edb21b7469bbddad940aa10f, type: 3}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _dirtStepSoundEffects.Array.data[14]
       value: 
-      objectReference: {fileID: 8300000, guid: 1d4d5764edb21b7469bbddad940aa10f, type: 3}
+      objectReference: {fileID: 8300000, guid: f56f4302ad2404041bdfe07939a76b58, type: 3}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _dirtStepSoundEffects.Array.data[15]
       value: 
-      objectReference: {fileID: 8300000, guid: f56f4302ad2404041bdfe07939a76b58, type: 3}
+      objectReference: {fileID: 8300000, guid: 45f4500cf6c4a82488403d263c25d045, type: 3}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _dirtStepSoundEffects.Array.data[16]
       value: 
-      objectReference: {fileID: 8300000, guid: 45f4500cf6c4a82488403d263c25d045, type: 3}
+      objectReference: {fileID: 8300000, guid: 8feae08ce67281c43bd905a9c098ff5e, type: 3}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _dirtStepSoundEffects.Array.data[17]
       value: 
-      objectReference: {fileID: 8300000, guid: 8feae08ce67281c43bd905a9c098ff5e, type: 3}
+      objectReference: {fileID: 8300000, guid: 109fcb7135f1982448d5baa6b1c2bfe8, type: 3}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _dirtStepSoundEffects.Array.data[18]
       value: 
@@ -49541,6 +49601,110 @@ PrefabInstance:
       propertyPath: _dirtStepSoundEffects.Array.data[19]
       value: 
       objectReference: {fileID: 8300000, guid: a66c695b4e48716409ff0fb21aef879a, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: b070c374cb638214d8f51780c8c86aef, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a536beecdce12d4690ad2b01708d2f2, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: a876f1e3f76e44242b7dbb9ec6075e28, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: d4c86f70292bf334b86d53ab85392223, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: bd867fd52d462ae4b8c8104c1b40f1fb, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: ad82f760cc819f84a84807d5f3c4c664, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: c608cef932b5c8f48b8c4b7c785002eb, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: d98ed52424fb26245ae7589f2a59056f, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: 105f2397dda05094499871dad65999a2, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: 38acd2fcdff63b842a88ffc395954d89, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _onWaterStepSoundEffects.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2130ed421c7266243a8fcf48013b2bff, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _onWaterStepSoundEffects.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: b836a8f4e3fd84a4bbe2deef1f97bbbd, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _onWaterStepSoundEffects.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: b430609a10798e742b36e5aa61a6c109, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _onWaterStepSoundEffects.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2c86db72f1081d24e9eb909297815ee6, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _onWaterStepSoundEffects.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ec4afb4b007e7a478c8825973c53deb, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _onWaterStepSoundEffects.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 866c1e106d5825a419606c005330c320, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _onWaterStepSoundEffects.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5433d9912df851849a7fb17fe88e3251, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _onWaterStepSoundEffects.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1b759ad80224cb043ac348c9e6ccb382, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _onWaterStepSoundEffects.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: cf1db57332a6e464b9469ebda68a05f8, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _onWaterStepSoundEffects.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: 268f3f549a917a34d971db8d414dd9ae, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[10]
+      value: 
+      objectReference: {fileID: 8300000, guid: e235ffc065e283645bc60d72c1d27c22, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[11]
+      value: 
+      objectReference: {fileID: 8300000, guid: f122d20248375f64485992fa90a22fed, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[12]
+      value: 
+      objectReference: {fileID: 8300000, guid: ddde5c0e3ee119c459578896bbc6804d, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[13]
+      value: 
+      objectReference: {fileID: 8300000, guid: ab57cff9aa652234fa1cfd44d58c26b0, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[14]
+      value: 
+      objectReference: {fileID: 8300000, guid: 106b456d3d9208a458aad1dc118e8f54, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterStepSoundEffects.Array.data[15]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8c86f4b84b41f6942a5b20ed61a15215, type: 3}
     - target: {fileID: 8057907759296733281, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _intervals.y
       value: 2
@@ -49554,8 +49718,20 @@ PrefabInstance:
       value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8057907759296733285, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _inWaterShpereOffset
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057907759296733285, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _halfInWaterShpereOffset
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057907759296733285, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _forceAppliedToBigobjects
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057907759296733286, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _gravityNormalModifier
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 8057907759296733291, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: m_RootOrder
@@ -49563,7 +49739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8057907759296733291, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.47
+      value: 110.8
       objectReference: {fileID: 0}
     - target: {fileID: 8057907759296733291, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -49571,7 +49747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8057907759296733291, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 151.13
+      value: 91.4
       objectReference: {fileID: 0}
     - target: {fileID: 8057907759296733291, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -75819,7 +75995,7 @@ GameObject:
   - component: {fileID: 1811932111}
   m_Layer: 4
   m_Name: collider
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77959,7 +78135,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 74734738}
-  m_VersionIndex: 20617
+  m_VersionIndex: 20625
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

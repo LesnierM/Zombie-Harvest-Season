@@ -29,6 +29,13 @@ public struct GroundData
         this.Tag = Tag;
     }
 }
+public enum WaterLevels
+{
+    None,
+    OnWater,
+    HalfInWater,
+    InWater
+}
 public enum ActionableObjects
 {
     None,
@@ -63,7 +70,8 @@ public enum GroundStepsSoundTypes
 {
     None,
     Dirt,
-    Wood
+    Wood,
+    Water
 }
 public class gameManager : MonoBehaviour
 {
@@ -184,6 +192,8 @@ public static class converter
 
             case "Wood":
                 return GroundStepsSoundTypes.Wood;
+            case "Water":
+                return GroundStepsSoundTypes.Water;
             default:
                 return GroundStepsSoundTypes.None;
         }
