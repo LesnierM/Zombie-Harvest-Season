@@ -55906,7 +55906,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9545cb4b4b724a04e932de931cae7019, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1311ed15640501d40a689c64a1bea5b4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -91322,11 +91322,11 @@ PrefabInstance:
     - target: {fileID: 3534437918019447993, guid: 754e3a26ac3dd0245aa724876f2e4bf3, type: 3}
       propertyPath: _enviromentDaySound
       value: 
-      objectReference: {fileID: 8300000, guid: 9545cb4b4b724a04e932de931cae7019, type: 3}
+      objectReference: {fileID: 8300000, guid: 1311ed15640501d40a689c64a1bea5b4, type: 3}
     - target: {fileID: 3534437918019447993, guid: 754e3a26ac3dd0245aa724876f2e4bf3, type: 3}
       propertyPath: _enviromentNightSound
       value: 
-      objectReference: {fileID: 8300000, guid: 2915334548eb34e419a26ef7a6beaaae, type: 3}
+      objectReference: {fileID: 8300000, guid: a24c408e9f22998479ffda8e7f6abaac, type: 3}
     - target: {fileID: 3534437918019447998, guid: 754e3a26ac3dd0245aa724876f2e4bf3, type: 3}
       propertyPath: m_RootOrder
       value: 20

@@ -101,7 +101,10 @@ public class soundEffectsController : MonoBehaviour
                 _stepSounds = _inWaterStepSoundEffects;
                 break;
         }
-
+        if (_stepSounds == null)
+        {
+            return;
+        }
         int _nextSound;
         do
         {
