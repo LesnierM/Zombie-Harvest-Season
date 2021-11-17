@@ -14,12 +14,15 @@ public class soundEffectsController : MonoBehaviour
     [SerializeField] AudioClip _inWaterSoundEffect;
     [Header("Impacto de balas")]
     [SerializeField] AudioClip _onMetalTankBulletImpactSound;
+    [Header("Pitch de impacto")]
+    [SerializeField] float _minPitch;
+    [SerializeField] float _maxPitch;
     //Variables
     List<int> _playedStepSounds = new List<int>();
     int _currentStepSoundIndex;
 	//Componentes
 	AudioSource _soundPlayer;
-    AudioSource _stepsPlayer;
+    AudioSource _stepsSoundPlayer;
 	collisionController _collisionController;
     //Clases
     moveController _moveController;
@@ -28,7 +31,7 @@ public class soundEffectsController : MonoBehaviour
 		_collisionController = GetComponent<collisionController>();
         AudioSource[] players= GetComponents<AudioSource>();
         _soundPlayer = players[0];
-        _stepsPlayer = players[1];
+        _stepsSoundPlayer = players[1];
     }
     private void OnEnable()
     {
@@ -90,7 +93,7 @@ public class soundEffectsController : MonoBehaviour
             _audioSource.minDistance = 5.35f;
             _audioSource.maxDistance = 49.4f;
         }
-
+        _audioSource.pitch =1+ Random.Range(_minPitch, _maxPitch);
         switch (converter.getGroundStepSoundTypesFromString(HittedObject.tag))
         {
             case TagSoundTypes.None:
@@ -109,6 +112,7 @@ public class soundEffectsController : MonoBehaviour
     public void OnStep()
     {
         AudioClip[] _stepSounds = default;
+        _stepsSoundPlayer.pitch = 1 + Random.Range(_minPitch, _maxPitch);
         switch (_collisionController.CurrentWaterLevel)
         {
             case WaterLevels.None:
@@ -139,7 +143,7 @@ public class soundEffectsController : MonoBehaviour
         {
             _nextSound = Random.Range(0, _stepSounds.Length);
         } while (_playedStepSounds.Contains(_nextSound));
-        _stepsPlayer.PlayOneShot(_stepSounds[_nextSound]);
+        _stepsSoundPlayer.PlayOneShot(_stepSounds[_nextSound]);
         
         if (_playedStepSounds.Count ==_diferentSoundsConsecutiveCount)
         {
