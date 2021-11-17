@@ -71,12 +71,13 @@ public enum SoundType
     Door,
     Gate
 }
-public enum GroundStepsSoundTypes
+public enum TagSoundTypes
 {
     None,
     Dirt,
     Wood,
-    Water
+    Water,
+    MetalTank
 }
 public class gameManager : MonoBehaviour
 {
@@ -90,7 +91,6 @@ public class gameManager : MonoBehaviour
     sunController _sunState;
     private void Awake()
     {
-        
         _enviromentSoundPlayer = GetComponent<AudioSource>();
         if (GameObject.FindObjectsOfType<gameManager>().Length > 1)
         {
@@ -125,14 +125,12 @@ public class gameManager : MonoBehaviour
         _playerActions.playerActions.Run.performed += updateUsedDivice;
         _playerActions.playerActions.Shoot.performed += updateUsedDivice;
     }
-
     private void OnSunStateChange(SunStates State)
     {
         _enviromentSoundPlayer.Stop();
         _enviromentSoundPlayer.clip = State == SunStates.Day ? _enviromentDaySound : _enviromentNightSound;
         _enviromentSoundPlayer.Play();
     }
-
     private void OnDisable()
     {
         _playerActions.Disable();
@@ -206,19 +204,21 @@ public static class converter
                 return ActionsTypes.None;
         }
     }
-    public static GroundStepsSoundTypes getGroundStepSoundTypesFromString(string SoundType)
+    public static TagSoundTypes getGroundStepSoundTypesFromString(string SoundType)
     {
         switch (SoundType)
         {
             case "Dirt":
-                return GroundStepsSoundTypes.Dirt;
+                return TagSoundTypes.Dirt;
 
             case "Wood":
-                return GroundStepsSoundTypes.Wood;
+                return TagSoundTypes.Wood;
             case "Water":
-                return GroundStepsSoundTypes.Water;
+                return TagSoundTypes.Water;
+            case "MetalTank":
+                return TagSoundTypes.MetalTank;
             default:
-                return GroundStepsSoundTypes.None;
+                return TagSoundTypes.None;
         }
     }
 }

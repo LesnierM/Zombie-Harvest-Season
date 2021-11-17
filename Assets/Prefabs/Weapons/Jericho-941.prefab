@@ -601,7 +601,7 @@ MonoBehaviour:
   _bulletsMaxCount: 96
   _shootSoundDelay: 0
   _reloadSoundDelay: 0.1
-  _shootSound: {fileID: 8300000, guid: 51b3a9227a0295f44a59416d838bc787, type: 3}
+  _shootSound: {fileID: 8300000, guid: be07b3e6a07247645b3b8bf7fae76c2a, type: 3}
   _reloadSound: {fileID: 8300000, guid: 7eae240aa4f30e243a92eadb52af1c2a, type: 3}
   _cartridgeCase: {fileID: 8682409687313712761, guid: 4c086e3d6df01e941b0be254fd076ce9, type: 3}
   _bulletHole: {fileID: 9083845830130240433, guid: 6facedcfb21ef6146adf1db0ed02b7fa, type: 3}

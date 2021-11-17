@@ -6,11 +6,14 @@ public class soundEffectsController : MonoBehaviour
 {
     [SerializeField] int _diferentSoundsConsecutiveCount;
     [SerializeField] AudioClip[] _jumpSounds;
+    [Header("Pasos")]
     [SerializeField] AudioClip[] _dirtStepSoundEffects;
     [SerializeField] AudioClip[] _woodStepSoundEffect;
 	[SerializeField] AudioClip[] _onWaterStepSoundEffects;
 	[SerializeField] AudioClip[] _inWaterStepSoundEffects;
     [SerializeField] AudioClip _inWaterSoundEffect;
+    [Header("Impacto de balas")]
+    [SerializeField] AudioClip _onMetalTankBulletImpactSound;
     //Variables
     List<int> _playedStepSounds = new List<int>();
     int _currentStepSoundIndex;
@@ -26,7 +29,6 @@ public class soundEffectsController : MonoBehaviour
         AudioSource[] players= GetComponents<AudioSource>();
         _soundPlayer = players[0];
         _stepsPlayer = players[1];
-        
     }
     private void OnEnable()
     {
@@ -38,7 +40,6 @@ public class soundEffectsController : MonoBehaviour
         _collisionController.OnGroundedStateChange += OnGroundedStateChange;
         _collisionController.OnWaterStateChange += OnWaterStateChange;
     }
-
     private void OnDisable()
     {
         _collisionController.OnGroundedStateChange -= OnGroundedStateChange;
@@ -77,6 +78,34 @@ public class soundEffectsController : MonoBehaviour
     #endregion
 
     #region Metodos
+    public void OnBulletImpact(GameObject HittedObject)
+    {
+        AudioSource _audioSource;
+        if (!HittedObject.TryGetComponent<AudioSource>(out _audioSource))
+        {
+            _audioSource = HittedObject.AddComponent<AudioSource>();
+            //configuracion del audiosource
+            _audioSource.spatialBlend = 1;
+            _audioSource.rolloffMode = AudioRolloffMode.Logarithmic;
+            _audioSource.minDistance = 5.35f;
+            _audioSource.maxDistance = 49.4f;
+        }
+
+        switch (converter.getGroundStepSoundTypesFromString(HittedObject.tag))
+        {
+            case TagSoundTypes.None:
+                break;
+            case TagSoundTypes.Dirt:
+                break;
+            case TagSoundTypes.Wood:
+                break;
+            case TagSoundTypes.Water:
+                break;
+            case TagSoundTypes.MetalTank:
+                _audioSource.PlayOneShot(_onMetalTankBulletImpactSound);
+                break;
+        }
+    }
     public void OnStep()
     {
         AudioClip[] _stepSounds = default;
@@ -85,10 +114,10 @@ public class soundEffectsController : MonoBehaviour
             case WaterLevels.None:
                 switch (converter.getGroundStepSoundTypesFromString(_collisionController.GroundedData.Tag))
                 {
-                    case GroundStepsSoundTypes.Dirt:
+                    case TagSoundTypes.Dirt:
                         _stepSounds = _dirtStepSoundEffects;
                         break;
-                    case GroundStepsSoundTypes.Wood:
+                    case TagSoundTypes.Wood:
                         _stepSounds = _woodStepSoundEffect;
                         break;
                 }

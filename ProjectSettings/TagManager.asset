@@ -15,6 +15,7 @@ TagManager:
   - TinyObjects
   - BigObjects
   - Water
+  - MetalTank
   layers:
   - Default
   - TransparentFX

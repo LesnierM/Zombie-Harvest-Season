@@ -47,11 +47,13 @@ public class weaponController : MonoBehaviour
 	AudioSource _soundPlayer;
 	//Clases
 	moveController _playerController;
+	soundEffectsController _soundEffectsController;
 	//debug
 	float _xAxyRandomDirection;
 	float _yAxyRandomDirection;
 	void Awake()
     {
+		_soundEffectsController = transform.root.GetComponent<soundEffectsController>();
 		_playerController = transform.parent.GetComponentInParent<moveController>();
 		_animator = GetComponent<Animator>();
 		_soundPlayer = GetComponent<AudioSource>();
@@ -115,7 +117,8 @@ public class weaponController : MonoBehaviour
 		//{
 		//	_rayHit.collider.gameObject.GetComponent<ExplosiveBarrelScript>().explode = true;
 		//}
-			Destroy(Instantiate(_bulletHole, _rayHit.point + _rayHit.normal * 0.001f, Quaternion.LookRotation(_rayHit.normal),_rayHit.transform), _bulletHoleDuration);
+		Destroy(Instantiate(_bulletHole, _rayHit.point + _rayHit.normal * 0.001f, Quaternion.LookRotation(_rayHit.normal),_rayHit.transform), _bulletHoleDuration);
+		_soundEffectsController.OnBulletImpact(_rayHit.collider.gameObject);
 	}
     public void Reload()
 	{
