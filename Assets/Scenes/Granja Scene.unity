@@ -49410,6 +49410,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 3ec48f7ff54acc84aaa7a8236352d4cd, type: 3}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
+      propertyPath: _onMetalTankBulletImpactSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6585e863f47158e47ad41bbb83101956, type: 3}
+    - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _diferentSoundsConsecutiveCount
       value: 8
       objectReference: {fileID: 0}

@@ -86,7 +86,7 @@ public class soundEffectsController : MonoBehaviour
             _audioSource = HittedObject.AddComponent<AudioSource>();
             //configuracion del audiosource
             _audioSource.spatialBlend = 1;
-            _audioSource.rolloffMode = AudioRolloffMode.Logarithmic;
+            _audioSource.rolloffMode = AudioRolloffMode.Linear;
             _audioSource.minDistance = 5.35f;
             _audioSource.maxDistance = 49.4f;
         }
