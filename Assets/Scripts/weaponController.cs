@@ -119,6 +119,12 @@ public class weaponController : MonoBehaviour
 		//}
 		Destroy(Instantiate(_bulletHole, _rayHit.point + _rayHit.normal * 0.001f, Quaternion.LookRotation(_rayHit.normal),_rayHit.transform), _bulletHoleDuration);
 		_soundEffectsController.OnBulletImpact(_rayHit.collider.gameObject);
+		//reaccion de firentes objetos a las balas
+		damageableObjects _objectToDamage;
+		if(_rayHit.collider.TryGetComponent<damageableObjects>(out _objectToDamage))
+        {
+			_objectToDamage.damage();
+        }
 	}
     public void Reload()
 	{

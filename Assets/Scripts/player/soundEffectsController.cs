@@ -54,6 +54,7 @@ public class soundEffectsController : MonoBehaviour
     {
         if (_collisionController.CurrentWaterLevel != WaterLevels.InWater)
         {
+            randomPitch(_soundPlayer);
             _soundPlayer.PlayOneShot(_jumpSounds[Random.Range(0, _jumpSounds.Length)]);
         }
     }
@@ -93,7 +94,7 @@ public class soundEffectsController : MonoBehaviour
             _audioSource.minDistance = 5.35f;
             _audioSource.maxDistance = 49.4f;
         }
-        _audioSource.pitch =1+ Random.Range(_minPitch, _maxPitch);
+        randomPitch(_audioSource);
         switch (converter.getGroundStepSoundTypesFromString(HittedObject.tag))
         {
             case TagSoundTypes.None:
@@ -109,10 +110,16 @@ public class soundEffectsController : MonoBehaviour
                 break;
         }
     }
+
+    private void randomPitch(AudioSource _audioSource)
+    {
+        _audioSource.pitch = 1 + Random.Range(_minPitch, _maxPitch);
+    }
+
     public void OnStep()
     {
         AudioClip[] _stepSounds = default;
-        _stepsSoundPlayer.pitch = 1 + Random.Range(_minPitch, _maxPitch);
+        randomPitch(_stepsSoundPlayer);
         switch (_collisionController.CurrentWaterLevel)
         {
             case WaterLevels.None:
@@ -159,6 +166,7 @@ public class soundEffectsController : MonoBehaviour
             _playedStepSounds.Add(_nextSound);
         }
     }
+   
     #endregion
 
     #region Propiedades

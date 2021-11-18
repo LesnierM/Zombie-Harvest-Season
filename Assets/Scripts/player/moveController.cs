@@ -176,7 +176,7 @@ public class moveController : MonoBehaviour
     #region Input
     private void OnRun(InputAction.CallbackContext obj)
     {
-        if (_isGrounded)
+        if (_isGrounded&&!_weaponsController.IsAiming)
         {
             _runPressed = obj.performed;
         }
