@@ -79,6 +79,7 @@ public enum TagSoundTypes
     Water,
     MetalTank
 }
+
 public class gameManager : MonoBehaviour
 {
     [SerializeField] AudioClip _enviromentDaySound;

@@ -600,9 +600,9 @@ MonoBehaviour:
   _bulletsCount: 96
   _bulletsMaxCount: 96
   _shootSoundDelay: 0
-  _reloadSoundDelay: 0.1
+  _reloadSoundDelay: 0
   _shootSound: {fileID: 8300000, guid: be07b3e6a07247645b3b8bf7fae76c2a, type: 3}
-  _reloadSound: {fileID: 8300000, guid: 7eae240aa4f30e243a92eadb52af1c2a, type: 3}
+  _reloadSound: {fileID: 8300000, guid: 6181785987349ee4f81b09910338fb71, type: 3}
   _cartridgeCase: {fileID: 8682409687313712761, guid: 4c086e3d6df01e941b0be254fd076ce9, type: 3}
   _bulletHole: {fileID: 9083845830130240433, guid: 6facedcfb21ef6146adf1db0ed02b7fa, type: 3}
   _muzzleFlash: {fileID: 3082203602606882605, guid: ce8cd3af529c06743b132a87d7fb85ae, type: 3}
@@ -626,8 +626,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: 975341314d7f2ed49a2cae6b0e862616, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
