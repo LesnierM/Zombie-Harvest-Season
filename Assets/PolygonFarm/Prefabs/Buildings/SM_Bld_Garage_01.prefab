@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 33713548189835512}
   - component: {fileID: 23283750674467648}
   - component: {fileID: 2055758675}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: SM_Bld_Garage_01_Door
-  m_TagString: Untagged
+  m_TagString: MetalGates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 23541901327860798}
   - component: {fileID: 2096672048}
   - component: {fileID: 2096672051}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: SM_Bld_Garage_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,11 +209,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239b9670e78cd04449b8b0321920747a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 0.5
+  _speed: 0.276
   _maxDistance: 2.95
   _direction: 0
   _type: 1
-  _garageDoor: {fileID: 4129036886750640}
+  _soundType: 0
+  _ObjectToManipulate: {fileID: 4129036886750640}
+  _openDoorSound: {fileID: 0}
+  _closeDoorSound: {fileID: 0}
+  _closeSoundDelay: 0
+  _onDirection: 0
 --- !u!1 &139379802917663075
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8565035574787388570}
   - component: {fileID: 3726463121505333003}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: entry
   m_TagString: Doors
   m_Icon: {fileID: 0}
@@ -268,7 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8788921223576245937}
   - component: {fileID: 1543423630141044005}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: exit
   m_TagString: Doors
   m_Icon: {fileID: 0}

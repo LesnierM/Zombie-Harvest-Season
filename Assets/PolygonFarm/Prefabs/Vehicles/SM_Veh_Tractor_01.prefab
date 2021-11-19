@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4101089192019909523}
   m_Layer: 0
   m_Name: SM_Veh_Tractor_Bucket
-  m_TagString: Untagged
+  m_TagString: BullDozer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -499,7 +499,7 @@ GameObject:
   - component: {fileID: 2382699801841761054}
   m_Layer: 0
   m_Name: SM_Veh_Tractor_Arm
-  m_TagString: Untagged
+  m_TagString: BullDozer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -597,7 +597,7 @@ GameObject:
   - component: {fileID: 6089522603356894835}
   m_Layer: 0
   m_Name: SM_Veh_Tractor_01
-  m_TagString: Untagged
+  m_TagString: BullDozer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

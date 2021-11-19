@@ -14,6 +14,11 @@ public class soundEffectsController : MonoBehaviour
     [SerializeField] AudioClip _inWaterSoundEffect;
     [Header("Impacto de balas")]
     [SerializeField] AudioClip _onMetalTankBulletImpactSound;
+    [SerializeField] AudioClip _OnCarsLikeImpactSound;
+    [SerializeField] AudioClip _OnMetalGatesImpactSound;
+    [SerializeField] AudioClip _OnSmallTractorsLikeImpactSound;
+    [SerializeField] AudioClip _OnMetalBarrelsLikeImpactSound;
+    [SerializeField] AudioClip _OnBullDozerLikeImpactSound;
     [Header("Pitch de impacto")]
     [SerializeField] float _minPitch;
     [SerializeField] float _maxPitch;
@@ -95,6 +100,7 @@ public class soundEffectsController : MonoBehaviour
             _audioSource.maxDistance = 49.4f;
         }
         randomPitch(_audioSource);
+        AudioClip _sound = default;
         switch (converter.getGroundStepSoundTypesFromString(HittedObject.tag))
         {
             case TagSoundTypes.None:
@@ -105,10 +111,26 @@ public class soundEffectsController : MonoBehaviour
                 break;
             case TagSoundTypes.Water:
                 break;
-            case TagSoundTypes.MetalTank:
-                _audioSource.PlayOneShot(_onMetalTankBulletImpactSound);
+            case TagSoundTypes.MetalOilTank:
+                _sound = _onMetalTankBulletImpactSound;
+                break;
+            case TagSoundTypes.CarsLike:
+                _sound = _OnCarsLikeImpactSound;
+                break;
+            case TagSoundTypes.MetalGates:
+                _sound = _OnMetalGatesImpactSound;
+                break;  
+            case TagSoundTypes.SmallTractorsLike:
+                _sound = _OnSmallTractorsLikeImpactSound;
+                break;
+            case TagSoundTypes.MetalBarrels:
+                _sound = _OnMetalBarrelsLikeImpactSound;
+                break; 
+            case TagSoundTypes.BullDozer:
+                _sound = _OnBullDozerLikeImpactSound;
                 break;
         }
+        _audioSource.PlayOneShot(_sound);
     }
 
     private void randomPitch(AudioSource _audioSource)
@@ -166,7 +188,7 @@ public class soundEffectsController : MonoBehaviour
             _playedStepSounds.Add(_nextSound);
         }
     }
-   
+
     #endregion
 
     #region Propiedades

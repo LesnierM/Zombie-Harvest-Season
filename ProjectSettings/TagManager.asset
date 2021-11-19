@@ -16,6 +16,11 @@ TagManager:
   - BigObjects
   - Water
   - MetalTank
+  - CarsLike
+  - MetalGates
+  - SmallTractorsLike
+  - MetalBarrels
+  - BullDozer
   layers:
   - Default
   - TransparentFX

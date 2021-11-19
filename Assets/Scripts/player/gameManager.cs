@@ -77,7 +77,12 @@ public enum TagSoundTypes
     Dirt,
     Wood,
     Water,
-    MetalTank
+    MetalOilTank,
+    CarsLike,
+    MetalGates,
+    SmallTractorsLike,
+    MetalBarrels,
+    BullDozer
 }
 
 public class gameManager : MonoBehaviour
@@ -217,7 +222,17 @@ public static class converter
             case "Water":
                 return TagSoundTypes.Water;
             case "MetalTank":
-                return TagSoundTypes.MetalTank;
+                return TagSoundTypes.MetalOilTank;
+            case "CarsLike":
+                return TagSoundTypes.CarsLike;
+            case "MetalGates":
+                return TagSoundTypes.MetalGates;
+            case "SmallTractorsLike":
+                return TagSoundTypes.SmallTractorsLike;
+            case "MetalBarrels":
+                return TagSoundTypes.MetalBarrels; 
+            case "BullDozer":
+                return TagSoundTypes.BullDozer;
             default:
                 return TagSoundTypes.None;
         }
