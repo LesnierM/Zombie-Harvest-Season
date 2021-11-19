@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13441,6 +13441,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Garage_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1497001144474008, guid: d15f67cc54a3fd640ab20c8ba977b6c7, type: 3}
+      propertyPath: m_TagString
+      value: MetalGates
+      objectReference: {fileID: 0}
     - target: {fileID: 4051301343721656, guid: d15f67cc54a3fd640ab20c8ba977b6c7, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -25929,6 +25933,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Veh_Harvester_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1018580832300568, guid: c30f6ae2f51f28749b062a9278ea6d0d, type: 3}
+      propertyPath: m_TagString
+      value: BullDozer
+      objectReference: {fileID: 0}
     - target: {fileID: 4849867837972820, guid: c30f6ae2f51f28749b062a9278ea6d0d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -32198,6 +32206,10 @@ PrefabInstance:
     - target: {fileID: 1369452303015908, guid: af1128e510fb6f54784b447a36446bb7, type: 3}
       propertyPath: m_Name
       value: SM_Veh_Attach_Trailer_Tank_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369452303015908, guid: af1128e510fb6f54784b447a36446bb7, type: 3}
+      propertyPath: m_TagString
+      value: MetalTank
       objectReference: {fileID: 0}
     - target: {fileID: 4924386808369338, guid: af1128e510fb6f54784b447a36446bb7, type: 3}
       propertyPath: m_RootOrder
@@ -47259,6 +47271,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Veh_Attach_Trailer_Cage_01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1854995115478434, guid: c4e102418e8d1fe4dac503425c4baa3d, type: 3}
+      propertyPath: m_TagString
+      value: MetalGates
+      objectReference: {fileID: 0}
     - target: {fileID: 4575060604013774, guid: c4e102418e8d1fe4dac503425c4baa3d, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -47714,6 +47730,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1881845919}
     m_Modifications:
+    - target: {fileID: 1018580832300568, guid: c30f6ae2f51f28749b062a9278ea6d0d, type: 3}
+      propertyPath: m_TagString
+      value: BullDozer
+      objectReference: {fileID: 0}
     - target: {fileID: 1018580832300568, guid: c30f6ae2f51f28749b062a9278ea6d0d, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -49397,7 +49417,7 @@ PrefabInstance:
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _OnBullDozerLikeImpactSound
       value: 
-      objectReference: {fileID: 8300000, guid: 3b564b6e145cfbf4ca7848c823a1d41e, type: 3}
+      objectReference: {fileID: 8300000, guid: 5bf69b1f56699b9409271a4f86a4a557, type: 3}
     - target: {fileID: 8057907759296733280, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: _onMetalTankBulletImpactSound
       value: 
@@ -58993,6 +59013,10 @@ PrefabInstance:
       value: SM_Veh_Attach_Trailer_Tank_01 (3)
       objectReference: {fileID: 0}
     - target: {fileID: 1369452303015908, guid: af1128e510fb6f54784b447a36446bb7, type: 3}
+      propertyPath: m_TagString
+      value: MetalTank
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369452303015908, guid: af1128e510fb6f54784b447a36446bb7, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -60064,6 +60088,10 @@ PrefabInstance:
     - target: {fileID: 1615897026885702, guid: 1cdc50614e227c8499631cad3a10195a, type: 3}
       propertyPath: m_Name
       value: SM_Veh_Attach_Plough_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1615897026885702, guid: 1cdc50614e227c8499631cad3a10195a, type: 3}
+      propertyPath: m_TagString
+      value: SmallTractorsLike
       objectReference: {fileID: 0}
     - target: {fileID: 4438113085479268, guid: 1cdc50614e227c8499631cad3a10195a, type: 3}
       propertyPath: m_RootOrder
@@ -71740,6 +71768,10 @@ PrefabInstance:
       value: SM_Prop_Truck_Rusted_01 (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1720874156255482, guid: 9f470d0cec85b424792889e715164185, type: 3}
+      propertyPath: m_TagString
+      value: CarsLike
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720874156255482, guid: 9f470d0cec85b424792889e715164185, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -75926,6 +75958,10 @@ PrefabInstance:
     - target: {fileID: 1858355190577810, guid: 9f951889d571d8d43a9afdc8caf44225, type: 3}
       propertyPath: m_Name
       value: SM_Veh_Pickup_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858355190577810, guid: 9f951889d571d8d43a9afdc8caf44225, type: 3}
+      propertyPath: m_TagString
+      value: CarsLike
       objectReference: {fileID: 0}
     - target: {fileID: 4805542088995832, guid: 9f951889d571d8d43a9afdc8caf44225, type: 3}
       propertyPath: m_RootOrder
@@ -83642,6 +83678,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Veh_Attach_Sprayer_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1022844031292210, guid: d6a2c9a5103e9734b886177e7fa56d77, type: 3}
+      propertyPath: m_TagString
+      value: MetalTank
+      objectReference: {fileID: 0}
     - target: {fileID: 4523900550600790, guid: d6a2c9a5103e9734b886177e7fa56d77, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -83684,6 +83724,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4523900550600790, guid: d6a2c9a5103e9734b886177e7fa56d77, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794267044471788538, guid: d6a2c9a5103e9734b886177e7fa56d77, type: 3}
+      propertyPath: m_Convex
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -88354,6 +88398,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Truck_Rusted_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1720874156255482, guid: 9f470d0cec85b424792889e715164185, type: 3}
+      propertyPath: m_TagString
+      value: CarsLike
+      objectReference: {fileID: 0}
     - target: {fileID: 4351715998415454, guid: 9f470d0cec85b424792889e715164185, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -89898,6 +89946,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Anvil_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1425804964575310, guid: 5da2d8875d58bc649b45623b6841c604, type: 3}
+      propertyPath: m_TagString
+      value: BullDozer
+      objectReference: {fileID: 0}
     - target: {fileID: 4111310620960406, guid: 5da2d8875d58bc649b45623b6841c604, type: 3}
       propertyPath: m_RootOrder
       value: 37
@@ -91169,6 +91221,10 @@ PrefabInstance:
     - target: {fileID: 1378312271168560, guid: fee415062d6516644bae411dfb4be339, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Wheelbarrow_Metal_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378312271168560, guid: fee415062d6516644bae411dfb4be339, type: 3}
+      propertyPath: m_TagString
+      value: SmallTractorsLike
       objectReference: {fileID: 0}
     - target: {fileID: 4116763267390986, guid: fee415062d6516644bae411dfb4be339, type: 3}
       propertyPath: m_RootOrder
