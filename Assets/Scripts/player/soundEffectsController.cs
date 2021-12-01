@@ -36,6 +36,8 @@ public class soundEffectsController : MonoBehaviour
     [Header("Pitch de impacto")]
     [SerializeField] float _minPitch;
     [SerializeField] float _maxPitch;
+    [Header("Restraso de impacto")]
+    [SerializeField] float _soundSpeed=331;
     //Variables
     List<int> _playedStepSounds = new List<int>();
     int _currentStepSoundIndex;
@@ -119,20 +121,20 @@ public class soundEffectsController : MonoBehaviour
     #endregion
 
     #region Metodos
-    public void OnBulletImpact(GameObject HittedObject,GameObject BulletHole)
+    public void OnBulletImpact(GameObject HittedObject, GameObject BulletHole)
     {
         AudioSource _audioSource;
-       _audioSource = BulletHole.AddComponent<AudioSource>();
-            //configuracion del audiosource
-            _audioSource.spatialBlend = 1;
-            _audioSource.rolloffMode = AudioRolloffMode.Linear;
-            _audioSource.minDistance = 5.35f;
-            _audioSource.maxDistance = 49.4f;
+        _audioSource = BulletHole.AddComponent<AudioSource>();
+        //configuracion del audiosource
+        _audioSource.spatialBlend = 1;
+        _audioSource.rolloffMode = AudioRolloffMode.Linear;
+        _audioSource.minDistance = 5.35f;
+        _audioSource.maxDistance = 49.4f;
         randomPitch(_audioSource);
         AudioClip _sound = default;
         if (_collisionController.CurrentWaterLevel == WaterLevels.InWater)
         {
-              _sound = _OnInWaterBullerImpactSound[Random.Range(0, _OnInWaterBullerImpactSound.Length)];
+            _sound = _OnInWaterBullerImpactSound[Random.Range(0, _OnInWaterBullerImpactSound.Length)];
         }
         else
         {
@@ -190,9 +192,14 @@ public class soundEffectsController : MonoBehaviour
                     break;
             }
         }
+        StartCoroutine(playImpactSound(_audioSource, _sound));
+    }
+    IEnumerator playImpactSound(AudioSource _audioSource,AudioClip _sound)
+    {
+        float _distance = (_audioSource.transform.position - transform.position).magnitude;
+        yield return new WaitForSeconds(_distance/_soundSpeed);
         _audioSource.PlayOneShot(_sound);
     }
-
     private void randomPitch(AudioSource _audioSource)
     {
         _audioSource.pitch = 1 + Random.Range(_minPitch, _maxPitch);
