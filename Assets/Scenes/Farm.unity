@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 9487729fcde8dd24784ad826e37abd4f, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -3128,7 +3128,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh32516
+  m_Name: pb_Mesh818924
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -34661,7 +34661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1128186481606252, guid: 0fd04b3c357c91a4bacd5ccc6b8e2cdf, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: MetalTank
       objectReference: {fileID: 0}
     - target: {fileID: 4095157858386222, guid: 0fd04b3c357c91a4bacd5ccc6b8e2cdf, type: 3}
       propertyPath: m_RootOrder
@@ -50736,7 +50736,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8057907759296733291, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.7
+      value: 132.5
       objectReference: {fileID: 0}
     - target: {fileID: 8057907759296733291, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -50744,7 +50744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8057907759296733291, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.2
+      value: 85.7
       objectReference: {fileID: 0}
     - target: {fileID: 8057907759296733291, guid: aa189a4b35124f0489deb36b7637e76f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -57134,107 +57134,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1238063165 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1128186481606252, guid: 0fd04b3c357c91a4bacd5ccc6b8e2cdf, type: 3}
-  m_PrefabInstance: {fileID: 689046308}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &1238063166
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1238063165}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6bdfb45acee17e54692fe478534c8659, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1001 &1238325300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79967,7 +79866,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 74734738}
-  m_VersionIndex: 20625
+  m_VersionIndex: 20633
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -85522,7 +85421,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30452
+  m_Name: pb_Mesh734570
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -89351,14 +89250,14 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.754717, g: 0.46727282, b: 0.2171591, a: 1}
+  m_Color: {r: 0.7529412, g: 0.67989933, b: 0.21568626, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -93363,7 +93262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6910897724487145536, guid: 4ed3e370092926d4f98941d08b20fc94, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.45
+      value: 122.8
       objectReference: {fileID: 0}
     - target: {fileID: 6910897724487145536, guid: 4ed3e370092926d4f98941d08b20fc94, type: 3}
       propertyPath: m_LocalPosition.y
@@ -93371,7 +93270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6910897724487145536, guid: 4ed3e370092926d4f98941d08b20fc94, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.4
+      value: 61.48
       objectReference: {fileID: 0}
     - target: {fileID: 6910897724487145536, guid: 4ed3e370092926d4f98941d08b20fc94, type: 3}
       propertyPath: m_LocalRotation.w

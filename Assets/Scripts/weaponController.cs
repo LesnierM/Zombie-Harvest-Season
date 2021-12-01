@@ -166,10 +166,18 @@ public class weaponController : MonoBehaviour
 	void playStartAmingAnimationAfterReloading()
     {
 		_animator.Play("startAiming",0);
+		Camera.main.fieldOfView *= AimingZoomMultiplier;
 	}
 	void showCartridge()
 	{
-		Instantiate(_cartridgeCase, transform.GetChild(0).position, transform.GetChild(0).rotation);
+		if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("aiming"))
+		{
+			Instantiate(_cartridgeCase, transform.GetChild(0).position, transform.GetChild(0).rotation);
+		}
+		else
+		{
+			Instantiate(_cartridgeCase, transform.GetChild(5).position, transform.GetChild(5).rotation);
+		}
 	}
 	void reloadSound()
     {
@@ -195,7 +203,6 @@ public class weaponController : MonoBehaviour
             _soundPlayer.PlayOneShot(_shoootSoundUnderWater[Random.Range(0, _shoootSoundUnderWater.Length)]);
         }
     }
-
     private void randomPitch()
     {
         _soundPlayer.pitch = 1 + Random.Range(-.2f, .2f);
