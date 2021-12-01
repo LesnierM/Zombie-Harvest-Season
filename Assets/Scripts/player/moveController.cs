@@ -97,6 +97,17 @@ public class moveController : MonoBehaviour
     }
     void FixedUpdate()
     {
+        //_isGrounded = _collisionController.IsGrounded;
+
+        #region Cieling Check
+        if (_yVelocity > 0)
+        {
+            if (_collisionController.checkCielingCollition())
+            {
+                _yVelocity = 0;
+            }
+        }
+        #endregion
 
         #region Normalizar la velocidad diagonal
         if (_input.sqrMagnitude > 1)
@@ -123,7 +134,7 @@ public class moveController : MonoBehaviour
         {
             _yVelocity += (_gravity* Time.deltaTime*_currentGravityModifier) * Time.deltaTime;
         }
-        else
+        else if(_yVelocity<=0)
         {
             _yVelocity = _gravityOnGrounded * Time.deltaTime;
         }

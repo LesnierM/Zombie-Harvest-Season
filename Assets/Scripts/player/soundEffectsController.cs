@@ -19,6 +19,20 @@ public class soundEffectsController : MonoBehaviour
     [SerializeField] AudioClip _OnSmallTractorsLikeImpactSound;
     [SerializeField] AudioClip _OnMetalBarrelsLikeImpactSound;
     [SerializeField] AudioClip _OnBullDozerLikeImpactSound;
+    [SerializeField] AudioClip _OnBigWheelTireImpactSound;
+    [SerializeField] AudioClip _OnWheelAirTireBullerImpactSound;
+    [SerializeField] AudioClip _OnBigSiloBullerImpactSound;
+    [SerializeField] AudioClip _OnSmallSiloBullerImpactSound;
+    [SerializeField] AudioClip[] _OnWelcomeSignBullerImpactSound;
+    [SerializeField] AudioClip[] _OnGlassBullerImpactSound;
+    [SerializeField] AudioClip[] _OnDirtBullerImpactSound;
+    [SerializeField] AudioClip[] _OnWaterBullerImpactSound;
+    [SerializeField] AudioClip[] _OnInWaterBullerImpactSound;
+    [SerializeField] AudioClip[] _OnGreenHouseBullerImpactSound;
+    [SerializeField] AudioClip[] _OnWoodBulletImpactSound;
+    [Header("Sonido de empuje de puertas")]
+    [SerializeField] AudioClip[] _wireGateSound;
+    [SerializeField] AudioClip[] _woodGateSound;
     [Header("Pitch de impacto")]
     [SerializeField] float _minPitch;
     [SerializeField] float _maxPitch;
@@ -47,14 +61,32 @@ public class soundEffectsController : MonoBehaviour
         _moveController.OnPlayerJump += OnPlayerJump;
         _collisionController.OnGroundedStateChange += OnGroundedStateChange;
         _collisionController.OnWaterStateChange += OnWaterStateChange;
+        _collisionController.OnGatePush += OnGatePush;
     }
     private void OnDisable()
     {
         _collisionController.OnGroundedStateChange -= OnGroundedStateChange;
         _collisionController.OnWaterStateChange -= OnWaterStateChange;
+        _collisionController.OnGatePush -= OnGatePush;
     }
 
     #region Eventos
+    private void OnGatePush(Materials Material)
+    {
+        if (_soundPlayer.isPlaying)
+        {
+            return;
+        }
+        switch (Material)
+        {
+            case Materials.Wood:
+                _soundPlayer.PlayOneShot(_woodGateSound[Random.Range(0, _woodGateSound.Length)]);
+                break;
+            case Materials.Metal:
+                _soundPlayer.PlayOneShot(_wireGateSound[Random.Range(0, _wireGateSound.Length)]);
+                break;
+        }
+    }
     private void OnPlayerJump()
     {
         if (_collisionController.CurrentWaterLevel != WaterLevels.InWater)
@@ -87,48 +119,76 @@ public class soundEffectsController : MonoBehaviour
     #endregion
 
     #region Metodos
-    public void OnBulletImpact(GameObject HittedObject)
+    public void OnBulletImpact(GameObject HittedObject,GameObject BulletHole)
     {
         AudioSource _audioSource;
-        if (!HittedObject.TryGetComponent<AudioSource>(out _audioSource))
-        {
-            _audioSource = HittedObject.AddComponent<AudioSource>();
+       _audioSource = BulletHole.AddComponent<AudioSource>();
             //configuracion del audiosource
             _audioSource.spatialBlend = 1;
             _audioSource.rolloffMode = AudioRolloffMode.Linear;
             _audioSource.minDistance = 5.35f;
             _audioSource.maxDistance = 49.4f;
-        }
         randomPitch(_audioSource);
         AudioClip _sound = default;
-        switch (converter.getGroundStepSoundTypesFromString(HittedObject.tag))
+        if (_collisionController.CurrentWaterLevel == WaterLevels.InWater)
         {
-            case TagSoundTypes.None:
-                break;
-            case TagSoundTypes.Dirt:
-                break;
-            case TagSoundTypes.Wood:
-                break;
-            case TagSoundTypes.Water:
-                break;
-            case TagSoundTypes.MetalOilTank:
-                _sound = _onMetalTankBulletImpactSound;
-                break;
-            case TagSoundTypes.CarsLike:
-                _sound = _OnCarsLikeImpactSound;
-                break;
-            case TagSoundTypes.MetalGates:
-                _sound = _OnMetalGatesImpactSound;
-                break;  
-            case TagSoundTypes.SmallTractorsLike:
-                _sound = _OnSmallTractorsLikeImpactSound;
-                break;
-            case TagSoundTypes.MetalBarrels:
-                _sound = _OnMetalBarrelsLikeImpactSound;
-                break; 
-            case TagSoundTypes.BullDozer:
-                _sound = _OnBullDozerLikeImpactSound;
-                break;
+              _sound = _OnInWaterBullerImpactSound[Random.Range(0, _OnInWaterBullerImpactSound.Length)];
+        }
+        else
+        {
+            switch (converter.getGroundStepSoundTypesFromString(HittedObject.tag))
+            {
+                case TagSoundTypes.None:
+                    break;
+                case TagSoundTypes.Dirt:
+                    _sound = _OnDirtBullerImpactSound[Random.Range(0, _OnDirtBullerImpactSound.Length)];
+                    break;
+                case TagSoundTypes.Wood:
+                    _sound = _OnWoodBulletImpactSound[Random.Range(0, _OnWoodBulletImpactSound.Length)];
+                    break;
+                case TagSoundTypes.Water:
+                    _sound = _OnWaterBullerImpactSound[Random.Range(0, _OnWaterBullerImpactSound.Length)];
+                    break;
+                case TagSoundTypes.MetalOilTank:
+                    _sound = _onMetalTankBulletImpactSound;
+                    break;
+                case TagSoundTypes.CarsLike:
+                    _sound = _OnCarsLikeImpactSound;
+                    break;
+                case TagSoundTypes.MetalGates:
+                    _sound = _OnMetalGatesImpactSound;
+                    break;
+                case TagSoundTypes.SmallTractorsLike:
+                    _sound = _OnSmallTractorsLikeImpactSound;
+                    break;
+                case TagSoundTypes.MetalBarrels:
+                    _sound = _OnMetalBarrelsLikeImpactSound;
+                    break;
+                case TagSoundTypes.BullDozer:
+                    _sound = _OnBullDozerLikeImpactSound;
+                    break;
+                case TagSoundTypes.BigWheelTire:
+                    _sound = _OnBigWheelTireImpactSound;
+                    break;
+                case TagSoundTypes.WheelAirTire:
+                    _sound = _OnWheelAirTireBullerImpactSound;
+                    break;
+                case TagSoundTypes.WelcomeSign:
+                    _sound = _OnWelcomeSignBullerImpactSound[Random.Range(0, _OnWelcomeSignBullerImpactSound.Length)];
+                    break;
+                case TagSoundTypes.Glass:
+                    _sound = _OnGlassBullerImpactSound[Random.Range(0, _OnGlassBullerImpactSound.Length)];
+                    break;
+                case TagSoundTypes.BigSilo:
+                    _sound = _OnBigSiloBullerImpactSound;
+                    break;
+                case TagSoundTypes.SmallSilo:
+                    _sound = _OnSmallSiloBullerImpactSound;
+                    break;
+                case TagSoundTypes.GreenHouse:
+                    _sound = _OnGreenHouseBullerImpactSound[Random.Range(0, _OnGreenHouseBullerImpactSound.Length)];
+                    break;
+            }
         }
         _audioSource.PlayOneShot(_sound);
     }

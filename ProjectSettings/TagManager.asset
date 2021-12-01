@@ -21,6 +21,13 @@ TagManager:
   - SmallTractorsLike
   - MetalBarrels
   - BullDozer
+  - BigWheelTire
+  - WheelAirTire
+  - WelcomeSign
+  - Glass
+  - SmallSilo
+  - BigSilo
+  - Rock
   layers:
   - Default
   - TransparentFX

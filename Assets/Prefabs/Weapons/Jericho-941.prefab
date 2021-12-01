@@ -603,6 +603,10 @@ MonoBehaviour:
   _reloadSoundDelay: 0
   _shootSound: {fileID: 8300000, guid: be07b3e6a07247645b3b8bf7fae76c2a, type: 3}
   _reloadSound: {fileID: 8300000, guid: 6181785987349ee4f81b09910338fb71, type: 3}
+  _shoootSoundUnderWater:
+  - {fileID: 8300000, guid: 3b1a83f7ab958ea43a1a27773740edbf, type: 3}
+  - {fileID: 8300000, guid: 63fac556c850bf847b2151595da678e3, type: 3}
+  _reloadSoundUnderWater: {fileID: 8300000, guid: 222f63a329bd0af41b3b5c71a5511882, type: 3}
   _cartridgeCase: {fileID: 8682409687313712761, guid: 4c086e3d6df01e941b0be254fd076ce9, type: 3}
   _bulletHole: {fileID: 9083845830130240433, guid: 6facedcfb21ef6146adf1db0ed02b7fa, type: 3}
   _muzzleFlash: {fileID: 3082203602606882605, guid: ce8cd3af529c06743b132a87d7fb85ae, type: 3}
@@ -614,6 +618,7 @@ MonoBehaviour:
   _effectiveMaxRange: 50
   _bulletHoleDuration: 500
   _aimingZoomMultiplier: 0.8
+  _forceApplied: 1
   _bulletSpeed: 360
   _UiImage: {fileID: 2800000, guid: 5a6bdcff9cd19a346987713a9c7ad5b6, type: 3}
 --- !u!82 &6446267196618801483

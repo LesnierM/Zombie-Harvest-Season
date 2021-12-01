@@ -275,8 +275,9 @@ GameObject:
   - component: {fileID: 4256343847605670}
   - component: {fileID: 33028962423103628}
   - component: {fileID: 23432747189162558}
-  - component: {fileID: 1534940065}
   - component: {fileID: 1534940064}
+  - component: {fileID: 6263199053468712550}
+  - component: {fileID: 2103846125588847654}
   m_Layer: 0
   m_Name: SM_Bld_Greenhouse_Large_Door_04
   m_TagString: Untagged
@@ -351,19 +352,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1534940065
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1209638229318348}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.7193329, y: 4.5019197, z: 0.15034914}
-  m_Center: {x: 0.86227083, y: 2.2509599, z: 0.0751822}
 --- !u!114 &1534940064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,9 +364,126 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239b9670e78cd04449b8b0321920747a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 150
-  _maxAngleRotation: 100
+  _speed: 0
+  _maxDistance: 0
   _direction: 0
+  _type: 0
+  _soundType: 0
+  _ObjectToManipulate: {fileID: 0}
+  _openDoorSound: {fileID: 0}
+  _closeDoorSound: {fileID: 0}
+  _closeSoundDelay: 0
+  _onDirection: 0
+--- !u!82 &6263199053468712550
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209638229318348}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!64 &2103846125588847654
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209638229318348}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300016, guid: 9c162c399018a4b4e827d187b04fa3b2, type: 3}
 --- !u!1 &1222044158874310
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,9 +495,10 @@ GameObject:
   - component: {fileID: 4002993521400074}
   - component: {fileID: 33256658848296048}
   - component: {fileID: 23904925637049492}
+  - component: {fileID: 8341479485639922733}
   m_Layer: 0
   m_Name: SM_Bld_Greenhouse_Large_Door_02_Glass
-  m_TagString: Untagged
+  m_TagString: Glass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -461,6 +567,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8341479485639922733
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222044158874310}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300010, guid: 9c162c399018a4b4e827d187b04fa3b2, type: 3}
 --- !u!1 &1235069126087806
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +593,8 @@ GameObject:
   - component: {fileID: 33286420173056390}
   - component: {fileID: 23521450916567096}
   - component: {fileID: 686328477717598992}
-  - component: {fileID: 6039060512277028728}
+  - component: {fileID: 2197066310380128469}
+  - component: {fileID: 3071640772281698604}
   m_Layer: 0
   m_Name: SM_Bld_Greenhouse_Large_Door_01
   m_TagString: Untagged
@@ -560,11 +681,114 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239b9670e78cd04449b8b0321920747a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 150
-  _maxAngleRotation: 100
+  _speed: 0
+  _maxDistance: 0
   _direction: 1
---- !u!65 &6039060512277028728
-BoxCollider:
+  _type: 0
+  _soundType: 0
+  _ObjectToManipulate: {fileID: 0}
+  _openDoorSound: {fileID: 0}
+  _closeDoorSound: {fileID: 0}
+  _closeSoundDelay: 0
+  _onDirection: 0
+--- !u!82 &2197066310380128469
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235069126087806}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!64 &3071640772281698604
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -573,9 +797,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.7193329, y: 4.5019197, z: 0.15034914}
-  m_Center: {x: 0.86227083, y: 2.2509599, z: -0.07517457}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 9c162c399018a4b4e827d187b04fa3b2, type: 3}
 --- !u!1 &1290443462515136
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,8 +909,9 @@ GameObject:
   - component: {fileID: 4864134455709092}
   - component: {fileID: 33950134228783662}
   - component: {fileID: 23355682727532240}
-  - component: {fileID: 1534940066}
   - component: {fileID: 1534940067}
+  - component: {fileID: 2883524839511472337}
+  - component: {fileID: 153944655869232351}
   m_Layer: 0
   m_Name: SM_Bld_Greenhouse_Large_Door_02
   m_TagString: Untagged
@@ -760,19 +986,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1534940066
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1314815332887192}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.7193329, y: 4.5019197, z: 0.15034914}
-  m_Center: {x: -0.86227083, y: 2.2509599, z: -0.07517457}
 --- !u!114 &1534940067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,9 +998,126 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239b9670e78cd04449b8b0321920747a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 150
-  _maxAngleRotation: 100
+  _speed: 0
+  _maxDistance: 0
   _direction: 0
+  _type: 0
+  _soundType: 0
+  _ObjectToManipulate: {fileID: 0}
+  _openDoorSound: {fileID: 0}
+  _closeDoorSound: {fileID: 0}
+  _closeSoundDelay: 0
+  _onDirection: 0
+--- !u!82 &2883524839511472337
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314815332887192}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!64 &153944655869232351
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314815332887192}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300008, guid: 9c162c399018a4b4e827d187b04fa3b2, type: 3}
 --- !u!1 &1566582650879552
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,9 +1129,10 @@ GameObject:
   - component: {fileID: 4947750476595278}
   - component: {fileID: 33678883157106066}
   - component: {fileID: 23068851911666962}
+  - component: {fileID: 3497770134574079027}
   m_Layer: 0
   m_Name: SM_Bld_Greenhouse_Large_Door_01_Glass
-  m_TagString: Untagged
+  m_TagString: Glass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -870,6 +1201,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3497770134574079027
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566582650879552}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300006, guid: 9c162c399018a4b4e827d187b04fa3b2, type: 3}
 --- !u!1 &1595859169383058
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,9 +1226,10 @@ GameObject:
   - component: {fileID: 4860696772494682}
   - component: {fileID: 33476542422215398}
   - component: {fileID: 23501302785275628}
+  - component: {fileID: 5967372152767221233}
   m_Layer: 0
   m_Name: SM_Bld_Greenhouse_Large_Door_03_Glass
-  m_TagString: Untagged
+  m_TagString: Glass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -952,6 +1298,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5967372152767221233
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595859169383058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300014, guid: 9c162c399018a4b4e827d187b04fa3b2, type: 3}
 --- !u!1 &1601270497835012
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,9 +1324,10 @@ GameObject:
   - component: {fileID: 33341315564794964}
   - component: {fileID: 23305411250952108}
   - component: {fileID: 1617402577}
+  - component: {fileID: 9131156275104358497}
   m_Layer: 0
   m_Name: SM_Bld_Greenhouse_Large_Door_04_Glass
-  m_TagString: Untagged
+  m_TagString: Glass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1048,6 +1409,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4368588, y: 4.2134247, z: 0}
   m_Center: {x: 0.2098914, y: 2.1067123, z: 0.00000869751}
+--- !u!64 &9131156275104358497
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601270497835012}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300018, guid: 9c162c399018a4b4e827d187b04fa3b2, type: 3}
 --- !u!1 &1750395351432862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,7 +1434,6 @@ GameObject:
   - component: {fileID: 4082123152994934}
   - component: {fileID: 33078700625317256}
   - component: {fileID: 23882992369190092}
-  - component: {fileID: 1085613757}
   m_Layer: 0
   m_Name: SM_Bld_Greenhouse_Large_01
   m_TagString: Untagged
@@ -1136,20 +1510,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1085613757
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1750395351432862}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 9c162c399018a4b4e827d187b04fa3b2, type: 3}
 --- !u!1 &1762793716821098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,8 +1521,9 @@ GameObject:
   - component: {fileID: 4354157069936472}
   - component: {fileID: 33405099523621010}
   - component: {fileID: 23101375679589468}
-  - component: {fileID: 1504082094}
   - component: {fileID: 1504082091}
+  - component: {fileID: 1366416073373591430}
+  - component: {fileID: 6913654727632402214}
   m_Layer: 0
   m_Name: SM_Bld_Greenhouse_Large_Door_03
   m_TagString: Untagged
@@ -1237,19 +1598,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1504082094
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1762793716821098}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.7193329, y: 4.5019197, z: 0.15034914}
-  m_Center: {x: -0.86227083, y: 2.2509599, z: 0.0751822}
 --- !u!114 &1504082091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1262,9 +1610,126 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239b9670e78cd04449b8b0321920747a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 150
-  _maxAngleRotation: 100
+  _speed: 0
+  _maxDistance: 0
   _direction: 1
+  _type: 0
+  _soundType: 0
+  _ObjectToManipulate: {fileID: 0}
+  _openDoorSound: {fileID: 0}
+  _closeDoorSound: {fileID: 0}
+  _closeSoundDelay: 0
+  _onDirection: 0
+--- !u!82 &1366416073373591430
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762793716821098}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!64 &6913654727632402214
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762793716821098}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300012, guid: 9c162c399018a4b4e827d187b04fa3b2, type: 3}
 --- !u!1 &1004417561416531688
 GameObject:
   m_ObjectHideFlags: 0

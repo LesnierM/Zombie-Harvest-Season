@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4705755131658704707}
   m_Layer: 0
   m_Name: SM_Prop_Fence_Wire_02
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

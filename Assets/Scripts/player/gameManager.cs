@@ -19,6 +19,11 @@ public enum DoorOpenDirections
 /// Referencia de la ui para mostrar los mensajes.
 /// </summary>
 /// 
+public enum Materials
+{
+    Wood,
+    Metal
+}
 public enum SunStates
 {
     Day,
@@ -82,7 +87,32 @@ public enum TagSoundTypes
     MetalGates,
     SmallTractorsLike,
     MetalBarrels,
-    BullDozer
+    BullDozer,
+    BigWheelTire,
+    WheelAirTire,
+    WelcomeSign,
+    Glass,
+    BigSilo,
+    SmallSilo,
+    GreenHouse
+
+}
+public enum Weapons
+{
+    None,
+    Jericho_941,
+}
+public struct WeaponsStruct
+{
+    public Weapons Weapon;
+    public int BulletsTotalCount;
+    public int BulletsInCartridge;
+    public WeaponsStruct(int BulletsTotalCount, int BulletsInCartridge, Weapons Weapon)
+    {
+        this.BulletsTotalCount = BulletsTotalCount;
+        this.BulletsInCartridge = BulletsInCartridge;
+        this.Weapon = Weapon;
+    }
 }
 
 public class gameManager : MonoBehaviour
@@ -216,8 +246,8 @@ public static class converter
         {
             case "Dirt":
                 return TagSoundTypes.Dirt;
-
             case "Wood":
+            case "BigObjects":
                 return TagSoundTypes.Wood;
             case "Water":
                 return TagSoundTypes.Water;
@@ -230,9 +260,22 @@ public static class converter
             case "SmallTractorsLike":
                 return TagSoundTypes.SmallTractorsLike;
             case "MetalBarrels":
-                return TagSoundTypes.MetalBarrels; 
+                return TagSoundTypes.MetalBarrels;
             case "BullDozer":
                 return TagSoundTypes.BullDozer;
+            case "BigWheelTire":
+                return TagSoundTypes.BigWheelTire;
+            case "WheelAirTire":
+                return TagSoundTypes.WheelAirTire;
+            case "WelcomeSign":
+                return TagSoundTypes.WelcomeSign;
+            case "Glass":
+                return TagSoundTypes.Glass;
+            case "BigSilo":
+                return TagSoundTypes.BigSilo;
+            case "SmallSilo":
+                return TagSoundTypes.SmallSilo; case "GreenHouse":
+                return TagSoundTypes.GreenHouse;
             default:
                 return TagSoundTypes.None;
         }

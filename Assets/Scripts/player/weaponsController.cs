@@ -3,23 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
-public enum Weapons
-{
-    None,
-    Jericho_941,
-}
-public struct WeaponsStruct
-{ 
-    public Weapons Weapon;
-    public int BulletsTotalCount;
-    public int BulletsInCartridge;
-    public WeaponsStruct(int BulletsTotalCount,int BulletsInCartridge,Weapons Weapon)
-    {
-        this.BulletsTotalCount = BulletsTotalCount;
-        this.BulletsInCartridge = BulletsInCartridge;
-        this.Weapon = Weapon;
-    }
-}
+
 public class weaponsController : MonoBehaviour
 {
     ////eventos

@@ -24,6 +24,8 @@ public class weaponController : MonoBehaviour
 	[Header("Sonidos")]
 	[SerializeField] AudioClip _shootSound;
 	[SerializeField] AudioClip _reloadSound;
+	[SerializeField] AudioClip[] _shoootSoundUnderWater;
+	[SerializeField] AudioClip _reloadSoundUnderWater;
     [SerializeField] GameObject _cartridgeCase;
 	[Header("Disparo")]
 	[SerializeField] GameObject _bulletHole;
@@ -34,6 +36,7 @@ public class weaponController : MonoBehaviour
 	[SerializeField] float _effectiveMaxRange;
 	[SerializeField] float _bulletHoleDuration;
 	[SerializeField] float _aimingZoomMultiplier;
+	[SerializeField] float _forceApplied;
 	[Tooltip("Velocidad del proyectil en u/s")]
 	[SerializeField] float _bulletSpeed;
 	[Header("Imagen Ui")]
@@ -48,12 +51,14 @@ public class weaponController : MonoBehaviour
 	//Clases
 	moveController _playerController;
 	soundEffectsController _soundEffectsController;
+	collisionController _collisionController;
 	//debug
 	float _xAxyRandomDirection;
 	float _yAxyRandomDirection;
 	void Awake()
     {
 		_soundEffectsController = transform.root.GetComponent<soundEffectsController>();
+		_collisionController = transform.root.GetComponent<collisionController>();
 		_playerController = transform.parent.GetComponentInParent<moveController>();
 		_animator = GetComponent<Animator>();
 		_soundPlayer = GetComponent<AudioSource>();
@@ -117,13 +122,19 @@ public class weaponController : MonoBehaviour
 		//{
 		//	_rayHit.collider.gameObject.GetComponent<ExplosiveBarrelScript>().explode = true;
 		//}
-		Destroy(Instantiate(_bulletHole, _rayHit.point + _rayHit.normal * 0.001f, Quaternion.LookRotation(_rayHit.normal),_rayHit.transform), _bulletHoleDuration);
-		_soundEffectsController.OnBulletImpact(_rayHit.collider.gameObject);
+		GameObject _bulletHoleInstance= Instantiate(_bulletHole, _rayHit.point + _rayHit.normal * 0.001f, Quaternion.LookRotation(_rayHit.normal),_rayHit.transform);
+		Destroy(_bulletHoleInstance, _bulletHoleDuration);
+		_soundEffectsController.OnBulletImpact(_rayHit.collider.gameObject,_bulletHoleInstance);
 		//reaccion de firentes objetos a las balas
 		damageableObjects _objectToDamage;
 		if(_rayHit.collider.TryGetComponent<damageableObjects>(out _objectToDamage))
         {
 			_objectToDamage.damage();
+        }
+        //aplicar fuerza a los objetos afectables
+        if (_rayHit.collider.gameObject.layer == 15)
+        {
+			_rayHit.collider.attachedRigidbody.AddTorque(_rayHit.collider.gameObject.transform.forward*_forceApplied,ForceMode.Force);
         }
 	}
     public void Reload()
@@ -162,15 +173,36 @@ public class weaponController : MonoBehaviour
 	}
 	void reloadSound()
     {
-		_soundPlayer.PlayOneShot(_reloadSound);
+		randomPitch();
+		if (_collisionController.CurrentWaterLevel != WaterLevels.InWater)
+		{
+			_soundPlayer.PlayOneShot(_reloadSound);
+		}
+		else
+		{
+			_soundPlayer.PlayOneShot(_reloadSoundUnderWater);
+		}
 	}
 	void shootSound()
-	{
-		_soundPlayer.PlayOneShot(_shootSound);
-	}
-	#endregion
-				
-	#region Propiedades
+    {
+		_soundPlayer.pitch = 1;
+        if (_collisionController.CurrentWaterLevel != WaterLevels.InWater)
+        {
+            _soundPlayer.PlayOneShot(_shootSound);
+        }
+        else
+        {
+            _soundPlayer.PlayOneShot(_shoootSoundUnderWater[Random.Range(0, _shoootSoundUnderWater.Length)]);
+        }
+    }
+
+    private void randomPitch()
+    {
+        _soundPlayer.pitch = 1 + Random.Range(-.2f, .2f);
+    }
+    #endregion
+
+    #region Propiedades
     public GameObject CartridgeCase { get => _cartridgeCase;}
     public float AimingZoomMultiplier { get => _aimingZoomMultiplier;}
     public int CartridgeCaseRemaningBullets { get => _cartridgeCaseRemaningBullets;}
