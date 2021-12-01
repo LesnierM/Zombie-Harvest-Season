@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 33967829983264120}
   - component: {fileID: 23059004313521418}
   - component: {fileID: 95434418175564056}
-  - component: {fileID: -296719609062829548}
   - component: {fileID: 549667487}
   m_Layer: 13
   m_Name: SM_Generic_TreeDead_01
@@ -104,19 +103,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &-296719609062829548
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1412878908807930}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7885646, y: 5.237155, z: 0.41735715}
-  m_Center: {x: 0.16581276, y: 2.531095, z: 0.020241708}
 --- !u!64 &549667487
 MeshCollider:
   m_ObjectHideFlags: 0
