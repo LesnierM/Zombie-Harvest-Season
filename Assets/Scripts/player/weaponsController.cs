@@ -15,11 +15,15 @@ public class weaponsController : MonoBehaviour
     [SerializeField] GameObject _weaponsHolder;
     [SerializeField] float _defaultCameraFieldofViewValue = 60;
     [Header("Coleccion de armas")]
-    [SerializeField] weaponController[] _weaponsCollection;
+    [SerializeField] weaponController[] _weaponsCollectionArray;
     //Variables
     int _currentWeaponIndex = -1;
     //TODO en la version final eliminar la etiqueta seriealiza
-    [SerializeField] List<WeaponsStruct> _weaponsAdquired = new List<WeaponsStruct>();
+    List<WeaponsStruct> _weaponsAdquired = new List<WeaponsStruct>();
+    /// <summary>
+    /// Se utiliza para cunado se valla acambiar de arma se ams facil de encontrar que en un array.
+    /// </summary>
+    Dictionary<Weapons, weaponController> _weaponsCollection = new Dictionary<Weapons, weaponController>();
     /// <summary>
     /// Cunado este dejando de apuntar no reproducir la animacion de walk hasta que no termine la animacion stopAiming
     /// </summary>
@@ -38,6 +42,12 @@ public class weaponsController : MonoBehaviour
         _playerController = GetComponent<moveController>();
         _characterController = GetComponent<CharacterController>();
         _pickUps = GetComponent<collisionController>();
+        #region Diccionario
+        foreach (var item in _weaponsCollectionArray)
+        {
+            _weaponsCollection.Add(item.status.Weapon, item);
+        }
+        #endregion
     }
     private void OnEnable()
     {
@@ -193,25 +203,42 @@ public class weaponsController : MonoBehaviour
     }
     private void OnWeaponPickedUp(Weapons Weapon)
     {
-        foreach(WeaponsStruct weapon in _weaponsAdquired)
+        if (hasWeapon(Weapon))
         {
-            if (weapon.Weapon == Weapon)
-            {
-                return;
-            }
+            _currentWeapon.fillAmmo();
+            return;
         }
-          _weaponsAdquired.Add(_weaponsCollection[(int)Weapon-1].status);
-          //equipar arma si no hay ninguna
+        addweaponToInventory(Weapon);
+        //equipar arma si no hay ninguna
         if (_currentWeapon == null)
         {
-          _currentWeaponIndex++;
+            _currentWeaponIndex++;
             changeWeapon(Weapon);
         }
     }
+
     #endregion
 
     #region Metodos
-    
+    public void updateAdquieredWeaponsToSave()
+    {
+        _weaponsAdquired[_currentWeaponIndex] = _currentWeapon.status;
+    }
+    private void addweaponToInventory(Weapons Weapon)
+    {
+        _weaponsAdquired.Add(_weaponsCollection[Weapon].status);
+    }
+    bool hasWeapon(Weapons Weapon)
+    {
+        foreach (WeaponsStruct weapon in _weaponsAdquired)
+        {
+            if (weapon.Weapon == Weapon)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     private bool isAiming()
     {
         return _animator.GetCurrentAnimatorStateInfo(0).IsName("startAiming") || _animator.GetCurrentAnimatorStateInfo(0).IsName("aiming") || _animator.GetCurrentAnimatorStateInfo(0).IsName("stopAiming");
@@ -240,7 +267,7 @@ public class weaponsController : MonoBehaviour
     }
     weaponController getWeapon(Weapons CurrentWeapon)
     {
-        return _weaponsCollection[(int)CurrentWeapon-1];
+        return _weaponsCollection[CurrentWeapon];
     }
     void startWalkAnimationAfterStopAiming()
     {
@@ -267,6 +294,7 @@ public class weaponsController : MonoBehaviour
     public weaponController CurrentWeapon { get => _currentWeapon; }
 	public Weapons CurrentWeaponName { get => _currentWeaponName; }
     public bool IsAiming { get => _isAiming; }
+    public List<WeaponsStruct> WeaponsAdquired { get => _weaponsAdquired;  set => _weaponsAdquired = value==null?new List<WeaponsStruct>():value;  }
     #endregion
 
 }

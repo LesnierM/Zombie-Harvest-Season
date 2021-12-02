@@ -75,6 +75,12 @@ public class weaponController : MonoBehaviour
     #endregion
 
     #region Metodos
+	public void fillAmmo()
+    {
+		Reload();
+		_bulletsCount = _bulletsMaxCount;
+		OnAmmoStatusChange(_cartridgeCaseRemaningBullets, _bulletsCount);
+    }
     public void shoot()
     {
 		//no disparar si esta disparando
@@ -227,6 +233,7 @@ public class weaponController : MonoBehaviour
         }
     }
     public Texture2D UiImage { get => _UiImage; }
+    public Weapons WeaponType { get => _weaponType; set => _weaponType = value; }
 
     #endregion
 

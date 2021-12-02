@@ -15,7 +15,15 @@ public class guiController : MonoBehaviour
     [Header("Botones")]
     [SerializeField] GameObject _keyboardEButton;
     [SerializeField] GameObject _gamepadAButton;
+    [Header("Barra de oxigeno")]
+    [SerializeField] float _oxigenDuration;
+    [SerializeField] Transform _oxigenBar;
+    [SerializeField] float _transitionDuration;
     //Variables
+    float _remaingOxigenTime;
+    float _diveStartTime;
+    bool _isDiving;
+    CanvasGroup _oxigenBarCanvasGroup;
     //Componentes
     //Clases
     weaponController _currentWeapon;
@@ -24,6 +32,7 @@ public class guiController : MonoBehaviour
     gameManager _gameManager;
     void Awake()
     {
+        _oxigenBarCanvasGroup = _oxigenBar.parent.GetComponent<CanvasGroup>();
         _gameManager = GameObject.FindObjectOfType<gameManager>();
         _weaponsController = GetComponent<weaponsController>();
         _collisionController = GetComponent<collisionController>();
@@ -40,8 +49,9 @@ public class guiController : MonoBehaviour
         }
         _collisionController.onActionableObjectStay += onActionableObjectStay;
         _collisionController.onActionableObjectLeave += onActionableObjectLeave;
+        _collisionController.OnWaterStateChange += OnWaterStateChange;
+        _collisionController.onInteractableActions += onInteractableActions;
     }
-
     private void OnDisable()
     {
         if (_currentWeapon != null)
@@ -54,9 +64,53 @@ public class guiController : MonoBehaviour
         }
         _collisionController.onActionableObjectStay -= onActionableObjectStay;
         _collisionController.onActionableObjectLeave -= onActionableObjectLeave;
+        _collisionController.onInteractableActions -= onInteractableActions;
+    }
+    private void Update()
+    {
+        #region Barra de oxigeno
+        if (_isDiving)
+        {
+            float _value = (Time.time - _diveStartTime) / _oxigenDuration;
+            _oxigenBar.localScale = new Vector3(Mathf.Clamp(1 - _value, 0, 1), 1, 1);
+            if (_oxigenBarCanvasGroup.alpha < 1)
+            {
+                _oxigenBarCanvasGroup.alpha += _transitionDuration * Time.deltaTime;
+            }
+        }
+        else if (_oxigenBarCanvasGroup.alpha > 0)
+        {
+            _oxigenBarCanvasGroup.alpha -= _transitionDuration * Time.deltaTime;
+        }
+        if (!_isDiving&&_oxigenBar.localScale.x < 1)
+        {
+            float _value = (Time.time - _diveStartTime) / _oxigenDuration;
+            _oxigenBar.localScale = new Vector3(Mathf.Clamp(_oxigenBar.localScale.x + _value, 0, 1), 1, 1);
+
+        }
+
+        #endregion
     }
 
     #region Eventos
+    private void onInteractableActions(string ActionText)
+    {
+        showInfotext(ActionText);
+        showInputActionButton();
+    }
+    private void OnWaterStateChange(WaterLevels WaterLevel)
+    {
+        if (WaterLevel == WaterLevels.InWater)
+        {
+            _diveStartTime = Time.time;
+            _isDiving = true;
+        }
+        else if(WaterLevel==WaterLevels.HalfInWater)
+        {
+            _diveStartTime = Time.time;
+            _isDiving = false;
+        }
+    }
     private void onActionableObjectLeave()
     {
         hideInfoText();
@@ -75,21 +129,25 @@ public class guiController : MonoBehaviour
                     case ObjectStates.Idle:
                         break;
                     case ObjectStates.Close:
-                        showInfotext("Cerrar", 0);
+                        showInfotext("Cerrar");
                         break;
                     case ObjectStates.Open:
-                        showInfotext("Abrir", 0);
+                        showInfotext("Abrir");
                         break;
                     case ObjectStates.Moving:
                         break;
                 }
                 break;
             case ActionableObjects.Manipulable:
-                showInfotext("Manipular", 0);
+                showInfotext("Manipular");
                 break;
             case ActionableObjects.None:
                 break;
         }
+        showInputActionButton();
+    }
+    private void showInputActionButton()
+    {
         GameObject _button = null;
         switch (gameManager._lastInputDeviceUsed)
         {
@@ -137,7 +195,7 @@ public class guiController : MonoBehaviour
 
     #region Metodos
    
-    public void showInfotext(string Text,float HideDelay)
+    public void showInfotext(string Text,float HideDelay=0)
     {
         _actionText.text = Text;
         _actionText.enabled = true;

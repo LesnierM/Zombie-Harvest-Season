@@ -11,10 +11,16 @@ public class sunController : MonoBehaviour
 	[SerializeField] float _nightLightSpeed;
 	//Variables
 	SunStates _state;
-	//Componentes
-	//Clases
-
-	void FixedUpdate()
+    //Componentes
+    //Clases
+    private void Start()
+    {
+        foreach (var item in  FindObjectsOfType<gameManager>())
+        {
+			item.addSunStateListener();
+        }
+    }
+    void FixedUpdate()
 	{
 		float _rotacion = transform.rotation.eulerAngles.x;
 		float _velocity = _rotacion > 190 && _rotacion < 360 ? _nightLightSpeed : _dayLightSpeed;

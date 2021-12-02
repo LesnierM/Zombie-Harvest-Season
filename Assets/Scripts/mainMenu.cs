@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class mainMenu : MonoBehaviour
 {
 	//Variables Expuestas
+	[SerializeField] Button _continueButton;
 	//Variables
 	AsyncOperation _farmScene;
 	//Componentes
@@ -13,7 +15,7 @@ public class mainMenu : MonoBehaviour
 	void Awake()
 	{
 		StartCoroutine(loadScene());
-
+		_continueButton.interactable =FindObjectOfType<gameManager>().loadGame();
 	}
 
     void Update()

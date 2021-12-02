@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -102,6 +105,7 @@ public enum Weapons
     None,
     Jericho_941,
 }
+[Serializable]
 public struct WeaponsStruct
 {
     public Weapons Weapon;
@@ -114,6 +118,11 @@ public struct WeaponsStruct
         this.Weapon = Weapon;
     }
 }
+public enum InteractionActions
+{
+    None,
+    SaveGame
+}
 
 public class gameManager : MonoBehaviour
 {
@@ -123,8 +132,13 @@ public class gameManager : MonoBehaviour
     public event NoParameters oninputDiviceChanged;
     public static ControlType _lastInputDeviceUsed;
     GameActions _playerActions;
+    BinaryFormatter bf = new BinaryFormatter();
     AudioSource _enviromentSoundPlayer;
     sunController _sunState;
+    SaveData _gameData;
+    weaponsController _weaponsController ;
+    public SaveData GameData { get => _gameData; }
+
     private void Awake()
     {
         _enviromentSoundPlayer = GetComponent<AudioSource>();
@@ -139,11 +153,6 @@ public class gameManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        if (_sunState == null)
-        {
-            _sunState = GameObject.FindObjectOfType<sunController>();
-        }
-        _sunState.OnSunStateChange += OnSunStateChange;
         if (_playerActions == null)
         {
             _playerActions = new GameActions();
@@ -161,14 +170,12 @@ public class gameManager : MonoBehaviour
         _playerActions.playerActions.Run.performed += updateUsedDivice;
         _playerActions.playerActions.Shoot.performed += updateUsedDivice;
     }
-    private void OnSunStateChange(SunStates State)
-    {
-        _enviromentSoundPlayer.Stop();
-        _enviromentSoundPlayer.clip = State == SunStates.Day ? _enviromentDaySound : _enviromentNightSound;
-        _enviromentSoundPlayer.Play();
-    }
     private void OnDisable()
     {
+        if (_playerActions == null)
+        {
+            return;
+        }
         _playerActions.Disable();
         _playerActions.playerActions.Jump.performed -= updateUsedDivice;
         _playerActions.playerActions.Action.performed -= updateUsedDivice;
@@ -181,6 +188,12 @@ public class gameManager : MonoBehaviour
         _playerActions.playerActions.Reload.performed -= updateUsedDivice;
         _playerActions.playerActions.Run.performed -= updateUsedDivice;
         _playerActions.playerActions.Shoot.performed -= updateUsedDivice;
+    }
+    private void OnSunStateChange(SunStates State)
+    {
+        _enviromentSoundPlayer.Stop();
+        _enviromentSoundPlayer.clip = State == SunStates.Day ? _enviromentDaySound : _enviromentNightSound;
+        _enviromentSoundPlayer.Play();
     }
     public void updateUsedDivice(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
@@ -197,6 +210,43 @@ public class gameManager : MonoBehaviour
             }
         }
         _lastInputDeviceUsed = _temp;
+    }
+    public void addSunStateListener()
+    {
+        _sunState = GameObject.FindObjectOfType<sunController>();
+        _sunState.OnSunStateChange += OnSunStateChange;
+        if (_gameData != null)
+        {
+            _sunState.transform.rotation = Quaternion.Euler(GameData.SunPosition, 0, 0);
+        }
+    }
+    public void saveGame()
+    {
+        if (_weaponsController == null)
+        {
+            _weaponsController = GameObject.FindObjectOfType<weaponsController>();
+        }
+        _gameData = _gameData == null? new SaveData() : _gameData;
+        _weaponsController.updateAdquieredWeaponsToSave();
+        _gameData.Weapons =_weaponsController.WeaponsAdquired;
+        _gameData.SunPosition = GameObject.Find("Sun").transform.eulerAngles.x;
+        _gameData.playerXPosition = _weaponsController.transform.position.x;
+        _gameData.playerYPosition = _weaponsController.transform.position.y;
+        _gameData.playerZPosition = _weaponsController.transform.position.z;
+        FileStream fs = fs = File.Open(Application.persistentDataPath + "\\data.dat", FileMode.Create);
+        bf.Serialize(fs, GameData);
+    }
+    public bool loadGame()
+    {
+        if (File.Exists(Application.persistentDataPath + "\\data.dat"))
+        {
+            _gameData =bf.Deserialize(File.Open(Application.persistentDataPath + "\\data.dat", FileMode.Open, FileAccess.Read)) as SaveData;
+        }
+        return _gameData != null;
+    }
+    public void newGame()
+    {
+        _gameData = null;
     }
 }
 public static class converter

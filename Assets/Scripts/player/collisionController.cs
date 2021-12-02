@@ -14,6 +14,7 @@ public class collisionController : MonoBehaviour
     public delegate void NoParameters();
     public delegate void MaterialParameter(Materials Material);
     public delegate void WaterParameters(WaterLevels WaterLevel);
+    public delegate void Interactable(string ActionText);
     public delegate void BoolParameter(bool isinWater);
     public delegate void GroundDataParameterEventHandler(GroundData GroundData);
     public delegate void onPickedUpWeaponEventHandler(Weapons Weapon);
@@ -25,6 +26,7 @@ public class collisionController : MonoBehaviour
     public event WaterParameters OnWaterStateChange;
     public event GroundDataParameterEventHandler OnGroundedStateChange;
     public event MaterialParameter OnGatePush;
+    public event Interactable onInteractableActions;
     //Variables Expuestas
     [SerializeField] float _gatesRotationSpeed;
     [Header("Capas")]
@@ -47,6 +49,10 @@ public class collisionController : MonoBehaviour
     private bool _executeAction;
 
     bool _isGrounded;
+    /// <summary>
+    /// Indica si ya se interactuo con un objeto interactuable para no interactua consecutivamente
+    /// </summary>
+    bool _interacted;
 
     GroundData _groundedData;
 
@@ -196,11 +202,36 @@ public class collisionController : MonoBehaviour
             }
             OnGatePush(_material);
         }
-            #endregion
+        #endregion
+
+        #region Objetos interactuables
+        else if (other.gameObject.layer == 16)
+        {
+            if (!_interacted)
+            {
+                interactionActions _object = other.GetComponent<interactionActions>();
+                if (_executeAction)
+                {
+                    _object.performAction();
+                    _interacted = true;
+                    Invoke("interactAgain", 2);
+                }
+                else
+                {
+                    onInteractableActions(_object.ActionText);
+                }
+            }
+            else
+            {
+                onActionableObjectLeave();
+            }
+        }
+        
+        #endregion
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer==14)
+        if (other.gameObject.layer==14|| other.gameObject.layer == 16)
         {
             onActionableObjectLeave();
         }
@@ -286,6 +317,13 @@ public class collisionController : MonoBehaviour
             _groundData = new GroundData(true,_colliders[0].gameObject.tag);
         }
         return _groundData;
+    }
+    /// <summary>
+    /// Permite interactua nevamente con el objeto interactuable.
+    /// </summary>
+    void interactAgain()
+    {
+        _interacted = false;
     }
 
     #endregion

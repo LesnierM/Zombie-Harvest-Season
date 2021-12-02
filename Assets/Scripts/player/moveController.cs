@@ -55,6 +55,7 @@ public class moveController : MonoBehaviour
     CharacterController _characterController;
     weaponsController _weaponsController;
     collisionController _collisionController;
+    gameManager _gameManager;
     void Awake()
     {
         _currentGravityModifier = _gravityNormalModifier;
@@ -62,6 +63,14 @@ public class moveController : MonoBehaviour
         _soundPlayer = GetComponent<AudioSource>();
         _characterController = GetComponent<CharacterController>();
         _collisionController = GetComponent<collisionController>();
+    }
+    private void Start()
+    {
+        _gameManager = FindObjectOfType<gameManager>();
+        if (_gameManager.GameData!=null)
+        {
+            _weaponsController.WeaponsAdquired = _gameManager.GameData.Weapons;
+        }
     }
     private void OnEnable()
     {
