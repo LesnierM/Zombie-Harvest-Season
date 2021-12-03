@@ -649,7 +649,7 @@ MonoBehaviour:
   _effectiveMaxRange: 50
   _bulletHoleDuration: 500
   _aimingZoomMultiplier: 0.8
-  _forceApplied: 1
+  _forceApplied: 100
   _bulletSpeed: 360
   _UiImage: {fileID: 2800000, guid: 5a6bdcff9cd19a346987713a9c7ad5b6, type: 3}
 --- !u!82 &6446267196618801483

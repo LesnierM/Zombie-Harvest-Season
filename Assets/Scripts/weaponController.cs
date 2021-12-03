@@ -118,16 +118,6 @@ public class weaponController : MonoBehaviour
     }
     private void performBulletCollision()
     {
-		//if (_rayHit.collider.tag == "Target")
-		//{
-		//	_rayHit.collider.gameObject.GetComponent<TargetScript>().isHit = true;
-		//	Destroy(Instantiate(_bulletHole, _rayHit.point + _rayHit.normal * 0.001f, Quaternion.LookRotation(_rayHit.normal),_rayHit.collider.transform), _bulletHoleDuration);
-		//	return;
-		//}
-		//else if (_rayHit.collider.tag == "Target")
-		//{
-		//	_rayHit.collider.gameObject.GetComponent<ExplosiveBarrelScript>().explode = true;
-		//}
 		GameObject _bulletHoleInstance= Instantiate(_bulletHole, _rayHit.point + _rayHit.normal * 0.001f, Quaternion.LookRotation(_rayHit.normal),_rayHit.transform);
 		Destroy(_bulletHoleInstance, _bulletHoleDuration);
 		_soundEffectsController.OnBulletImpact(_rayHit.collider.gameObject,_bulletHoleInstance);
@@ -140,7 +130,7 @@ public class weaponController : MonoBehaviour
         //aplicar fuerza a los objetos afectables
         if (_rayHit.collider.gameObject.layer == 15)
         {
-			_rayHit.collider.attachedRigidbody.AddTorque(_rayHit.collider.gameObject.transform.forward*_forceApplied,ForceMode.Force);
+			_rayHit.collider.attachedRigidbody.AddForce(-_rayHit.normal * _forceApplied,ForceMode.Impulse);
         }
 	}
     public void Reload()

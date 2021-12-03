@@ -2,6 +2,5 @@
 -impactos en el fondo del agua invalidar.
 -fuerza aplicada con los impactos de bala cartel y amaca
 -separar follaje de tronco en arboles 
--Impacto de bala en árboles pelados suena a tierra.
 -implementar puerco.
 -implementar itens de balas
