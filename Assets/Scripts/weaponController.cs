@@ -100,6 +100,11 @@ public class weaponController : MonoBehaviour
 			//calcular desvio de proyectil
 			_xAxyRandomDirection = Random.Range(-.1f, .1f);
 			_yAxyRandomDirection = Random.Range(-.1f, .1f);
+			if (Physics.Raycast(transform.parent.parent.position, transform.parent.parent.forward, out _rayHit, _effectiveMaxRange, _hitLayerMask)&&_rayHit.collider.tag=="Water")
+			{
+				Invoke("performBulletCollision", _rayHit.distance / _bulletSpeed);
+				Debug.Log("En rango");
+			}else
 			if (Physics.Raycast(transform.parent.parent.position, transform.parent.parent.forward, out _rayHit, _effectiveMaxRange, _hitLayerMask,QueryTriggerInteraction.Ignore))
 			{
 				Invoke("performBulletCollision", _rayHit.distance / _bulletSpeed);
@@ -118,14 +123,26 @@ public class weaponController : MonoBehaviour
     }
     private void performBulletCollision()
     {
+		//variables
+		damageableObjects _objectToDamage;
+		enemyController _enemy;
 		GameObject _bulletHoleInstance= Instantiate(_bulletHole, _rayHit.point + _rayHit.normal * 0.001f, Quaternion.LookRotation(_rayHit.normal),_rayHit.transform);
 		Destroy(_bulletHoleInstance, _bulletHoleDuration);
+		//ocultar agujero de bala en el agua
+        if (_rayHit.collider.tag == "Water")
+        {
+			_bulletHoleInstance.GetComponent<MeshRenderer>().enabled = false;
+        }
 		_soundEffectsController.OnBulletImpact(_rayHit.collider.gameObject,_bulletHoleInstance);
 		//reaccion de firentes objetos a las balas
-		damageableObjects _objectToDamage;
 		if(_rayHit.collider.TryGetComponent<damageableObjects>(out _objectToDamage))
         {
 			_objectToDamage.damage();
+        }
+		//dañar enemigos
+		if(_rayHit.collider.TryGetComponent<enemyController>(out _enemy))
+        {
+			_enemy.damage(1, _rayHit.point);
         }
         //aplicar fuerza a los objetos afectables
         if (_rayHit.collider.gameObject.layer == 15)

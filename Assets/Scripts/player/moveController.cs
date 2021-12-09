@@ -320,6 +320,7 @@ public class moveController : MonoBehaviour
     public bool IsGrounded { get => _isGrounded; }
     public bool IsCrouch { get => _isCrouch; }
     public float Gravity { get => _gravity; set => _gravity = value; }
+    public Vector2 Input { get => _input; }
     #endregion
 
 }

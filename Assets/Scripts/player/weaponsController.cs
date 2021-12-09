@@ -222,7 +222,10 @@ public class weaponsController : MonoBehaviour
     #region Metodos
     public void updateAdquieredWeaponsToSave()
     {
-        _weaponsAdquired[_currentWeaponIndex] = _currentWeapon.status;
+        if (_currentWeapon != null)
+        {
+            _weaponsAdquired[_currentWeaponIndex] = _currentWeapon.status;
+        }
     }
     private void addweaponToInventory(Weapons Weapon)
     {

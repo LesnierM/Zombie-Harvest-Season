@@ -123,6 +123,10 @@ public enum InteractionActions
     None,
     SaveGame
 }
+public enum EnemyTypes
+{
+    Pig
+}
 
 public class gameManager : MonoBehaviour
 {

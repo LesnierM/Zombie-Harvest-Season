@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4334136491152610}
   - component: {fileID: 33181788827316890}
   - component: {fileID: 23080735464093684}
-  - component: {fileID: 7703804299356738004}
   - component: {fileID: 5361522160239542070}
+  - component: {fileID: 5443084387046730616}
   m_Layer: 11
   m_Name: SM_Bld_Farmhouse_01_Door_03
   m_TagString: Untagged
@@ -86,19 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7703804299356738004
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257406544074148}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.23754583, y: 2.272401, z: 1.0500393}
-  m_Center: {x: -0.0000076293945, y: 1.1362005, z: 0.5250349}
 --- !u!114 &5361522160239542070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,9 +98,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239b9670e78cd04449b8b0321920747a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 150
-  _maxAngleRotation: 100
+  _speed: 0
+  _maxDistance: 0
   _direction: 1
+  _type: 0
+  _soundType: 0
+  _ObjectToManipulate: {fileID: 0}
+  _openDoorSound: {fileID: 0}
+  _closeDoorSound: {fileID: 0}
+  _closeSoundDelay: 0
+  _onDirection: 0
+--- !u!64 &5443084387046730616
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257406544074148}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300006, guid: 5243c0c91203f794aa144f4cfbc03d95, type: 3}
 --- !u!1 &1572243783172642
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,8 +234,8 @@ GameObject:
   - component: {fileID: 4192932864801446}
   - component: {fileID: 33815909532924820}
   - component: {fileID: 23829750731837650}
-  - component: {fileID: 8808394135212776235}
   - component: {fileID: 3161222901559727201}
+  - component: {fileID: 1670623604247514261}
   m_Layer: 11
   m_Name: SM_Bld_Farmhouse_01_Door_01
   m_TagString: Untagged
@@ -301,19 +309,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8808394135212776235
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875201363225048}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0252987, y: 2.2243483, z: 0.237544}
-  m_Center: {x: -0.5126566, y: 1.1121742, z: 0.000015258789}
 --- !u!114 &3161222901559727201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,9 +321,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239b9670e78cd04449b8b0321920747a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 150
-  _maxAngleRotation: 100
+  _speed: 0
+  _maxDistance: 0
   _direction: 1
+  _type: 0
+  _soundType: 0
+  _ObjectToManipulate: {fileID: 0}
+  _openDoorSound: {fileID: 0}
+  _closeDoorSound: {fileID: 0}
+  _closeSoundDelay: 0
+  _onDirection: 0
+--- !u!64 &1670623604247514261
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875201363225048}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 5243c0c91203f794aa144f4cfbc03d95, type: 3}
 --- !u!1 &1909860827850162
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,9 +456,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239b9670e78cd04449b8b0321920747a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 150
-  _maxAngleRotation: 100
+  _speed: 0
+  _maxDistance: 0
   _direction: 1
+  _type: 0
+  _soundType: 0
+  _ObjectToManipulate: {fileID: 0}
+  _openDoorSound: {fileID: 0}
+  _closeDoorSound: {fileID: 0}
+  _closeSoundDelay: 0
+  _onDirection: 0
 --- !u!1 &1965132566611222
 GameObject:
   m_ObjectHideFlags: 0
